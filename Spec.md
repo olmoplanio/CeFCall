@@ -1,6 +1,3 @@
-Ciao Paolo!
-come stai?
-
 devo comunicare con protocollo customDll (o custom ma SEMBRA che sia meglio customDLL) da access ad una stampante fiscale
 X-KUBE F ETH/KUBE II F ETH
 
