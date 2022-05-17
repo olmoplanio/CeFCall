@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CeFCall
 {
-    //Copyright Paolo Olmino 2021
+    //Copyright Paolo Olmino 2021-2022
     class Program
     {
         static void Main(string[] args)
