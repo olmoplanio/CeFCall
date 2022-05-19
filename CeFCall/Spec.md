@@ -8,29 +8,15 @@ dove trovi  il link per la dll. (ocio che sono DUE dll come descritto qua https:
 link dll 
 http://www.infolabsrl.it/download/CeFdllInstallation_140.exe
 
-io in access riesco a definirle cosi'
+Usage
+=====
 
-Option Compare Database
+Comando exec
+CeFCall.exe exec 192.168.1.199 9100 "7007 "
 
-nota che ho provato a metterle ovunque, repetitia dementia est .....
-'C:\Program Files\Custom Engineering\CeFdll\CeFdll x64\CeFdll.dll
-'C:\Program Files (x86)\Custom\CeFdll\CeFdll x64\CeFdll.dll
-'C:\Windows\SysWOW64\CeFdll.dll
-'C:\centrosurf\CeFdll.dll
+"7007 ": Pulisce display
+7007xyz: scrive _xyz_
+70081: Apri cassetto
+3012125xyz: Carica la riga _xyz_ nel buffer
+3013: Stampa il buffer
 
-Private Declare PtrSafe Function VbCEFOpen Lib "CeFdll.dll" (ByVal intCom As Long, ByVal dwBaudRate As Long, ByVal byParity As Byte, ByVal byDataBit As Byte, ByVal byStopBit As Byte, ByVal byFlowControl As Byte, lpdwSysError As Long) As Long
-' Declare Function for Open Communication Ethernet
-Private Declare PtrSafe Function VbCEFOpenEth Lib "CeFdll.dll" (textip As String, ByVal dwPort As Long, lpdwSysError As Long) As Long
-' Declare Function for Write Command on Communication Port
-Private Declare PtrSafe Function VbCEFWrite Lib "CeFdll.dll" (textcmd As String, lpdwSysError As Long) As Long
-' Declare Function for Read from Communication Port
-Private Declare PtrSafe Function VbCEFRead Lib "CeFdll.dll" (RetData() As Byte, pdwByteRead As Long, lpdwSysError As Long) As Long
-' Declare Function for Read DLL Version
-Private Declare PtrSafe Function VbCEFGetVersion Lib "C:\centrosurf\CeFdll.dll" (RetData() As Byte, lpdwSysError As Long) As Long
-' Declare Function for Close Communication Port
-Private Declare PtrSafe Function VbCEFClose Lib "CeFdll.dll" (lpdwSysError As Long) As Long
-
-comunque ti allego il file access e il file della dll (installa un minimo di documentazione e degli esempi che funzionano, intrerrogano la stampante regolarmente)
-
-your mission is to deply a dll, com ocx or whatever that works in access.
-se incapsuli ed esponi le 5  funzioni (la VbCEFOpen non serve, usiamo rete non seriale) sarebbe il top
