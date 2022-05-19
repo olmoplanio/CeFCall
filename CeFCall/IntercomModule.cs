@@ -25,20 +25,6 @@ namespace CeFCall
 
     internal static class IntercomModule
     {
-        /*
-         * // Visual C++
-            AFX_EXT_CLASS DWORD CEFWrite(unsigned char*, LPDWORD);
-            AFX_EXT_CLASS DWORD CEFClose(LPDWORD);
-            AFX_EXT_CLASS DWORD CEFRead(unsigned char *, LPDWORD, LPDWORD);
-            AFX_EXT_CLASS DWORD CEFOpen(int, DWORD, BYTE, BYTE, BYTE, BYTE, LPDWORD);
-            AFX_EXT_CLASS DWORD CEFGetVersion(LPTSTR, LPDWORD );
-            AFX_EXT_CLASS DWORD CEFOpenEth(LPTSTR,DWORD,LPDWORD);
-            AFX_EXT_CLASS DWORD CEFOpenEth(LPTSTR,DWORD,LPDWORD);
-            AFX_EXT_CLASS DWORD CEFOpenEthUnSafe(LPTSTR,DWORD,LPDWORD);
-         *
-         */
-
-
         // Declare Function for Open Communication Port
         [System.Runtime.InteropServices.DllImport("CeFdll.dll", EntryPoint = "CEFOpen", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
         public static extern int CEFOpen(int intCom, uint dwBaudRate, byte byParity, byte byDataBit, byte byStopBit, byte byFlowControl, ref int lpdwSysError);
@@ -64,17 +50,6 @@ namespace CeFCall
         [System.Runtime.InteropServices.DllImport("CeFdll.dll", EntryPoint = "CEFOpenEthUnSafe", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
         public static extern int CEFUnsafeOpenEth(string strIp, int dwPort, ref int lpdwSysError);
 
-
-
-        /*
-         * // Visual Basic
-            AFX_EXT_CLASS DWORD __stdcall VbCEFClose(LPDWORD);
-            AFX_EXT_CLASS DWORD __stdcall VbCEFWrite(DWORD*, LPDWORD);
-            AFX_EXT_CLASS DWORD __stdcall VbCEFRead(SAFEARRAY** , LPDWORD, LPDWORD);
-            AFX_EXT_CLASS DWORD __stdcall VbCEFOpen(DWORD, DWORD, BYTE, BYTE, BYTE, BYTE, LPDWORD);
-            AFX_EXT_CLASS DWORD __stdcall VbCEFGetVersion(SAFEARRAY** , LPDWORD);
-        *
-        */
 
         // Declare Function for Open Communication Port
         [System.Runtime.InteropServices.DllImport("CeFdll.dll", EntryPoint = "VbCEFOpen", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]

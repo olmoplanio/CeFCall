@@ -51,6 +51,10 @@ namespace CeFCall
         }
         public IEnumerable<string> Run(string command, string[] arguments, char[] options)
         {
+            if (options.Contains('v'))
+            {
+                return new string[] { "0", "V02.01" };
+            }
             bool isg = !options.Contains('p');
             if (isg)
             {
