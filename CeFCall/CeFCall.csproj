@@ -58,10 +58,10 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -81,6 +81,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="CeFCall_TemporaryKey.pfx" />
+    <None Include="README.md" />
     <None Include="Spec.md" />
   </ItemGroup>
   <ItemGroup>
