@@ -1,4 +1,4 @@
-# Lanx
+# CeFCall (v2.0)
 
 Simple Custom (TM) or XON/XOFF (Software Flow Control) Message Sender on ethernet.
 
