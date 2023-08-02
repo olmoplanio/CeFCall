@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
-namespace CeFCall
+namespace com.github.olmoplanio.CeFCall
 {
     public class Gateway
     {

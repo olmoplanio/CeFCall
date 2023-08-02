@@ -1,9 +1,7 @@
-﻿using System;
-
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace CeFCall
+namespace com.github.olmoplanio.CeFCall
 {
     /*
      * This document contains programming examples.
