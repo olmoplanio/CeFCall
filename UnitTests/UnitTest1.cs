@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class SmokeTests
     {
         private const string EOT = "\u0004";
 
