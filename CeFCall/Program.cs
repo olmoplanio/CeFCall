@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
-namespace CeFCall
+namespace com.github.olmoplanio.CeFCall
 {
-    //Copyright Paolo Olmino 2021-2022
+    //Copyright Paolo Olmino 2021-2023
     class Program
     {
         static void Main(string[] args)
@@ -53,10 +55,30 @@ namespace CeFCall
         {
             if (options.Contains('v'))
             {
-                return new string[] { "0", "V02.01" };
+                return new string[] { "0", "V03.00" };
             }
-            bool isg = !options.Contains('p');
-            if (isg)
+            bool isx = options.Contains('x');
+            if (isx)
+            {
+                var sfc = new SFCClient();
+                switch (command)
+                {
+                    case "getversion":
+                        return new string[] { "0", sfc.GetVersion() };
+                    case "send":
+                    case "exec":
+                        CheckLen(arguments, 2);
+                        string[] commands = arguments.Skip(2).ToArray();
+                        sfc.Send(arguments[0], Int32.Parse(arguments[1]), commands);
+                        return new string[] { "0", "" };
+                    case "ping":
+                        CheckLen(arguments, 0);
+                        return new string[] { "0", "" + sfc.Ping(arguments[0]) };
+                    default:
+                        return GetHelp();
+                }
+            }
+            else
             {
                 var gw = new Gateway();
                 switch (command)
@@ -84,42 +106,6 @@ namespace CeFCall
                         return GetHelp();
                 }
             }
-            else
-            {
-
-                var pl = new Platform();
-                int lpwdSysError = 0;
-                int vRet = 0;
-                switch (command)
-                {
-                    case "open":
-                        CheckLen(arguments, 5);
-                        vRet = pl.CEFOpen(Int32.Parse(arguments[0]), UInt32.Parse(arguments[1]), Byte.Parse(arguments[2]), Byte.Parse(arguments[3]), Byte.Parse(arguments[4]), Byte.Parse(arguments[5]), ref lpwdSysError);
-                        return new string[] { vRet.ToString() };
-                    case "write":
-                        CheckLen(arguments, 0);
-                        vRet = pl.CEFWrite(arguments[0], ref lpwdSysError);
-                        return new string[] { vRet.ToString() };
-                    case "read":
-                        var sb1 = new StringBuilder();
-                        int _ = 0;
-                        vRet = pl.CEFRead(sb1, ref _, ref lpwdSysError);
-                        return new string[] { vRet.ToString(), sb1.ToString() };
-                    case "openeth":
-                        CheckLen(arguments, 1);
-                        vRet = pl.CEFOpenEth(arguments[0], int.Parse(arguments[1]), ref lpwdSysError);
-                        return new string[] { vRet.ToString() };
-                    case "close":
-                        vRet = pl.CEFClose(ref lpwdSysError);
-                        return new string[] { vRet.ToString() };
-                    case "getversion":
-                        var sb2 = new StringBuilder(256);
-                        vRet = pl.CEFGetVersion(sb2, ref lpwdSysError);
-                        return new string[] { vRet.ToString(), sb2.ToString() };
-                    default:
-                        return GetHelp();
-                }
-            }
         }
 
         private static void CheckLen(string[] arguments, int l)
@@ -130,7 +116,17 @@ namespace CeFCall
 
         private string[] GetHelp()
         {
-            return new string[] { "-1", "Syntax: CeFCall.exe [/tp] <command> [<arguments> ...]"};
+            string strResourceName = "README.md";
+
+            Assembly asm = Assembly.GetExecutingAssembly();
+            using (Stream rsrcStream = asm.GetManifestResourceStream("com.github.olmoplanio.CeFCall." + strResourceName))
+            {
+                using (StreamReader sRdr = new StreamReader(rsrcStream))
+                {
+                    //For instance, gets it as text
+                    return sRdr.ReadToEnd().Split(new char[] { '\n' });
+                }
+            }
         }
     }
 }
