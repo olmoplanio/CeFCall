@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeFCall", "CeFCall\CeFCall.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFCEmulator", "SFCEmulator\SFCEmulator.csproj", "{D8D9D8DC-728E-4C8B-9219-38FEE8AE110E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "UnitTests\Tests.csproj", "{C4D59442-FB19-4660-9CBD-28F6DFB7C60A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D8D9D8DC-728E-4C8B-9219-38FEE8AE110E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8D9D8DC-728E-4C8B-9219-38FEE8AE110E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8D9D8DC-728E-4C8B-9219-38FEE8AE110E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D59442-FB19-4660-9CBD-28F6DFB7C60A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D59442-FB19-4660-9CBD-28F6DFB7C60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D59442-FB19-4660-9CBD-28F6DFB7C60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D59442-FB19-4660-9CBD-28F6DFB7C60A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
