@@ -3,12 +3,12 @@
     "configurations": [
 
             {
-                "name": ".NET 4.8 Build",
+                "name": ".NET 4.7.2 Build",
                 "type":"clr",
                 "request": "launch",
                 "preLaunchTask": "sdkbuild",
-                "program": "${workspaceFolder}/bin/Debug/CeFCall.exe",
-                "args":[],
+                "program": "${workspaceFolder}/CeFCall/bin/Debug/CeFCall.exe",
+                "args":["/t"],
                 "console": "internalConsole",
                 "stopAtEntry": false,
                 "internalConsoleOptions": "openOnSessionStart"
@@ -22,9 +22,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Emulator/bin/Debug/net6.0/Emulator.dll",
+            "program": "${workspaceFolder}/SFCEmulator/bin/Debug/net6.0/SFCEmulator.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Emulator",
+            "cwd": "${workspaceFolder}/SFCEmulator",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false

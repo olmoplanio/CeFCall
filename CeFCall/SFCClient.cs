@@ -39,7 +39,7 @@ namespace com.github.olmoplanio.CeFCall
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine("Error: " + ex.Message);
             }
         }
 
@@ -48,7 +48,7 @@ namespace com.github.olmoplanio.CeFCall
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
 
             udpClient.Send(messageBytes, messageBytes.Length, remoteEndPoint);
-            Console.WriteLine($"Sent '{message}' to {remoteEndPoint}");
+            Console.WriteLine(String.Format("Sent '{0}' to {1}", message, remoteEndPoint));
         }
 
         internal string GetVersion()

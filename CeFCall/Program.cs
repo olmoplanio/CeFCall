@@ -111,7 +111,7 @@ namespace com.github.olmoplanio.CeFCall
         private static void CheckLen(string[] arguments, int l)
         {
             if (arguments.Length < l + 1)
-                throw new ArgumentException($"Arguments not provided: {l + 1} arguments required");
+                throw new ArgumentException(String.Format("Arguments not provided: {0} arguments required", l + 1));
         }
 
         private string[] GetHelp()

@@ -3,7 +3,7 @@
     "tasks": [ 
         {
         "label": "sdkbuild",
-        "command":"C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\msbuild.exe",
+        "command":"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe",
         "type":"shell",
         "args":[
             "CeFCall/CeFCall.csproj",
@@ -18,7 +18,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Emulator/Emulator.csproj",
+                "${workspaceFolder}/CeFCall/CeFCall.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -30,7 +30,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Emulator/Emulator.csproj",
+                "${workspaceFolder}/CeFCall/CeFCall.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -44,7 +44,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Emulator/Emulator.csproj"
+                "${workspaceFolder}/CeFCall/CeFCall.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
