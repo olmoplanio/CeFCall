@@ -11,7 +11,7 @@ To install missing .NET framework 4.8, download from:
 
 ### XOFF/XON Connection
 
-``CeFCall /x _COMMAND_ _SERVER _PORT_ _MESSAGES[...]_``
+``CeFCall /x _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_``
 
 Sends a message to the given server using XON/XOFF.
 
@@ -28,11 +28,11 @@ CeFCall.exe /x send 192.168.1.199 9100 """ITEM1""2.5*R1"
 #### Commands
 
 * _send_
-	Sends a list of XONXOFF commands.
+ Sends a list of XONXOFF commands.
 
 ### Custom (TM) connection
 
-``CeFCall _COMMAND_ _SERVER _PORT_ _MESSAGES[...]_``
+``CeFCall _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_``
 
 Sends a message to the given server using Custom (TM) protocol.
 
