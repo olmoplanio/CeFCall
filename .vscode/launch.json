@@ -7,8 +7,8 @@
                 "type":"clr",
                 "request": "launch",
                 "preLaunchTask": "sdkbuild",
-                "program": "${workspaceFolder}/CeFCall/bin/Debug/CeFCall.exe",
-                "args":["/t"],
+                "program": "${workspaceFolder}/CeFCall/bin/x64/Debug/CeFCall.exe",
+                "args":[],
                 "console": "internalConsole",
                 "stopAtEntry": false,
                 "internalConsoleOptions": "openOnSessionStart"
