@@ -3,7 +3,7 @@
     "configurations": [
 
             {
-                "name": ".NET 4.7.2 Build",
+                "name": ".NET 4 Build",
                 "type":"clr",
                 "request": "launch",
                 "preLaunchTask": "sdkbuild",

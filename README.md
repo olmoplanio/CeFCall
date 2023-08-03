@@ -6,8 +6,6 @@ Simple Custom (TM) or XON/XOFF (Software Flow Control) Message Sender on etherne
 
 To install missing .NET framework 4.8, download from:
 <https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48>
-or
-<https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472>
 
 ## Usage
 
