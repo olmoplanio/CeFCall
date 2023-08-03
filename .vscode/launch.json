@@ -1,18 +1,28 @@
 {
     "version": "0.3.0",
     "configurations": [
-
-            {
-                "name": ".NET 4 Build",
-                "type":"clr",
-                "request": "launch",
-                "preLaunchTask": "sdkbuild",
-                "program": "${workspaceFolder}/CeFCall/bin/x64/Debug/CeFCall.exe",
-                "args":[],
-                "console": "internalConsole",
-                "stopAtEntry": false,
-                "internalConsoleOptions": "openOnSessionStart"
-            },
+        
+        {
+            "name": ".NET Framework Build (AnyCPU)",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "sdkbuild",
+            "program": "${workspaceFolder}/CeFCall/bin/Release/CeFCall.exe",
+            "args": [],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Framework Launch (x64)",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "sdkbuildDebug64",
+            "program": "${workspaceFolder}/CeFCall/bin/x64/Debug/CeFCall.exe",
+            "args": [],
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
             // Use hover for the description of the existing attributes

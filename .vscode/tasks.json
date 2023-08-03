@@ -1,17 +1,30 @@
 {
     "version": "2.0.0",
-    "tasks": [ 
+    "tasks": [
         {
-        "label": "sdkbuild",
-        "command":"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe",
-        "type":"shell",
-        "args":[
-            "CeFCall/CeFCall.csproj",
-            "/t:Build",
-            "/p:Configuration=Debug",
-            "/p:Platform=\"AnyCPU\""
-        ]
-    },
+            "label": "sdkbuild",
+            "command": "C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe",
+            "type": "shell",
+            "args": [
+                "CeFCall/CeFCall.csproj",
+                "/t:Build",
+                "/tv:4.0",
+                "/p:Configuration=Release",
+                "/p:Platform=\"AnyCPU\""
+            ]
+        },
+        {
+            "label": "sdkbuildDebug64",
+            "command": "C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe",
+            "type": "shell",
+            "args": [
+                "CeFCall/CeFCall.csproj",
+                "/t:Build",
+                "/tv:4.0",
+                "/p:Configuration=Debug",
+                "/p:Platform=\"x64\""
+            ]
+        },
         {
             "label": "build",
             "command": "dotnet",
@@ -48,28 +61,28 @@
             ],
             "problemMatcher": "$msCompile"
         },
-        { 
-            "label": ".NET Core Test with debugger", 
-            "type": "process", 
-            "isBackground": true, 
-            "command": "dotnet", 
-            "args": [ "test" ], 
-            "options": 
-                { 
-                    "cwd": "${workspaceFolder}/tests", 
-                    "env": 
-                    { 
-                        "VSTEST_HOST_DEBUG": "1" 
-                    }, 
-                }, 
-            "group": "test", "presentation": 
-                { 
-                    "echo": true,
-                    "reveal": "always",
-                    "focus": false,
-                    "panel": "shared"
+        {
+            "label": ".NET Core Test with debugger",
+            "type": "process",
+            "isBackground": true,
+            "command": "dotnet",
+            "args": [
+                "test"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/tests",
+                "env": {
+                    "VSTEST_HOST_DEBUG": "1"
                 },
-            "problemMatcher": [] 
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
         },
     ]
 }
