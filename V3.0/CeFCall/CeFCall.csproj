@@ -62,7 +62,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>com.github.olmoplanio.CeFCall.Program</StartupObject>
@@ -80,11 +80,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gateway.cs" />
+    <Compile Include="ICaller.cs" />
     <Compile Include="IntercomModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TcpCaller.cs" />
     <Compile Include="UdpCaller.cs" />
-    <Compile Include="SFCTwoWay.cs" />
+    <Compile Include="UdpCallerAck.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\README.md">

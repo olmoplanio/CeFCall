@@ -50,10 +50,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UdpServer.cs" />
-    <Compile Include="SFCEthernet4.cs" />
-    <Compile Include="SFCEthernet2.cs" />
-    <Compile Include="SFCEthernet3.cs" />
-    <Compile Include="SFCSerialPort.cs" />
+    <Compile Include="TcpServer.cs" />
+    <Compile Include="SerialPort.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="cash-register.ico" />

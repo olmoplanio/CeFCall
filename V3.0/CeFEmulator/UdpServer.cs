@@ -14,8 +14,8 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         private bool transmissionPaused = false;
         private bool transmissionEnded = false;
 
-        private int serverPort;
-        private bool ack;
+        private readonly int serverPort;
+        private readonly bool ack;
 
         public UdpServer(int serverPort, bool ack = false)
         {
@@ -98,6 +98,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         public void Close()
         {
             transmissionEnded = true;
+            
         }
     }
 }

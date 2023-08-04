@@ -1,30 +1,36 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Linq;
 
 namespace com.github.olmoplanio.CeFCall
 {
-    public class SFCTwoWay
+    public class TcpCaller: ICaller
     {
-        private const string XON = "\u0011"; // ASCII control code for XON
-        private const string XOFF = "\u0013"; // ASCII control code for XOFF
+        const byte XON = 17; // ASCII control code for XON
+        const byte XOFF = 19; // ASCII control code for XOFF
+        TcpClient client;
 
 
-        public void Send(string serverIP, int serverPort, string message)
+        public TcpCaller(string serverIP, int serverPort)
         {
-            Send(serverIP, serverPort, new string[1] { message });
+            client = new TcpClient();
+            client.Connect(IPAddress.Parse(serverIP), serverPort);
+            Console.WriteLine("Connected to the server.");
         }
 
-        public void Send(string serverIP, int serverPort, IEnumerable<string> messages)
+        public void Send(string message)
         {
+            Send(new string[1] { message });
+        }
+
+        public void Send(IEnumerable<string> messages)
+        {
+         
             try
             {
-                TcpClient client = new TcpClient();
-                client.Connect(IPAddress.Parse(serverIP), serverPort);
-
                 using (NetworkStream stream = client.GetStream())
                 {
                     Console.WriteLine("Connected to the server.");
@@ -34,12 +40,16 @@ namespace com.github.olmoplanio.CeFCall
                     byte xoffChar = 19;
                     int line = 0;
 
-                    while (line < messages.Count())
+                    while (true)
                     {
                         if (!pauseTransmission)
                         {
                             SendMessage(stream, messages.ElementAt(line));
                             line++;
+                            if (line >= messages.Count())
+                            {
+                                break;
+                            }
                         }
 
                         // Check for incoming XOFF and XON signals from the receiver
@@ -75,12 +85,12 @@ namespace com.github.olmoplanio.CeFCall
             Console.WriteLine(String.Format("Sent '{0}' to endpoint", message));
         }
 
-        public static string GetVersion()
+        public string GetVersion()
         {
             return "V3.0";
         }
 
-        public static int Ping(string v)
+        public int Ping(string v)
         {
             return 0;
         }

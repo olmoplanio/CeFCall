@@ -23,16 +23,10 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                 switch (args[1])
                 {
                     case "s":
-                        server = new SFCSerialPort(comPort);
+                        server = new SerialPort(comPort);
                         break;
                     case "2":
-                        server = new SFCEthernet2(serverPort);
-                        break;
-                    case "3":
-                        server = new SFCEthernet3(serverPort);
-                        break;
-                    case "4":
-                        server = new SFCEthernet4(serverPort);
+                        server = new TcpServer(serverPort);
                         break;
                     default:
                         server = new UdpServer(serverPort);

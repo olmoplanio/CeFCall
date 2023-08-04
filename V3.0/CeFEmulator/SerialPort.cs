@@ -6,14 +6,14 @@ using System.Text;
 
 namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
-    public class SFCSerialPort: IServer
+    public class SerialPort: IServer
     {
-        SerialPort serialPort;
+        System.IO.Ports.SerialPort serialPort;
         public string LastMessage { get; private set; }
 
-        public SFCSerialPort(string portName = "COM1", int baudRate = 9600)
+        public SerialPort(string portName = "COM1", int baudRate = 9600)
         {
-            serialPort = new SerialPort(portName, baudRate);
+            serialPort = new System.IO.Ports.SerialPort(portName, baudRate);
             serialPort.DataReceived += SerialPort_DataReceived;
         }
         

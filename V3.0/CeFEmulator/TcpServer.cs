@@ -2,17 +2,16 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 
 namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
-    class SFCEthernet2 : IServer
+    public class TcpServer : IServer
     {
-        private int port;
+        private readonly int port;
         TcpListener listener;
         public string LastMessage { get; private set; }
 
-        public SFCEthernet2(int port = 9100)
+        public TcpServer(int port = 9100)
         {
             this.port = port;
             listener = new TcpListener(IPAddress.Any, port);
@@ -39,7 +38,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             try
             {
                 listener.Start();
-                Console.WriteLine($"Listening two-way for incoming connections on port {port}...");
+                Console.WriteLine($"Listening TCP for incoming connections on port {port}...");
 
 
                 bool cancel = false;
@@ -50,7 +49,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
 
                     Console.WriteLine("Client connected.");
 
-                    byte[] buffer = new byte[1024];
+                    byte[] buffer = new byte[512];
                     int bytesRead;
 
                     while (!cancel)
@@ -58,27 +57,28 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                         if ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                         {
                             string receivedData = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                            Ethernet_DataReceived(receivedData);
 
                             // Check for XON and XOFF characters (ASCII 17 and 19) and respond accordingly
-                            if (receivedData.Contains("\u0011")) // XON character (ASCII code 17)
+                            if (receivedData.Contains("\u0013")) // XOFF character (ASCII code 19)
                             {
-                                // XON received, resume data transmission
-                                byte[] xonResponse = { 17 }; // Send XON back to the sender
-                                stream.Write(xonResponse, 0, xonResponse.Length);
-                                Console.WriteLine("Received XON, data transmission resumed.");
+                                Reply(stream, 19); // Send XOFF back to the sender
+                                Console.WriteLine("Received XOFF, data transmission resumed.");
                             }
-                            else if (receivedData.Contains("\u0013")) // XOFF character (ASCII code 19)
+                            else if (receivedData.Contains("\u0011")) // XON character (ASCII code 17)
                             {
-                                // XOFF received, pause data transmission
-                                byte[] xoffResponse = { 19 }; // Send XOFF back to the sender
-                                stream.Write(xoffResponse, 0, xoffResponse.Length);
-                                Console.WriteLine("Received XOFF, data transmission paused.");
+                                Reply(stream, 17); // Send XON back to the sender
+                                Console.WriteLine("Received XON, data transmission paused.");
                             }
                             else if (receivedData.Contains("\u0004")) // EOT
                             {
                                 cancel = true;
                                 Console.WriteLine("Received EOT, end of transmission");
+                            }
+                            else
+                            {
+                                Reply(stream, 19); // Send XOFF back to the sender
+                                Ethernet_DataReceived(receivedData);
+                                Reply(stream, 17); // Send XON back to the sender
                             }
 
                             // Clear the buffer for the next iteration
@@ -91,6 +91,12 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+        }
+
+        private static void Reply(NetworkStream stream, byte response)
+        {
+            byte[] xResponse = { response }; 
+            stream.Write(xResponse, 0, xResponse.Length);
         }
 
         private void Ethernet_DataReceived(string receivedMessage)

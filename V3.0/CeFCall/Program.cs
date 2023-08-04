@@ -57,46 +57,53 @@ namespace com.github.olmoplanio.CeFCall
             {
                 return new string[] { "0", "V03.00" };
             }
-            bool ack = options.Contains('k');
-            bool is2 = options.Contains('2');
             bool isx = options.Contains('x');
-            if (is2)
+            bool is3 = options.Contains('3');
+            if (isx)
             {
-                switch (command)
+                string ip = arguments[0];
+                int port = Int32.Parse(arguments[1]);
+
+                int callerNo =
+                    options.Contains('4') ? 4
+                  : options.Contains('3') ? 3
+                  : options.Contains('2') ? 2
+                  : options.Contains('1') ? 1
+                  : 0;
+
+                ICaller caller;
+                switch(callerNo)
                 {
-                    case "getversion":
-                        return new string[] { "0", UdpCaller.GetVersion() };
-                    case "send":
-                    case "exec":
-                        var sfc = new UdpCaller(arguments[0], Int32.Parse(arguments[1]), ack);
-                        CheckLen(arguments, 2);
-                        var commands = arguments.Skip(2);
-                        sfc.Send(commands);
-                        return new string[] { "0", "" };
-                    case "ping":
-                        CheckLen(arguments, 0);
-                        return new string[] { "0", "" + UdpCaller.Ping(arguments[0]) };
+                    case 1:
+                        caller = new UdpCaller(ip, port);
+                        break;
+                    case 2:
+                        caller = new UdpCallerAck(ip, port, false);
+                        break;
+                    case 3:
+                        caller = new UdpCallerAck(ip, port, true);
+                        break;
+                    case 4:
+                        caller = new TcpCaller(ip, port);
+                        break;
                     default:
-                        Console.Out.WriteLine("Unknown command '{0}'", command);
-                        return GetHelp();
+                        caller = new UdpCaller(ip, port);
+                        break;
                 }
-            }
-            else if(isx)
-            {
+
                 switch (command)
                 {
                     case "getversion":
-                        return new string[] { "0", UdpCaller.GetVersion() };
+                        return new string[] { "0", caller.GetVersion() };
                     case "send":
                     case "exec":
-                        var sfc = new UdpCaller(arguments[0], Int32.Parse(arguments[1]), ack);
                         CheckLen(arguments, 2);
                         var commands = arguments.Skip(2);
-                        sfc.Send(commands);
+                        caller.Send(commands);
                         return new string[] { "0", "" };
                     case "ping":
                         CheckLen(arguments, 0);
-                        return new string[] { "0", "" + UdpCaller.Ping(arguments[0]) };
+                        return new string[] { "0", "" + caller.Ping(arguments[0]) };
                     default:
                         Console.Out.WriteLine("Unknown command '{0}'", command);
                         return GetHelp();
