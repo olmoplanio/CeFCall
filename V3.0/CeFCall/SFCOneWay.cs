@@ -6,7 +6,7 @@ using System.Text;
 
 namespace com.github.olmoplanio.CeFCall
 {
-    public class SFCClient
+    public class SFCOneWay
     {
         private const string XON = "\u0011"; // ASCII control code for XON
         private const string XOFF = "\u0013"; // ASCII control code for XOFF

@@ -57,10 +57,31 @@ namespace com.github.olmoplanio.CeFCall
             {
                 return new string[] { "0", "V03.00" };
             }
+            bool is2 = options.Contains('2');
             bool isx = options.Contains('x');
-            if (isx)
+            if (is2)
             {
-                var sfc = new SFCClient();
+                var sfc = new SFCTwoWay();
+                switch (command)
+                {
+                    case "getversion":
+                        return new string[] { "0", sfc.GetVersion() };
+                    case "send":
+                    case "exec":
+                        CheckLen(arguments, 2);
+                        var commands = arguments.Skip(2);
+                        sfc.Send(arguments[0], Int32.Parse(arguments[1]), commands);
+                        return new string[] { "0", "" };
+                    case "ping":
+                        CheckLen(arguments, 0);
+                        return new string[] { "0", "" + sfc.Ping(arguments[0]) };
+                    default:
+                        return GetHelp();
+                }
+            }
+            else if(isx)
+            {
+                var sfc = new SFCOneWay();
                 switch (command)
                 {
                     case "getversion":
