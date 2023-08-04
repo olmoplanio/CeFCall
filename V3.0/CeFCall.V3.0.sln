@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1684
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeFCall", "CeFCall\CeFCall.csproj", "{A64328E4-503E-4B68-8087-EF9E7926A582}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeFEmulator", "CeFEmulator\CeFEmulator.csproj", "{FC3C5461-E448-43CA-9748-811F12A8C561}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{BBC7003E-01C5-4424-B136-0B33527D200A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{BBC7003E-01C5-4424-B136-0B33527D200A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBC7003E-01C5-4424-B136-0B33527D200A}.Release|x64.ActiveCfg = Release|Any CPU
 		{BBC7003E-01C5-4424-B136-0B33527D200A}.Release|x64.Build.0 = Release|Any CPU
+		{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}.Debug|x64.Build.0 = Debug|Any CPU
+		{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}.Release|x64.ActiveCfg = Release|Any CPU
+		{5FC5028C-A568-47C2-B72E-B6BD52E96BFA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -26,15 +26,15 @@ namespace com.github.olmoplanio.CeFCall
                     IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), serverPort);
 
                     // Send XON message
-                    SendXONXOFFMessage(udpClient, remoteEndPoint, XON);
+                    SendMessage(udpClient, remoteEndPoint, XON, true);
 
                     foreach(var message in messages)
                     {
-                        SendXONXOFFMessage(udpClient, remoteEndPoint, message);
+                        SendMessage(udpClient, remoteEndPoint, message);
                     }
 
                     // Send XOFF message
-                    SendXONXOFFMessage(udpClient, remoteEndPoint, XOFF);
+                    SendMessage(udpClient, remoteEndPoint, XOFF, true);
                 }
             }
             catch (Exception ex)
@@ -43,12 +43,19 @@ namespace com.github.olmoplanio.CeFCall
             }
         }
 
-        private void SendXONXOFFMessage(UdpClient udpClient, IPEndPoint remoteEndPoint, string message)
+        private void SendMessage(UdpClient udpClient, IPEndPoint remoteEndPoint, string message, bool ack = false)
         {
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
 
             udpClient.Send(messageBytes, messageBytes.Length, remoteEndPoint);
             Console.WriteLine(String.Format("Sent '{0}' to {1}", message, remoteEndPoint));
+
+            bool wait = ack;
+            while (wait)
+            {
+                byte[] receivedData = udpClient.Receive(ref remoteEndPoint);
+                wait = receivedData != messageBytes;
+            }
         }
 
         internal string GetVersion()
