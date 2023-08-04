@@ -1,10 +1,12 @@
-# CeFCall (v2.0)
+# CeFCall (v3 RTM)
 
 Simple Custom (TM) or XON/XOFF (Software Flow Control) Message Sender on ethernet.
 
 ## Prerequisiters
 
-To install missing .NET framework 4.8, download from:
+Still compatible on .Net Framework 3.5, downloadable from here:
+<https://www.microsoft.com/en-US/download/details.aspx?id=22>
+Soon migrating to .NET framework 4.8, download from:
 <https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48>
 
 ## Usage

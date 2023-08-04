@@ -5,7 +5,7 @@ using System.Text;
 
 namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
-    public class SFCEthernet: IServer
+    public class UdpServer: IServer
     {
         private const string XON = "\u0011"; // ASCII control code for XON
         private const string XOFF = "\u0013"; // ASCII control code for XOFF
@@ -15,12 +15,14 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         private bool transmissionEnded = false;
 
         private int serverPort;
+        private bool ack;
 
-        public SFCEthernet(int serverPort)
+        public UdpServer(int serverPort, bool ack = false)
         {
             this.serverPort = serverPort;
+            this.ack = ack;
             LastMessage = "";
-            Console.WriteLine("Instantiating...");
+            Console.WriteLine("Instantiating UDP Server...");
         }
 
         public string LastMessage { get; private set; }
@@ -49,7 +51,10 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                             // Handle XON flow control
                             Console.WriteLine("Received XON - Resume Transmission");
                             byte[] xonResponse = { 17 }; // Send XON back to the sender
-                            // udpClient.Send(xonResponse, 0, remoteEndPoint);
+                            if (ack)
+                            {
+                                udpClient.Send(xonResponse, xonResponse.Length, remoteEndPoint);
+                            }
                             transmissionPaused = false;
                         }
                         else if (receivedMessage == XOFF)
@@ -57,7 +62,10 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                             // Handle XOFF flow control
                             Console.WriteLine("Received XOFF - Pause Transmission");
                             byte[] xffResponse = { 19 }; // Send XFF back to the sender
-                            // udpClient.Send(xffResponse, 0, remoteEndPoint);
+                            if (ack)
+                            {
+                                udpClient.Send(xffResponse, xffResponse.Length, remoteEndPoint);
+                            }
                             transmissionPaused = true;
                         }
                         else if (receivedMessage == EOT)

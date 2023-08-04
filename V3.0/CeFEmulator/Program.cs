@@ -35,13 +35,13 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                         server = new SFCEthernet4(serverPort);
                         break;
                     default:
-                        server = new SFCEthernet(serverPort);
+                        server = new UdpServer(serverPort);
                         break;
                 }
             }
             else
             {
-                server = new SFCEthernet(serverPort);
+                server = new UdpServer(serverPort);
             }
             server.Listen();
 

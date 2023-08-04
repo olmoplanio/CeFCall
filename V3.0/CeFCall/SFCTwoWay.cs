@@ -74,13 +74,13 @@ namespace com.github.olmoplanio.CeFCall
             stream.Write(buffer, 0, buffer.Length);
             Console.WriteLine(String.Format("Sent '{0}' to endpoint", message));
         }
-        
-        internal string GetVersion()
+
+        public static string GetVersion()
         {
             return "V3.0";
         }
 
-        internal int Ping(string v)
+        public static int Ping(string v)
         {
             return 0;
         }
