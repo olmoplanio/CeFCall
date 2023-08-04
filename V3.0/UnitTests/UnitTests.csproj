@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CeFCall\CeFCall.csproj">
-      <Project>{a64328e4-503e-4b68-8087-ef9e7926a582}</Project>
+      <Project>{446eea27-29c9-4234-b5c6-a4a6dc25bc2c}</Project>
       <Name>CeFCall</Name>
     </ProjectReference>
     <ProjectReference Include="..\CeFEmulator\CeFEmulator.csproj">
