@@ -11,38 +11,39 @@ namespace com.github.olmoplanio.CeFCall
         const string XON = "\u0011"; // ASCII control code for XON
         const string XOFF = "\u0013"; // ASCII control code for XOFF
         readonly bool ack;
-        readonly UdpClient udpClient;
-        readonly IPEndPoint remoteEndPoint;
 
 
-        public UdpCallerAck(string serverIP, int serverPort, bool ack)
+        public UdpCallerAck(bool ack)
         {
             this.ack = ack;
-            this.udpClient = new UdpClient();
-            this.remoteEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), serverPort);
-            Console.WriteLine("Connected to the server.");
         }
 
-        public void Send(IEnumerable<string> messages)
+        public void Send(string serverIP, int serverPort, IEnumerable<string> messages)
         {
             foreach (var message in messages)
             {
-                Send(message);
+                Send(serverIP, serverPort, message);
             }
         }
 
-        public void Send(string message)
+        public void Send(string serverIP, int serverPort, string message)
         {
             try
             {
+                UdpClient udpClient = new UdpClient();
+                IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), serverPort);
+
+
+                Console.WriteLine("Connected to the server.");
+
                 // Send XON message
-                SendMessage(XON, ack);
+                SendMessage(udpClient, remoteEndPoint, XON, ack);
 
                 // Send Message
-                SendMessage(message, false);
+                SendMessage(udpClient, remoteEndPoint, message, false);
 
                 // Send XOFF message
-                SendMessage(XOFF, ack);
+                SendMessage(udpClient, remoteEndPoint, XOFF, ack);
             }
             catch (Exception ex)
             {
@@ -50,7 +51,10 @@ namespace com.github.olmoplanio.CeFCall
             }
         }
 
-        private void SendMessage(string message, bool acknowledge)
+        private void SendMessage(UdpClient udpClient,
+            IPEndPoint remoteEndPoint, 
+            string message,
+            bool acknowledge)
         {
             var ep = remoteEndPoint;
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
@@ -72,7 +76,7 @@ namespace com.github.olmoplanio.CeFCall
 
         public string GetVersion()
         {
-            return "V3.0";
+            return "V3.0.2";
         }
 
         public int Ping(string v)

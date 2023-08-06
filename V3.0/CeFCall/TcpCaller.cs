@@ -11,33 +11,35 @@ namespace com.github.olmoplanio.CeFCall
     {
         const byte XON = 17; // ASCII control code for XON
         const byte XOFF = 19; // ASCII control code for XOFF
-        TcpClient client;
+        bool startTransmitting = true;
 
 
-        public TcpCaller(string serverIP, int serverPort)
+        public TcpCaller(bool startTransmitting = true)
         {
-            client = new TcpClient();
-            client.Connect(IPAddress.Parse(serverIP), serverPort);
-            Console.WriteLine("Connected to the server.");
+            this.startTransmitting = startTransmitting;
+
         }
 
-        public void Send(string message)
+        public void Send(string serverIP, int serverPort, string message)
         {
-            Send(new string[1] { message });
+            Send(serverIP, serverPort, new string[1] { message });
         }
 
-        public void Send(IEnumerable<string> messages)
+        public void Send(string serverIP, int serverPort, IEnumerable<string> messages)
         {
          
             try
             {
+                TcpClient client;
+                client = new TcpClient();
+                client.Connect(IPAddress.Parse(serverIP), serverPort);
+                Console.WriteLine("Connected to the server.");
+
                 using (NetworkStream stream = client.GetStream())
                 {
                     Console.WriteLine("Connected to the server.");
 
-                    bool pauseTransmission = false;
-                    byte xonChar = 17;
-                    byte xoffChar = 19;
+                    bool pauseTransmission = !startTransmitting;
                     int line = 0;
 
                     while (true)
@@ -58,12 +60,12 @@ namespace com.github.olmoplanio.CeFCall
                             byte[] incomingSignal = new byte[1];
                             stream.Read(incomingSignal, 0, 1);
 
-                            if (incomingSignal[0] == xoffChar)
+                            if (incomingSignal[0] == XOFF)
                             {
                                 pauseTransmission = true;
                                 Console.WriteLine("Received XOFF, data transmission paused.");
                             }
-                            else if (incomingSignal[0] == xonChar)
+                            else if (incomingSignal[0] == XON)
                             {
                                 pauseTransmission = false;
                                 Console.WriteLine("Received XON, data transmission resumed.");
@@ -87,7 +89,7 @@ namespace com.github.olmoplanio.CeFCall
 
         public string GetVersion()
         {
-            return "V3.0";
+            return "V3.0.3";
         }
 
         public int Ping(string v)

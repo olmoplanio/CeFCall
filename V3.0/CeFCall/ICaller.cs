@@ -7,7 +7,7 @@ namespace com.github.olmoplanio.CeFCall
 {
     interface ICaller
     {
-        void Send(IEnumerable<string> commands);
+        void Send(string ip, int port, IEnumerable<string> commands);
         string GetVersion();
         int Ping(string s);
     }

@@ -58,14 +58,13 @@ namespace com.github.olmoplanio.CeFCall
                 return new string[] { "0", "V03.00" };
             }
             bool isx = options.Contains('x');
-            bool is3 = options.Contains('3');
             if (isx)
             {
-                string ip = arguments[0];
-                int port = Int32.Parse(arguments[1]);
-
                 int callerNo =
-                    options.Contains('4') ? 4
+                    options.Contains('7') ? 7
+                  : options.Contains('6') ? 6
+                  : options.Contains('5') ? 5
+                  : options.Contains('4') ? 4
                   : options.Contains('3') ? 3
                   : options.Contains('2') ? 2
                   : options.Contains('1') ? 1
@@ -75,19 +74,28 @@ namespace com.github.olmoplanio.CeFCall
                 switch(callerNo)
                 {
                     case 1:
-                        caller = new UdpCaller(ip, port);
+                        caller = new UdpCaller();
                         break;
                     case 2:
-                        caller = new UdpCallerAck(ip, port, false);
+                        caller = new UdpCallerAck(false);
                         break;
                     case 3:
-                        caller = new UdpCallerAck(ip, port, true);
+                        caller = new UdpCallerAck(true);
                         break;
                     case 4:
-                        caller = new TcpCaller(ip, port);
+                        caller = new TcpCaller();
+                        break;
+                    case 5:
+                        caller = new TcpCaller2();
+                        break;
+                    case 6:
+                        caller = new TcpCaller(false);
+                        break;
+                    case 7:
+                        caller = new TcpCaller2(false);
                         break;
                     default:
-                        caller = new UdpCaller(ip, port);
+                        caller = new UdpCaller();
                         break;
                 }
 
@@ -98,8 +106,10 @@ namespace com.github.olmoplanio.CeFCall
                     case "send":
                     case "exec":
                         CheckLen(arguments, 2);
+                        string ip = arguments[0];
+                        int port = Int32.Parse(arguments[1]);
                         var commands = arguments.Skip(2);
-                        caller.Send(commands);
+                        caller.Send(ip, port, commands);
                         return new string[] { "0", "" };
                     case "ping":
                         CheckLen(arguments, 0);

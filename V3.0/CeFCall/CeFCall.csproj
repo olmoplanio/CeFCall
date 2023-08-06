@@ -38,6 +38,15 @@
   <PropertyGroup>
     <ApplicationIcon>cash-register.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>719E8E625591B5AA37699BE1D57CAE45424AE822</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +59,7 @@
     <Compile Include="IntercomModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TcpCaller2.cs" />
     <Compile Include="TcpCaller.cs" />
     <Compile Include="UdpCaller.cs" />
     <Compile Include="UdpCallerAck.cs" />

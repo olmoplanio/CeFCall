@@ -1,5 +1,6 @@
 using com.github.olmoplanio.CeFCall;
 using com.github.olmoplanio.CeFCall.CeFEmulator;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
 
 namespace UnitTests
@@ -8,17 +9,17 @@ namespace UnitTests
     public class SmokeTests
     {
         private const string EOT = "\u0004";
-        
+
         [TestMethod]
         public void UdpHelloWorld()
         {
             var th = new Thread(RunServer);
             th.Start();
             Thread.Sleep(1000);
-            var client = new UdpCallerAck("127.0.0.1", 9100, false);
-            client.Send("HelloWorld");
+            var client = new UdpCallerAck(false);
+            client.Send("127.0.0.1", 9100, "HelloWorld");
             Thread.Sleep(1000);
-            client.Send(EOT);
+            client.Send("127.0.0.1", 9100, EOT);
         }
         public void RunServer()
         {
@@ -32,10 +33,10 @@ namespace UnitTests
             var th = new Thread(RunServerAck);
             th.Start();
             Thread.Sleep(1000);
-            var client = new UdpCallerAck("127.0.0.1", 9100, true);
-            client.Send("HelloWorld");
+            var client = new UdpCallerAck(true);
+            client.Send("127.0.0.1", 9100, "HelloWorld");
             Thread.Sleep(1000);
-            client.Send(EOT);
+            client.Send("127.0.0.1", 9100, EOT);
         }
         public void RunServerAck()
         {
@@ -50,10 +51,10 @@ namespace UnitTests
             var th = new Thread(TcpRunServer);
             th.Start();
             Thread.Sleep(1000);
-            var client = new TcpCaller("127.0.0.1", 9100);
-            client.Send("HelloWorld");
+            var client = new TcpCaller();
+            client.Send("127.0.0.1", 9100, "HelloWorld");
             Thread.Sleep(1000);
-            client.Send(EOT);
+            client.Send("127.0.0.1", 9100, EOT);
         }
         public void TcpRunServer()
         {
@@ -67,10 +68,10 @@ namespace UnitTests
             var th = new Thread(TcpRunServer);
             th.Start();
             Thread.Sleep(1000);
-            var client = new TcpCallerAck("127.0.0.1", 9100);
-            client.Send("HelloWorld");
+            var client = new TcpCaller2();
+            client.Send("127.0.0.1", 9100, "HelloWorld");
             Thread.Sleep(1000);
-            client.Send(EOT);
+            client.Send("127.0.0.1", 9100, EOT);
         }
     }
 }
