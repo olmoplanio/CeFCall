@@ -24,13 +24,14 @@ CeFCall.exe /x send 192.168.1.199 9100 a
 ```
 
 ```bash
-CeFCall.exe /x send 192.168.1.199 9100 """ITEM1""2.5*R1"
+CeFCall.exe /x send 192.168.1.199 9100 ^ITEM1^2.5*R1
 ```
 
 #### Commands
 
-* _send_
- Sends a list of XONXOFF commands.
+* _send_ / _sexec_
+ Sends a list of commands, pausing whenever an XOFF is received until an XON resumes.
+ Use '^' as an alias for double quotes.
 
 ### Custom (TM) connection
 
