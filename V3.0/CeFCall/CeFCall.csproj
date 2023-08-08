@@ -34,6 +34,9 @@
   <PropertyGroup>
     <StartupObject>com.github.olmoplanio.CeFCall.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>flow.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +57,9 @@
     </EmbeddedResource>
     <None Include="References\CeFdll.dll" />
     <None Include="References\CeNComLayer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="flow.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>UnitTests.Program</StartupObject>
+    <StartupObject>Microsoft.VisualStudio.TestTools.UnitTesting.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -41,13 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assert.cs" />
     <Compile Include="NoRegression.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmokeTests.cs" />
-    <Compile Include="TestClassAttribute.cs" />
-    <Compile Include="TestMethodAttribute.cs" />
+    <Compile Include="UnitTesting\Assert.cs" />
+    <Compile Include="UnitTesting\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTesting\TestClassAttribute.cs" />
+    <Compile Include="UnitTesting\TestMethodAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CeFCall\CeFCall.csproj">

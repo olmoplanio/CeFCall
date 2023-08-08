@@ -1,6 +1,5 @@
 using com.github.olmoplanio.CeFCall;
-using com.github.olmoplanio.CeFCall.CeFEmulator;
-using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
 {

@@ -1,5 +1,8 @@
 using com.github.olmoplanio.CeFCall;
 using com.github.olmoplanio.CeFCall.CeFEmulator;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Text;
 using System.Threading;
 
 namespace UnitTests
@@ -7,70 +10,55 @@ namespace UnitTests
     [TestClass]
     public class SmokeTests
     {
-        private const string EOT = "\u0004";
-        
-        [TestMethod]
-        public void UdpHelloWorld()
-        {
-            var th = new Thread(RunServer);
-            th.Start();
-            Thread.Sleep(1000);
-            var client = new UdpCallerAck("127.0.0.1", 9100, false);
-            client.Send("HelloWorld");
-            Thread.Sleep(1000);
-            client.Send(EOT);
-        }
-        public void RunServer()
-        {
-            var emulator = new UdpServer(9100, false);
-            emulator.Listen();
-        }
-
-        [TestMethod]
-        public void UdpHelloWorldAck()
-        {
-            var th = new Thread(RunServerAck);
-            th.Start();
-            Thread.Sleep(1000);
-            var client = new UdpCallerAck("127.0.0.1", 9100, true);
-            client.Send("HelloWorld");
-            Thread.Sleep(1000);
-            client.Send(EOT);
-        }
-        public void RunServerAck()
-        {
-            var emulator = new UdpServer(9100, true);
-            emulator.Listen();
-        }
-
+        private const byte EOT = 4;
 
         [TestMethod]
         public void TcpHelloWorld()
         {
-            var th = new Thread(TcpRunServer);
-            th.Start();
-            Thread.Sleep(1000);
-            var client = new TcpCaller("127.0.0.1", 9100);
-            client.Send("HelloWorld");
-            Thread.Sleep(1000);
-            client.Send(EOT);
-        }
-        public void TcpRunServer()
-        {
-            var emulator = new TcpServer(9100);
-            emulator.Listen();
+            IServer server = new TcpServer(9100);
+            server.Start();
+            Thread.Sleep(534); // Wait for server
+
+            var client = new TcpCaller();
+            client.Send("127.0.0.1", 9100, "Hi");
+            Thread.Sleep(211);
+
+            client.Send("127.0.0.1", 9100, "Hello");
+            Thread.Sleep(211);
+
+            Thread.Sleep(2000);
+            Assert.AreEqual("HiHello", server.History);
+
+            client.Send("127.0.0.1", 9100, Char.ToString((char)EOT));
         }
 
-        [TestMethod]
-        public void TcpAckHelloWorld()
+        // [TestMethod]
+        public void TcpChallengeXoffXon()
         {
-            var th = new Thread(TcpRunServer);
-            th.Start();
-            Thread.Sleep(1000);
-            var client = new TcpCallerAck("127.0.0.1", 9100);
-            client.Send("HelloWorld");
-            Thread.Sleep(1000);
-            client.Send(EOT);
+            IServer server = new TcpServer(9100);
+            server.Start();
+
+            string message = GenerateString();
+            var client = new TcpCaller();
+            client.Send("127.0.0.1", 9100, message);
+            Thread.Sleep(2000);
+
+            Assert.AreEqual(message, server.History);
+            client.Send("127.0.0.1", 9100, Char.ToString((char)EOT));
+        }
+
+        private static string GenerateString()
+        {
+            Random random = new Random();
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                char randomChar = (char)random.Next(32, 127); // ASCII range: 32 (space) to 126 (tilde)
+                stringBuilder.Append(randomChar);
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }
