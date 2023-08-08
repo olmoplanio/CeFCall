@@ -60,17 +60,5 @@ namespace UnitTests
             var emulator = new TcpServer(9100);
             emulator.Listen();
         }
-
-        [TestMethod]
-        public void TcpAckHelloWorld()
-        {
-            var th = new Thread(TcpRunServer);
-            th.Start();
-            Thread.Sleep(1000);
-            var client = new TcpCallerAck("127.0.0.1", 9100);
-            client.Send("HelloWorld");
-            Thread.Sleep(1000);
-            client.Send(EOT);
-        }
     }
 }

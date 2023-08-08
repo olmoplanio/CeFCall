@@ -47,7 +47,7 @@ namespace com.github.olmoplanio.CeFCall
             }
             if (options.Contains('t'))
             {
-                Console.In.ReadLine();
+                System.Threading.Thread.Sleep(1000);
             }
 
         }
@@ -60,21 +60,25 @@ namespace com.github.olmoplanio.CeFCall
             bool isx = options.Contains('x');
             if (isx)
             {
-                var sfc = new SFCClient();
+                ICaller caller = new TcpCaller();
+
                 switch (command)
                 {
                     case "getversion":
-                        return new string[] { "0", sfc.GetVersion() };
+                        return new string[] { "0", caller.GetVersion() };
                     case "send":
                     case "exec":
                         CheckLen(arguments, 2);
-                        string[] commands = arguments.Skip(2).ToArray();
-                        sfc.Send(arguments[0], Int32.Parse(arguments[1]), commands);
+                        string ip = arguments[0];
+                        int port = Int32.Parse(arguments[1]);
+                        var commands = arguments.Skip(2);
+                        caller.Send(ip, port, commands);
                         return new string[] { "0", "" };
                     case "ping":
                         CheckLen(arguments, 0);
-                        return new string[] { "0", "" + sfc.Ping(arguments[0]) };
+                        return new string[] { "0", "" + caller.Ping(arguments[0]) };
                     default:
+                        Console.Out.WriteLine("Unknown command '{0}'", command);
                         return GetHelp();
                 }
             }
@@ -92,7 +96,7 @@ namespace com.github.olmoplanio.CeFCall
                         return gw.Read();
                     case "exec":
                         CheckLen(arguments, 2);
-                        string[] commands = arguments.Skip(2).ToArray();
+                        string[] commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
                         return gw.Exec(arguments[0], Int32.Parse(arguments[1]), commands);
                     case "openeth":
                         CheckLen(arguments, 1);
@@ -103,6 +107,7 @@ namespace com.github.olmoplanio.CeFCall
                         CheckLen(arguments, 0);
                         return gw.Ping(arguments[0]);
                     default:
+                        Console.Out.WriteLine("Unknown command '{0}'", command);
                         return GetHelp();
                 }
             }
