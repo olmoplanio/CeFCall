@@ -5,6 +5,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Linq;
 using System.Threading;
+using System.IO;
+using System.CodeDom;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace com.github.olmoplanio.CeFCall
 {
@@ -20,64 +23,57 @@ namespace com.github.olmoplanio.CeFCall
 
         public void Send(string hostIp, int port, IEnumerable<string> messages)
         {
-         
+            TcpClient client = new TcpClient();
             try
             {
-                TcpClient client = new TcpClient();
                 client.Connect(IPAddress.Parse(hostIp), port);
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Error.WriteLine("Connected to the server.");
+                WriteLog("Connected to the server.");
 
-                using (NetworkStream stream = client.GetStream())
+                NetworkStream stream = client.GetStream();
+                bool pauseTransmission = false;
+                int line = 0;
+
+                while (true)
                 {
-                    Console.WriteLine("Connected to the server.");
-
-                    bool pauseTransmission = false;
-                    int line = 0;
-
-                    while (true)
+                    if (!pauseTransmission)
                     {
-                        if (pauseTransmission)
+                        string data = messages.ElementAt(line);
+                        SendMessage(stream, data);
+                        line++;
+                        if (line >= messages.Count())
                         {
-                            Thread.Sleep(100);
-                        }
-                        else
-                        {
-                            string data = messages.ElementAt(line);
-                            SendMessage(stream, data);
-                            line++;
-                            if (line >= messages.Count())
-                            {
-                                break;
-                            }
-                        }
-
-                        // Check for incoming XOFF and XON signals from the receiver
-                        if (stream.DataAvailable)
-                        {
-                            byte[] incomingSignal = new byte[1];
-                            stream.Read(incomingSignal, 0, 1);
-
-                            if (incomingSignal[0] == XOFF)
-                            {
-                                pauseTransmission = true;
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.Error.WriteLine("Received XOFF, data transmission paused.");
-                            }
-                            else if (incomingSignal[0] == XON)
-                            {
-                                pauseTransmission = false;
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.Error.WriteLine("Received XON, data transmission resumed.");
-                            }
+                            break;
                         }
                     }
-                }
-            }
+                    Thread.Sleep(100);
+
+                    // Check for incoming XOFF and XON signals from the receiver
+                    if (stream.DataAvailable)
+                    {
+                        byte[] incomingSignal = new byte[1];
+                        stream.Read(incomingSignal, 0, 1);
+
+                        if (incomingSignal[0] == XOFF)
+                        {
+                            pauseTransmission = true;
+                            WriteLog("Received XOFF, data transmission paused.");
+                        }
+                        else if (incomingSignal[0] == XON)
+                        {
+                            pauseTransmission = false;
+                            WriteLog("Received XON, data transmission resumed.");
+                        }
+                    }
+                } //wend
+                stream.Close();
+            } 
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Error.WriteLine("An error occurred: " + ex.Message);
+                WriteLog("An error occurred: " + ex.Message, true);
+            }
+            finally
+            {
+                client.Close();
             }
         }
 
@@ -85,7 +81,16 @@ namespace com.github.olmoplanio.CeFCall
         {
             byte[] buffer = Encoding.ASCII.GetBytes(message);
             stream.Write(buffer, 0, buffer.Length);
-            Console.WriteLine(String.Format("Sent '{0}' to endpoint", message));
+            stream.Flush();
+            WriteLog(String.Format("Sent '{0}' to endpoint", message));
+        }
+
+        private static void WriteLog(string message, bool asError = false)
+        {
+            var saveColor = Console.ForegroundColor;
+            Console.ForegroundColor = asError ? ConsoleColor.Yellow : ConsoleColor.Cyan;
+            Console.Error.WriteLine(message);
+            Console.ForegroundColor = saveColor;
         }
 
         public string GetVersion()

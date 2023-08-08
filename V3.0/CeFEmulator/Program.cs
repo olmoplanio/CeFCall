@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
@@ -16,13 +17,14 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
 
             IServer server = new TcpServer(serverPort);
-            server.Listen();
+            server.Start();
 
             Console.WriteLine("Press any key to stop listening...");
             Console.ReadKey();
 
             server.Close();
             Console.WriteLine("Listener closed.");
+            Thread.Sleep(1000);
         }
     }
 }

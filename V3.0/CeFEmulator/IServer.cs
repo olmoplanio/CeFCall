@@ -7,9 +7,9 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
     public interface IServer
     {
-        void Listen();
+        void Start();
         void Close();
-        string LastMessage {
+        string History {
             get;
         } 
     }

@@ -47,7 +47,7 @@ namespace com.github.olmoplanio.CeFCall
             }
             if (options.Contains('t'))
             {
-                Console.In.ReadLine();
+                System.Threading.Thread.Sleep(1000);
             }
 
         }
