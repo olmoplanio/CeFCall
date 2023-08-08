@@ -21,7 +21,7 @@ Sends a message to the given server using XON/XOFF.
 Examples:
 
 ```bash
-CeFCall.exe /x send 192.168.1.199 9100 a
+CeFCall.exe /x send 192.168.1.199 9100 7w a #dumps open messages and opens drawer
 ```
 
 ```bash
