@@ -4,49 +4,47 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Linq;
+using System.Threading;
 
 namespace com.github.olmoplanio.CeFCall
 {
     public class TcpCaller: ICaller
     {
-        const byte XON = 17; // ASCII control code for XON
-        const byte XOFF = 19; // ASCII control code for XOFF
-        bool startTransmitting = true;
-
-
-        public TcpCaller(bool startTransmitting = true)
-        {
-            this.startTransmitting = startTransmitting;
-
-        }
+        private const byte XON = 17; // ASCII control code for XON
+        private const byte XOFF = 19; // ASCII control code for XOFF
 
         public void Send(string serverIP, int serverPort, string message)
         {
             Send(serverIP, serverPort, new string[1] { message });
         }
 
-        public void Send(string serverIP, int serverPort, IEnumerable<string> messages)
+        public void Send(string hostIp, int port, IEnumerable<string> messages)
         {
          
             try
             {
-                TcpClient client;
-                client = new TcpClient();
-                client.Connect(IPAddress.Parse(serverIP), serverPort);
-                Console.WriteLine("Connected to the server.");
+                TcpClient client = new TcpClient();
+                client.Connect(IPAddress.Parse(hostIp), port);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Error.WriteLine("Connected to the server.");
 
                 using (NetworkStream stream = client.GetStream())
                 {
                     Console.WriteLine("Connected to the server.");
 
-                    bool pauseTransmission = !startTransmitting;
+                    bool pauseTransmission = false;
                     int line = 0;
 
                     while (true)
                     {
-                        if (!pauseTransmission)
+                        if (pauseTransmission)
                         {
-                            SendMessage(stream, messages.ElementAt(line));
+                            Thread.Sleep(100);
+                        }
+                        else
+                        {
+                            string data = messages.ElementAt(line);
+                            SendMessage(stream, data);
                             line++;
                             if (line >= messages.Count())
                             {
@@ -63,12 +61,14 @@ namespace com.github.olmoplanio.CeFCall
                             if (incomingSignal[0] == XOFF)
                             {
                                 pauseTransmission = true;
-                                Console.WriteLine("Received XOFF, data transmission paused.");
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Error.WriteLine("Received XOFF, data transmission paused.");
                             }
                             else if (incomingSignal[0] == XON)
                             {
                                 pauseTransmission = false;
-                                Console.WriteLine("Received XON, data transmission resumed.");
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Error.WriteLine("Received XON, data transmission resumed.");
                             }
                         }
                     }
@@ -76,7 +76,8 @@ namespace com.github.olmoplanio.CeFCall
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Error.WriteLine("An error occurred: " + ex.Message);
             }
         }
 

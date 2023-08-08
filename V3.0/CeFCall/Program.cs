@@ -60,44 +60,7 @@ namespace com.github.olmoplanio.CeFCall
             bool isx = options.Contains('x');
             if (isx)
             {
-                int callerNo =
-                    options.Contains('7') ? 7
-                  : options.Contains('6') ? 6
-                  : options.Contains('5') ? 5
-                  : options.Contains('4') ? 4
-                  : options.Contains('3') ? 3
-                  : options.Contains('2') ? 2
-                  : options.Contains('1') ? 1
-                  : 0;
-
-                ICaller caller;
-                switch(callerNo)
-                {
-                    case 1:
-                        caller = new UdpCaller();
-                        break;
-                    case 2:
-                        caller = new UdpCallerAck(false);
-                        break;
-                    case 3:
-                        caller = new UdpCallerAck(true);
-                        break;
-                    case 4:
-                        caller = new TcpCaller();
-                        break;
-                    case 5:
-                        caller = new TcpCaller2();
-                        break;
-                    case 6:
-                        caller = new TcpCaller(false);
-                        break;
-                    case 7:
-                        caller = new TcpCaller2(false);
-                        break;
-                    default:
-                        caller = new UdpCaller();
-                        break;
-                }
+                ICaller caller = new TcpCaller();
 
                 switch (command)
                 {
@@ -133,7 +96,7 @@ namespace com.github.olmoplanio.CeFCall
                         return gw.Read();
                     case "exec":
                         CheckLen(arguments, 2);
-                        string[] commands = arguments.Skip(2).ToArray();
+                        string[] commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
                         return gw.Exec(arguments[0], Int32.Parse(arguments[1]), commands);
                     case "openeth":
                         CheckLen(arguments, 1);
