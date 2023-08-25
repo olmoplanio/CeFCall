@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace UnitTests
+namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
     class Program
     {

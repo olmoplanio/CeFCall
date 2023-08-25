@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.6.33829.357
+# Visual Studio 15
+VisualStudioVersion = 15.0.33423.255
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeFEmulator", "CeFEmulator\CeFEmulator.csproj", "{FC3C5461-E448-43CA-9748-811F12A8C561}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeFCall", "CeFCall\CeFCall.csproj", "{446EEA27-29C9-4234-B5C6-A4A6DC25BC2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{3F126CC9-14ED-4174-BC5C-3D91190DD2F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestExecutable", "UnitTests\UnitTestExecutable.csproj", "{BBC7003E-01C5-4424-B136-0B33527D200A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{3F126CC9-14ED-4174-BC5C-3D91190DD2F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F126CC9-14ED-4174-BC5C-3D91190DD2F7}.Release|x64.ActiveCfg = Release|Any CPU
 		{3F126CC9-14ED-4174-BC5C-3D91190DD2F7}.Release|x64.Build.0 = Release|Any CPU
+		{BBC7003E-01C5-4424-B136-0B33527D200A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC7003E-01C5-4424-B136-0B33527D200A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC7003E-01C5-4424-B136-0B33527D200A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BBC7003E-01C5-4424-B136-0B33527D200A}.Debug|x64.Build.0 = Debug|Any CPU
+		{BBC7003E-01C5-4424-B136-0B33527D200A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC7003E-01C5-4424-B136-0B33527D200A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBC7003E-01C5-4424-B136-0B33527D200A}.Release|x64.ActiveCfg = Release|Any CPU
+		{BBC7003E-01C5-4424-B136-0B33527D200A}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

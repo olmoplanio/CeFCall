@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace UnitTests
+namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
     internal class Assert
     {

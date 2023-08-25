@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace UnitTests
+namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
     internal class TestMethodAttribute : Attribute
     {
