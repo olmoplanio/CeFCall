@@ -1,6 +1,6 @@
 # CeFCall
 
-Simple *Custom* ([www.custom.biz](https://www.custom.biz/it_IT/)) or XON/XOFF (Software Flow Control) Message Sender on ethernet.
+Simple *Custom* ([www.custom.biz](https://www.custom.biz/it*IT/)) or XON/XOFF (Software Flow Control) Message Sender on ethernet.
 
 ## Prerequisiters
 
@@ -14,7 +14,7 @@ Soon migrating to .NET framework 4.8, download from:
 
 ### XOFF/XON Connection
 
-> CeFCall.exe */x* _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_
+> CeFCall.exe **/x** *COMMAND* *SERVER* *PORT* *MESSAGES[...]*
 
 Sends a message to the given server using XON/XOFF.
 
@@ -30,15 +30,15 @@ CeFCall.exe /x send 192.168.1.199 9100 ^ITEM1^2.5*R1
 
 #### Commands
 
-##### _send_ / _exec_
- 
+##### *send* / *exec*
+
  Sends a list of commands, pausing whenever an XOFF is received until an XON resumes.
- 
+
  Use '^' as an alias for double quotes.
 
 ### Custom (TM) connection
 
-> CeFCall.exe _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_
+> CeFCall.exe *COMMAND* *SERVER* *PORT* *MESSAGES[...]*
 
 Sends a message to the given server using Custom protocol.
 
