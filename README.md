@@ -1,8 +1,14 @@
-# CeFCall (v3 RTM)
+# CeFCall (v3.1)
 
-Simple CustomDll (TM) or XON/XOFF (Software Flow Control) Message Sender on ethernet.
+Simple Custom, CustomDll or XON/XOFF (Software Flow Control) Message Sender on ethernet.
 
 ## Prerequisiters
+
+To use Custom Dll, have the two Dlls in the same directory:
+
+1. CeFdll.dll
+
+2. CeNComLayer.dll
 
 Still compatible on .Net Framework 3.5, downloadable from here:
 <https://www.microsoft.com/en-US/download/details.aspx?id=22>
@@ -33,7 +39,7 @@ CeFCall.exe /x send 192.168.1.199 9100 ^ITEM1^2.5*R1
  Sends a list of commands, pausing whenever an XOFF is received until an XON resumes.
  Use '^' as an alias for double quotes.
 
-### Custom (TM) connection
+### Custom Dll connection
 
 ``CeFCall _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_``
 
