@@ -1,6 +1,6 @@
 # CeFCall (v3 RTM)
 
-Simple Custom (TM) or XON/XOFF (Software Flow Control) Message Sender on ethernet.
+Simple CustomDll (TM) or XON/XOFF (Software Flow Control) Message Sender on ethernet.
 
 ## Prerequisiters
 
