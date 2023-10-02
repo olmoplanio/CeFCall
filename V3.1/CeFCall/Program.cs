@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace com.github.olmoplanio.CeFCall
 {
@@ -58,9 +57,34 @@ namespace com.github.olmoplanio.CeFCall
                 return new string[] { "0", "V03.00" };
             }
             bool isx = options.Contains('x');
-            if (isx)
+            bool isc = options.Contains('c');
+            if (isc)
             {
-                ICaller caller = new TcpCaller();
+                var caller = new CustomClient();
+                CheckLen(arguments, 2);
+                string ip = arguments[0];
+                int port = Int32.Parse(arguments[1]);
+                var commands = arguments.Skip(2);
+                string ret = caller.Exec(ip, port, String.Join(" ", commands.ToArray()));
+
+
+                switch (command)
+                {
+                    case "call":
+                        return new string[] { ret };
+                    case "exec":
+                        return new string[] { "0", ret };
+                    case "ping":
+                        CheckLen(arguments, 0);
+                        return new string[] { "0", "pong" };
+                    default:
+                        Console.Out.WriteLine("Unknown command '{0}'", command);
+                        return GetHelp();
+                }
+            }
+            else if (isx)
+            {
+                ICaller caller = new SfcCaller();
 
                 switch (command)
                 {

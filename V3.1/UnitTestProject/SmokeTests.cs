@@ -19,7 +19,7 @@ namespace UnitTests
             server.Start();
             Thread.Sleep(534); // Wait for server
 
-            var client = new TcpCaller();
+            var client = new SfcCaller();
             client.Send("127.0.0.1", 9100, "Hi");
             Thread.Sleep(211);
 
@@ -39,7 +39,7 @@ namespace UnitTests
             server.Start();
 
             string message = GenerateString();
-            var client = new TcpCaller();
+            var client = new SfcCaller();
             client.Send("127.0.0.1", 9100, message);
             Thread.Sleep(2000);
 

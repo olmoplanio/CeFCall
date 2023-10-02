@@ -11,7 +11,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace com.github.olmoplanio.CeFCall
 {
-    public class TcpCaller: ICaller
+    public class SfcCaller: ICaller
     {
         private const byte XON = 17; // ASCII control code for XON
         private const byte XOFF = 19; // ASCII control code for XOFF
