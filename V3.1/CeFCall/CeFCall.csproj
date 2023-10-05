@@ -52,10 +52,10 @@
       <Link>README.md</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="References\CeFdll.dll">
+    <None Include="CeFdll.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="References\CeNComLayer.dll">
+    <None Include="CeNComLayer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
