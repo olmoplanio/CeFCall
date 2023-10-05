@@ -1,201 +1,40 @@
-﻿**Part Number : 77100000004500     Rev**
+﻿**CUSTOM S.p.A.**
 
-![](cef2e6c5-b46b-44be-b392-3359776d8743.001.png)
-
-**CUSTOM S.p.A.**
-
-World Headquarters
-
-**Via Berettine, 2/B - 43010 Fontevivo, Parma ITALY Tel. +39 0521 680111 - Fax +39 0521 610701 <info@custom.biz> - <www.custom.biz>**
+Via Berettine, 2/B
+43010 Fontevivo
+Parma
+ITALY
+Tel. +39 0521 680111 - Fax +39 0521 610701 <info@custom.biz> - <www.custom.biz>
 
 *All rights reserved*
 
-**<www.custom.biz>**
 
 Tutti i diritti riservati. È vietata la riproduzione totale o parziale del presente manuale in qualsiasi forma, sia essa cartacea o informatica. La CUSTOM ENGINEERING S.p.A. e le risorse impiegate nella realizzazione del manuale, non si assumono nessuna responsabilità derivante dall’utilizzo dello stesso, garantendo che le informazioni contenute nel manuale sono state accuratamente verifi cate.
 
 Ogni suggerimento riguardo ad eventuali errori riscontrati o a possibili miglioramenti sarà particolarmente ap- prezzato. I prodotti sono soggetti ad un continuo controllo e miglioramento, pertanto la CUSTOM ENGINEERING S.p.A. si riserva di modifi care le informazioni contenute nel manuale senza preavviso.
 
-*Questa manuale si riferisce alle seguenti versioni di prodotti fi scali: 1° generazione KUBE-F  1.56*
+Questo manuale si riferisce alle seguenti versioni di prodotti fiscali:
 
-*THEA-F  1.44*
+1° generazione
+KUBE-F  1.56 
+THEA-F  1.44
+MAX  1.42
 
-*MAX  1.42*
-
-*2° generazione BIG  1.08 XTHEA-F  1.02*
-
-*XKUBE-F  1.18 VKP80II-XF  1.16*
+2° generazione
+BIG  1.08
+XTHEA-F  1.02
+XKUBE-F  1.18
+VKP80II-XF  1.16
 
 Copyright © 2008 CUSTOM ENGINEERING S.p.A. – Italy
 
-CUSTOM ENGINEERING S.p.A.
+PROTOCOLLO CUSTOM
 
-Str. Berettine 2 - 43010 Fontevivo (PARMA) - Italy
-
-Tel. : +39 0521-680111  -  Fax : +39 0521-610701 http: <www.custom.it>
-
-Assistenza Tecnica Clienti
-
-*Prodotti POS & Retail:*   <supporto.pos@custom.it>
-
-**SOMMARIO**
-
-PROTOCOLLO CUSTOM![ref1]
-
-PROTOCOLLO DI COMUNICAZIONE ............................................................................................................8 Precisazioni in merito ai prodotti fi scali .......................................................................................................9 Precisazioni in merito al protocollo ..............................................................................................................9 Precisazione sull’utilizzo della CUSTOM DLL .............................................................................................9 Precisazioni sulla gestione del fi ne-carta ....................................................................................................9 Precisazioni sul contenuto dei messaggi (glossario) ...................................................................................9
-
-GRUPPI DI COMANDI ...................................................................................................................................10 1 COMANDI RICHIESTA DATI .......................................................................................................................13
-
-*1001  Data/ora..................................................................................................................................................................................13 1002  Righe intestazione ..................................................................................................................................................................13 1003  Totali scontrino .......................................................................................................................................................................14 1004  Totali giornalieri ......................................................................................................................................................................14 1005  Dati di chiusura giornaliera per n° d’ordine ............................................................................................................................15 1006  Dati di chiusura giornaliera per data .......................................................................................................................................15 1007  Dati ripristini fi scali..................................................................................................................................................................16 1008  Numero matricola fi scale ........................................................................................................................................................16 1009  Stato stampante .....................................................................................................................................................................17 1010  Stato stampante .....................................................................................................................................................................17 1011  Stato scontrini.........................................................................................................................................................................18 1012  Step scontrino fi scale .............................................................................................................................................................18 1013  Modello e release stampante .................................................................................................................................................18 1015  Codice d’errore .......................................................................................................................................................................19 1104  Dati ultima chiusura fi scale e numero DGFE .........................................................................................................................19 1109  Stato stampante .....................................................................................................................................................................20 1209  Stato stampante .....................................................................................................................................................................20 1270  Abilita / disabilita taglierina .....................................................................................................................................................20*
-
-2 OPERAZIONI FISCALI ................................................................................................................................21
-
-*2001  Programmazione data/ora ......................................................................................................................................................21 2002  Esecuzione chiusura giornaliera ............................................................................................................................................21 2003  Esecuzione lettura giornaliera ................................................................................................................................................22 2005  Fiscalizzazione .......................................................................................................................................................................22 2006  Verifi ca periodica ....................................................................................................................................................................23 2102  Azzeramento reparti ...............................................................................................................................................................24 2103  Lettura reparti .........................................................................................................................................................................24 2201  Incremento contatori di classe 2 .............................................................................................................................................24*
-
-3 GENERAZIONE DI DOCUMENTI FISCALI ................................................................................................25
-
-*3001  Operazione fi scale..................................................................................................................................................................25 3002  Riga aggiuntiva (ulteriore descrizione operazione) ................................................................................................................26 3003  Stampa subtotale ...................................................................................................................................................................27 3004  Pagamento con corrispettivo pagato ......................................................................................................................................27 3005  Pagamento con corrispettivo non pagato ...............................................................................................................................28 3006  Pagamento con EFT POS ......................................................................................................................................................28 3008  Riga aggiuntiva pagamenti .....................................................................................................................................................29 3009  Stampa rimanenza .................................................................................................................................................................29 3010  Righe fi sse..............................................................................................................................................................................30 3011  Chiusura scontrino .................................................................................................................................................................30 3012  Righe di cortesia .....................................................................................................................................................................31 3013  Espulsione scontrino con taglio parziale ................................................................................................................................32 3014  Espulsione scontrino con taglio parziale e avanzamento carta ..............................................................................................32 3015  Espulsione scontrino con taglio totale ....................................................................................................................................32 3016  Stampa bufferizzata ...............................................................................................................................................................33 3017  Stampa immagine grafi ca.......................................................................................................................................................33 3020  Forzatura stampa non bufferizzata .........................................................................................................................................34*
-
-*3021  Stampa barcode interno a scontrino ......................................................................................................................................34 3022  Defi nizione lunghezza stampa bufferizzata ............................................................................................................................35 3101  Operazione fi scale su reparto selezionato .............................................................................................................................35 3116  Comando di attivazione buzzer ..............................................................................................................................................36*
-
-4 GENERAZIONE DI DOCUMENTI NON FISCALI .......................................................................................37
-
-*4001  Apertura documento non fi scale.............................................................................................................................................37 4002  Stampa intestazione ...............................................................................................................................................................37 4003  Stampa riga non fi scale ..........................................................................................................................................................37 4004  Chiusura documento non fi scale ............................................................................................................................................38 4005  Stampa ragione sociale ..........................................................................................................................................................38*
-
-5 STAMPA DEL CONTENUTO DELLA MEMORIA FISCALE .........................................................................39
-
-*5001  Stampa chiusure giornaliere per n° d’ordine ..........................................................................................................................39 5002  Stampa chiusure giornaliere per data ....................................................................................................................................39 5003  Stampa somma chiusure giornaliere per data ........................................................................................................................40 5004  Stampa integrale contenuto memoria fi scale .........................................................................................................................40 5005  Comando di interruzione stampa ...........................................................................................................................................41*
-
-6 IMPOSTAZIONI FORMATI STAMPA ...........................................................................................................42
-
-6\.1 Programmazione ragione sociale ........................................................................................................42
-
-*6301  Numero max righe da stampare per ragione sociale .............................................................................................................42 6302  Programmazione ragione sociale ...........................................................................................................................................42*
-
-7 VARIE ..........................................................................................................................................................43
-
-*7001  Avanzamento carta ................................................................................................................................................................43 7005  Inizio modalità apprendimento ...............................................................................................................................................43 7006  Fine modalità apprendimento .................................................................................................................................................43 7007  Visualizzazione su display ......................................................................................................................................................44 7008  Apertura cassetto ...................................................................................................................................................................44 7009  Programmazione reparti .........................................................................................................................................................44*
-
-8 GESTIONE DEL GIORNALE ELETTRONICO ............................................................................................46
-
-*8001  Stampa giornale elettronico da data a data ............................................................................................................................46 8002  Stampa giornale elettronico per data e n° di scontrino...........................................................................................................46 8003  Stampa giornale elettronico da n. chiusura a n. chiusura ......................................................................................................47 8004  Richiesta riga di giornale elettronico ......................................................................................................................................47 8005  Stampa integrale giornale elettronico .....................................................................................................................................47 8006  Richiesta dati giornale elettronico ..........................................................................................................................................48 8007  Inizializzazione di un nuovo giornale elettronico ....................................................................................................................48*
-
-9 ESEMPI .......................................................................................................................................................50
-
-1. Scontrino di vendita .............................................................................................................................50
-1. Annullo scontrino .................................................................................................................................51
-
-PROTOCOLLO XON/XOFF![](cef2e6c5-b46b-44be-b392-3359776d8743.003.png)
-
-1 SCOPO ED APPLICABILITÀ.......................................................................................................................54 2 FUNZIONALITÀ ...........................................................................................................................................55
-
-3 STRUTTURA DEI DATI ...............................................................................................................................57
-
-1. Defi nizioni – Regole ........................................................................................................................57
-1. Separatori di campo ........................................................................................................................58
-1. Terminatori di comando ...................................................................................................................59
-
-- *Subtotale ................................................................................................................................................................................62*
-- *Stampa codice numerico non sommante ...............................................................................................................................62*
-- *Stampa messaggio alfanumerico ...........................................................................................................................................62 1%  Visualizza la descrizione sulla prima riga del customer display .............................................................................................63 2%  Visualizza la descrizione sulla seconda riga del customer display ........................................................................................63 a  Apertura cassetto ...................................................................................................................................................................63 j  Apertura scontrino non fi scale ................................................................................................................................................64 k  Annullo scontrino ....................................................................................................................................................................64*
-
-*1w  Dump memoria fi scale totale ..................................................................................................................................................65*
-
-*2w  Dump memoria fi scale per data .............................................................................................................................................65*
-
-*3w  Dump memoria fi scale per numero ........................................................................................................................................65*
-
-*4w  Dump giornale totale ..............................................................................................................................................................65*
-
-*5w  Dump giornale per data ..........................................................................................................................................................66*
-
-*6w  Dump giornale per numero .....................................................................................................................................................66*
-
-*7w  Termina dump.........................................................................................................................................................................66*
-
-*D  Imposta data/ora ....................................................................................................................................................................66*
-
-*39F Stampa Codice Fiscale / Partita IVA cliente ...........................................................................................................................67*
-
-*40F Stampa messaggio di cortesia a fi ne scontrino ......................................................................................................................67*
-
-*J  Chiusura scontrino non fi scale ...............................................................................................................................................68*
-
-*K  Clear .......................................................................................................................................................................................68*
-
-*0M  Modifi catore storno .................................................................................................................................................................68*
-
-*1M  Modifi catore sconto % su transazione articolo .......................................................................................................................69*
-
-*2M  Modifi catore sconto % su subtotale ........................................................................................................................................69*
-
-*3M  Modifi catore sconto a valore su transazione articolo .............................................................................................................69*
-
-*4M  Modifi catore sconto a valore su subtotale ..............................................................................................................................70*
-
-*5M  Modifi catore maggiorazione % su transazione articolo ..........................................................................................................70*
-
-*6M  Modifi catore maggiorazione % su subtotale ...........................................................................................................................70*
-
-*7M  Modifi catore maggiorazione a valore su transazione articolo ................................................................................................71*
-
-*8M  Modifi catore maggiorazione a valore su subtotale .................................................................................................................71*
-
-*9M  Modifi catore reso ....................................................................................................................................................................71*
-
-*10M  Cauzione ................................................................................................................................................................................72*
-
-*12M  Chiusura a credito ..................................................................................................................................................................73*
-
-*O  Selezione operatore ...............................................................................................................................................................73*
-
-*P  Vendita a PLU ........................................................................................................................................................................74*
-
-*R  Vendita a REPARTO ..............................................................................................................................................................75*
-
-*1T  Pagamento (tender) con contante ..........................................................................................................................................76*
-
-*2T  Pagamento (tender) con assegno ..........................................................................................................................................77*
-
-*3T  Pagamento (tender) con carta elettronica ..............................................................................................................................77*
-
-*4T  Pagamento (tender) con credito .............................................................................................................................................78*
-
-*5T  Pagamento (tender) con buono pasto ....................................................................................................................................79*
-
-*6T  Pagamento (tender) con sospensione ...................................................................................................................................79*
-
-*7T  Pagamento (tender) con pagamento generico .......................................................................................................................79*
-
-*21T Pagamento (tender) con buono pasto e calcolo del resto (solo per modelli FP) .....................................................................................80 22T Pagamento (tender) con buono pasto e calcolo del resto (solo per modelli ECR) ......................................................................................81 Y  Restituisce il controllo della transazione alla tastiera .............................................................................................................81*
-
-*1Z  Stampa BARCODE EAN13 ....................................................................................................................................................82*
-
-*2Z  Stampa BARCODE EAN8 ......................................................................................................................................................83*
-
-*3Z  Stampa BARCODE CODE39 .................................................................................................................................................84*
-
-4 COME EFFETTUARE LE PRIME PROVE DI COLLEGAMENTO ..............................................................85
-
-4\.1  Parametri di collegamento ..............................................................................................................85
-
-5***![ref2]
-
-7***![ref3]
-
-PROTOCOLLO CUSTOM![ref4]
-
-***KUBE-F THEA-F MAX***
-
-***BIG     XTHEA-F XKUBE-F VKP80II-F***
-
-*PROTOCOLLO CUSTOM*
-
-**PROTOCOLLO DI COMUNICAZIONE**
+## PROTOCOLLO DI COMUNICAZIONE
 
 Il colloquio avviene impostando i seguenti parametri per la trasmissione seriale RS232:
 
-- Baud Rate: 19200 bps **NOTE![](cef2e6c5-b46b-44be-b392-3359776d8743.007.png)**
+- Baud Rate: 19200 bps
 - Parità: ODD Il segnale RTS deve essere tenuto alto.
 - Data lenght: 7 bit dati Nei prodotti di nuova generazione XG la velocità di
 - 1 bit stop comunicazione può arrivare fi no a 57.600 bps.
@@ -216,9 +55,10 @@ Dove il signifi cato dei campi è:
 |**CKS**|Checksum|2 bytes|00###99|
 |**ETX**|Fine frame|1 byte|03h|
 
-**L**a notazione 02h identifi ca il valore esadecimale 02.
+La notazione 02h identifi ca il valore esadecimale 02.
 
-In caso di ricezione corretta si deve rispondere con il singolo carattere di  **ACK ![](cef2e6c5-b46b-44be-b392-3359776d8743.008.png)**In caso di ricezione non corretta si deve rispondere con il singolo carattere di  **NACK![](cef2e6c5-b46b-44be-b392-3359776d8743.009.png)**
+In caso di ricezione corretta si deve rispondere con il singolo carattere di  **ACK**
+In caso di ricezione non corretta si deve rispondere con il singolo carattere di **NACK**
 
 |**ACK**|acknowledge|1 byte|06h|
 | - | - | - | - |
@@ -228,52 +68,46 @@ dove :
 
 Il campo **MESSAGGIO** é così composto:
 
-**LUNGHEZZA![](cef2e6c5-b46b-44be-b392-3359776d8743.010.png)**
-
+**LUNGHEZZA**
 **DESCRIZIONE VALORE**
 
 ***(in bytes)***
 
 HEADER1 Corrisponde al gruppo 1 byte 1÷9 HEADER2 Corrisponde alla funzione 3 bytes 000÷999 DATI Dati del comando
 
-**NOTA![](cef2e6c5-b46b-44be-b392-3359776d8743.011.png)**
-
 - Il contatore di frame si incrementa ad ogni stringa inviata ( anche se la precedente non é andata a buon fi ne ); non si incrementa invece nel caso di reinvio della stessa stringa (retry).
 - La risposta ACK (acknowledge) ad ogni frame viene data solo in caso di ricezione corretta.
 - Il campo CKS (checksum) è la somma modulo 100 dei campi CNT+IDENT+MESSAGGIO.
 - Il campo IDENT è fi sso a “0” (zero come carattere ASCII).
 
-9***![ref3]
-*PROTOCOLLO CUSTOM*
+### Precisazioni in merito ai prodotti fiscali
 
-**Precisazioni in merito ai prodotti fiscali**
-
-I prodotti fi scali sono suddivisi per generazioni:
+I prodotti fiscali sono suddivisi per generazioni:
 
 1° generazione:  KUBE-F, THEA-F, MAX
 
 2° generazione:  BIG, XTHEA-F, XKUBE-F, VKP80II-XF
 
-**Precisazioni in merito al protocollo**
+### Precisazioni in merito al protocollo
 
 Dando per scontato il corretto collegamento del sistema alla Stampante e la corretta gestione delle porte seriali, esistono le seguenti casistiche:
 
 1. Il contatore di frame è una valore compreso tra 0÷99 e deve essere incrementato di 1 ad ogni comando.
-1. La risposta di NACK (not acknowledge) indica che la stringa inviata ha la checksum errata, oppure che è stato inviato un comando con contatore di frame uguale al precedente.
-1. Il contatore di frame posto a 00 e’ sempre accettato e non genera una risposta NACK (not acknowledge) azzerando il valore atteso dalla stampante. Si consiglia di servirsene per inviare il primo comando.
-1. Sia ad ACK che a NACK l’HOST deve rispondere ACK , nel primo caso il comando è da ritenersi interpre- tato correttamente, nel secondo no.
+2. La risposta di NACK (not acknowledge) indica che la stringa inviata ha la checksum errata, oppure che è stato inviato un comando con contatore di frame uguale al precedente.
+3. Il contatore di frame posto a 00 e’ sempre accettato e non genera una risposta NACK (not acknowledge) azzerando il valore atteso dalla stampante. Si consiglia di servirsene per inviare il primo comando.
+4. Sia ad ACK che a NACK l’HOST deve rispondere ACK , nel primo caso il comando è da ritenersi interpre- tato correttamente, nel secondo no.
 
-**NOTA:** Se un comando descritto nel presente manuale non dovesse essere supportato dal prodotto fi scale verifi care la versione fi rmware a bordo del prodotto fi scale.![](cef2e6c5-b46b-44be-b392-3359776d8743.012.png)
+**NOTA:** Se un comando descritto nel presente manuale non dovesse essere supportato dal prodotto fiscale verifi care la versione fi rmware a bordo del prodotto fiscal.
 
-**Precisazione sull’utilizzo della CUSTOM DLL**
+### Precisazione sull’utilizzo della CUSTOM DLL
 
 La sintassi dei comandi descritti in questo manuale è valida anche per l’utilizzo della DLL sviluppata per il protocollo CUSTOM e chiamata ‘CeFDLL.DLL’. Nel caso di utilizzo della DLL non sono da considerare tutte le osservazioni iniziali sulla struttura del basso livello ma occorre fare riferimento solo al manuale d’uso della DLL stessa che accompagna il suo pacchetto di installazione.
 
-**Precisazioni sulla gestione del fine-carta**
+### Precisazioni sulla gestione del fine-carta
 
-La Stampante provvede in maniera automatica alle ristampe dei soli scontrini fi scali che risultano essere in corso al momento del fi ne carta, nel momento dell’introduzione del nuovo rotolo carta.
+La Stampante provvede in maniera automatica alle ristampe dei soli scontrini fiscali che risultano essere in corso al momento del fi ne carta, nel momento dell’introduzione del nuovo rotolo carta.
 
-**Precisazioni sul contenuto dei messaggi (glossario)**
+### Precisazioni sul contenuto dei messaggi (glossario)**
 
 RIGA:  Può occupare l’intera larghezza della carta
 
@@ -283,7 +117,7 @@ PITCH:  Il valore del campo pitch è defi nito nel seguente modo :
 
 1. Standard
 1. Bold ad es. per il settaggio delle righe di intestazione
-1. 42 caratteri stampabili nella linea per le stampe non fi scali
+1. 42 caratteri stampabili nella linea per le stampe non fiscali
 1. Doppia Altezza
 1. Doppia Larghezza
 1. Corsivo
@@ -291,34 +125,28 @@ PITCH:  Il valore del campo pitch è defi nito nel seguente modo :
 1. Grassetto/42 caratteri
 1. Grassetto/doppia altezza/42 caratteri
 
-**NOTA:** I valori di PITCH corrispondenti a 4, 5, 6 sono presenti nei prodotti fi scali di 1° genera- zione (dalle release fi rmware 1.34 e successive) e nei prodotti fi scali di 2° generazione (tutte le release).![](cef2e6c5-b46b-44be-b392-3359776d8743.013.png)
+**NOTA:** I valori di PITCH corrispondenti a 4, 5, 6 sono presenti nei prodotti fiscali di 1° genera- zione (dalle release fi rmware 1.34 e successive) e nei prodotti fiscali di 2° generazione (tutte le release).
 
-***9![ref2]***
-
-*PROTOCOLLO CUSTOM*
-
-**GRUPPI DI COMANDI**
+### GRUPPI DI COMANDI
 
 I comandi accettati dalla STAMPANTE Fiscale vengono suddivisi nei seguenti 8 gruppi:
 
-1. Richiesta dati 5.  Stampa del contenuto della memoria fi scale
-1. Operazioni fi scali 6.  Impostazioni formato stampa
-1. Generazione di documenti fi scali 7.  Varie
-1. Generazione di documenti non fi scali 8.  Gestione del giornale Elettronico
+1. Richiesta dati 5.  Stampa del contenuto della memoria fiscale
+1. Operazioni fiscali 6.  Impostazioni formato stampa
+1. Generazione di documenti fiscali 7.  Varie
+1. Generazione di documenti non fiscali 8.  Gestione del giornale Elettronico
 
-Ogni comando eseguito correttamente genera una risposta del tipo: <ECHO COMANDO><DATI COMANDO>
+Ogni comando eseguito correttamente genera una risposta del tipo: `<ECHO COMANDO><DATI COMANDO>`
 
 Se un comando causa un anomalia di funzionamento genera una risposta del tipo:
 
-<ECHO COMANDO>ERR*nn*  dove *nn* rappresenta un numero 0 ÷ 99 che segnala uno stato
+`<ECHO COMANDO>ERR*nn*`  dove *nn* rappresenta un numero 0 ÷ 99 che segnala uno stato
 
 ***Nota:***  Lo stato di anomalia di funzionamento non necessita di azzeramento.
 
 La tabella riepilogativa delle anomalie di funzionamento è riportata sul manuale “GUIDA SEGNALA- ZIONI DI STATO”.
 
-FUNZIONE![](cef2e6c5-b46b-44be-b392-3359776d8743.014.png)
-
-*1 COMANDI RICHIESTA DATI*
+### 1 COMANDI RICHIESTA DATI
 
 |**1001**|Data/ora|
 | - | - |
@@ -327,22 +155,21 @@ FUNZIONE![](cef2e6c5-b46b-44be-b392-3359776d8743.014.png)
 |**1004**|Totali giornalieri|
 |**1005**|Dati di chiusura giornaliera per n° d’ordine|
 |**1006**|Dati di chiusura giornaliera per data|
-|**1007**|Dati ripristini fi scali|
-|**1008**|Numero matricola fi scale|
+|**1007**|Dati ripristini fiscali|
+|**1008**|Numero matricola fiscale|
 |**1009**|Stato stampante|
 |**1010**|Stato stampante|
 |**1011**|Stato scontrini|
-|**1012**|Step scontrino fi scale|
+|**1012**|Step scontrino fiscale|
 |**1013**|Modello e release stampante|
 |**1015**|Codice d’errore|
-|**1104**|Dati ultima chiusura fi scale e numero DGFE|
+|**1104**|Dati ultima chiusura fiscale e numero DGFE|
 |**1109**|Stato stampante|
 |**1209**|Stato stampante|
 |**1270**|Abilita / disabilita taglierina|
 |||
-FUNZIONE![ref5]
 
-*2 OPERAZIONI FISCALI*
+### 2 OPERAZIONI FISCALI
 
 |**2001**|Programmazione data/ora|
 | - | - |
@@ -354,7 +181,7 @@ FUNZIONE![ref5]
 |**2103**|Lettura reparti|
 |**2201**|Incremento contatori di classe 2|
 |*3 GENERAZIONE DI DOCUMENTI FISCALI*||
-|**3001**|Operazione fi scale|
+|**3001**|Operazione fiscale|
 |**3002**|Riga aggiuntiva (ulteriore descrizione operazione)|
 |**3003**|Stampa subtotale|
 |**3004**|Pagamento con corrispettivo pagato|
@@ -373,27 +200,22 @@ FUNZIONE![ref5]
 |**3020**|Forzatura stampa non bufferizzata|
 |**3021**|Stampa barcode interno a scontrino|
 |**3022**|Defi nizione lunghezza stampa bufferizzata|
-|**3101**|Operazione fi scale su reparto selezionato|
+|**3101**|Operazione fiscale su reparto selezionato|
 |**3116**|Comando di attivazione buzzer|
 |*4 GENERAZIONE DI DOCUMENTI NON FISCALI*||
-|**4001** Apertura documento non fi scale||
+|**4001** Apertura documento non fiscale||
 |**4002** Stampa intestazione||
 |||
 
-``***13***![ref6]***
-*PROTOCOLLO CUSTOM*
-
-FUNZIONE
-
-|**4003** Stampa riga non fi scale||
+|**4003** Stampa riga non fiscale||
 | - | :- |
-|**4004** Chiusura documento non fi scale||
+|**4004** Chiusura documento non fiscale||
 |**4005** Stampa ragione sociale||
 |*5 STAMPA DEL CONTENUTO DELLA MEMORIA FISCALE*||
 |**5001** Stampa chiusure giornaliere per n° d’ordine||
 |**5002** Stampa chiusure giornaliere per data||
 |**5003** Stampa somma chiusure giornaliere per data||
-|**5004** Stampa integrale contenuto memoria fi scale||
+|**5004** Stampa integrale contenuto memoria fiscale||
 |**5005** Comando di interruzione stampa||
 |*6 IMPOSTAZIONI FORMATI STAMPA*||
 |**6301**|Numero max righe da stampare per ragione sociale|
@@ -462,9 +284,9 @@ Risposta:
 <tr><td colspan="1">8-39</td><td colspan="1">RIGA</td><td colspan="1">0-32 bytes</td><td colspan="1">Testo della riga [alfanumerico]</td></tr>
 </table>
 
-***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fi scali di 1° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fiscali di 1° generazione (dalle
 
-release fi rmware 1.34 e successive) e nei prodotti fi scali di 2° generazione (tutte le release).
+release fi rmware 1.34 e successive) e nei prodotti fiscali di 2° generazione (tutte le release).
 
 **1003 Totali scontrino ![ref10]**Comando inviato:
 
@@ -486,8 +308,8 @@ Risposta:
 <tr><td colspan="1">41-49</td><td colspan="1">SUBT</td><td colspan="1">9 bytes</td><td colspan="1">SUBT = subtotale [0÷999999999]</td></tr>
 <tr><td colspan="1">50</td><td colspan="1">SEGNOR</td><td colspan="1">1 byte</td><td colspan="1">SEGNOR = segno rimanenza (se “-” è Resto) [+,-]</td></tr>
 <tr><td colspan="1">51-59</td><td colspan="1">RIM</td><td colspan="1">9 bytes</td><td colspan="1">RIM = rimanenza da pagare o resto [0÷999999999]</td></tr>
-<tr><td colspan="1">60-63</td><td colspan="1">N° FRAMES</td><td colspan="1">4 bytes</td><td colspan="1">N°FRAMES = n° frames inviate scontrino fi scale [0÷9999]</td></tr>
-<tr><td colspan="1">64</td><td colspan="1">SCONTR</td><td colspan="1">1 byte</td><td colspan="1">SCONTR = scontrino fi scale in corso [0/1]</td></tr>
+<tr><td colspan="1">60-63</td><td colspan="1">N° FRAMES</td><td colspan="1">4 bytes</td><td colspan="1">N°FRAMES = n° frames inviate scontrino fiscale [0÷9999]</td></tr>
+<tr><td colspan="1">64</td><td colspan="1">SCONTR</td><td colspan="1">1 byte</td><td colspan="1">SCONTR = scontrino fiscale in corso [0/1]</td></tr>
 </table>
 
 **1004 Totali giornalieri![ref11]**
@@ -504,13 +326,13 @@ Risposta:
 <table><tr><th colspan="1"><b>SEQ. BYTE</b></th><th colspan="1"><b>CONTENUTO</b></th><th colspan="1"><b>LUNGHEZZA</b></th><th colspan="1"><b>NOTE</b></th></tr>
 <tr><td colspan="1">0</td><td colspan="1"><b>1</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>004</b></td><td colspan="1">3 bytes</td></tr>
-<tr><td colspan="1">4-7</td><td colspan="1">NSF</td><td colspan="1">4 bytes</td><td colspan="1">NSF = n° scontrini fi scali [0÷9999]</td></tr>
-<tr><td colspan="1">8-16</td><td colspan="1">TSF</td><td colspan="1">9 bytes</td><td colspan="1">TSF = tot. scontrini fi scali [0÷999999999]</td></tr>
+<tr><td colspan="1">4-7</td><td colspan="1">NSF</td><td colspan="1">4 bytes</td><td colspan="1">NSF = n° scontrini fiscali [0÷9999]</td></tr>
+<tr><td colspan="1">8-16</td><td colspan="1">TSF</td><td colspan="1">9 bytes</td><td colspan="1">TSF = tot. scontrini fiscali [0÷999999999]</td></tr>
 <tr><td colspan="1">17-20</td><td colspan="1">NFA</td><td colspan="1">4 bytes</td><td colspan="1">NFA = N/A [0÷9999]</td></tr>
 <tr><td colspan="1">21-29</td><td colspan="1">TFA</td><td colspan="1">9 bytes</td><td colspan="1">TFA = N/A [0÷999999999]</td></tr>
 <tr><td colspan="1">30-33</td><td colspan="1">NRIC</td><td colspan="1">4 bytes</td><td colspan="1">NRIC = N/A [0÷9999]</td></tr>
 <tr><td colspan="1">34-42</td><td colspan="1">TRIC</td><td colspan="1">9 bytes</td><td colspan="1">TRIC = N/A [0÷999999999]</td></tr>
-<tr><td colspan="1">43-46</td><td colspan="1">NSLM</td><td colspan="1">4 bytes</td><td colspan="1">NSLM = n° scontrini letture memoria fi scale [0÷9999]</td></tr>
+<tr><td colspan="1">43-46</td><td colspan="1">NSLM</td><td colspan="1">4 bytes</td><td colspan="1">NSLM = n° scontrini letture memoria fiscale [0÷9999]</td></tr>
 <tr><td colspan="1">47-55</td><td colspan="1">TMA</td><td colspan="1">9 bytes</td><td colspan="1">TMA = tot. maggiorazioni [0÷999999999]</td></tr>
 <tr><td colspan="1">56-64</td><td colspan="1">TSC</td><td colspan="1">9 bytes</td><td colspan="1">TSC = tot. sconti [0÷999999999]</td></tr>
 <tr><td colspan="1">65-73</td><td colspan="1">TRET</td><td colspan="1">9 bytes</td><td colspan="1">TRET = tot. rettifi che [0÷999999999]</td></tr>
@@ -526,14 +348,14 @@ Comando inviato:
 | - | - | - | - |
 |0|**1**|1 byte|HEADER1: indica il gruppo di comandi|
 |1-3|**005**|3 bytes|HEADER2: indica la funzione|
-|4-7|N° ORD|4 bytes|Numero chiusura fi scale|
+|4-7|N° ORD|4 bytes|Numero chiusura fiscale|
 
 Risposta:
 
 <table><tr><th colspan="1"><b>SEQ. BYTE</b></th><th colspan="1"><b>CONTENUTO</b></th><th colspan="1"><b>LUNGHEZZA</b></th><th colspan="1"><b>NOTE</b></th></tr>
 <tr><td colspan="1">0</td><td colspan="1"><b>1</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>005</b></td><td colspan="1">3 bytes</td></tr>
-<tr><td colspan="1">4-7</td><td colspan="1">N° ORD</td><td colspan="1">4 bytes</td><td colspan="1"><p>N° ORD = n° chiusura fi scale [1÷9999]</p><p>Se il n° chiusura fi scale richiesto non è valido, la STAM- PANTE FISCALE risponde errore.</p></td></tr>
+<tr><td colspan="1">4-7</td><td colspan="1">N° ORD</td><td colspan="1">4 bytes</td><td colspan="1"><p>N° ORD = n° chiusura fiscale [1÷9999]</p><p>Se il n° chiusura fiscale richiesto non è valido, la STAM- PANTE FISCALE risponde errore.</p></td></tr>
 <tr><td colspan="1">8-16</td><td colspan="1">T.GIO</td><td colspan="1">9 bytes</td><td colspan="1">T.GIO = Tot. Giorno [0÷999999999]</td></tr>
 <tr><td colspan="1">17-20</td><td colspan="1">N. TE</td><td colspan="1">4 bytes</td><td colspan="1">N. TE = N/A [0÷9999]</td></tr>
 <tr><td colspan="1">21-29</td><td colspan="1">T.E.</td><td colspan="1">9 bytes</td><td colspan="1">T.E. = N/A [0÷999999999]</td></tr>
@@ -647,7 +469,7 @@ Risposta:
 <tr><td colspan="1">8</td><td colspan="1">S5</td><td colspan="1">1 byte</td><td colspan="1">S5 = f_ripristino (1: ripristino da fare) [0/1]</td></tr>
 <tr><td colspan="1">9</td><td colspan="1">S6</td><td colspan="1">1 byte</td><td colspan="1">S6 = ponticello ( 1: ponticello on) [0/1]</td></tr>
 <tr><td colspan="1">10</td><td colspan="1">S7</td><td colspan="1">1 byte</td><td colspan="1">S7 = matr. programmata (1: matr. Progr.) [0/1]</td></tr>
-<tr><td colspan="1">11</td><td colspan="1">S8</td><td colspan="1">1 byte</td><td colspan="1">S8 = chiusura fi scale (1 chiusura fatta) [0/1]</td></tr>
+<tr><td colspan="1">11</td><td colspan="1">S8</td><td colspan="1">1 byte</td><td colspan="1">S8 = chiusura fiscale (1 chiusura fatta) [0/1]</td></tr>
 <tr><td colspan="1">12</td><td colspan="1">S9</td><td colspan="1">1 byte</td><td colspan="1">S9 = stampa in corso [0/1]</td></tr>
 <tr><td colspan="1">13</td><td colspan="1">S10</td><td colspan="1">1 byte</td><td colspan="1">S10 = errore stampante [0/1]</td></tr>
 <tr><td colspan="1">14</td><td colspan="1">S11</td><td colspan="1">1 byte</td><td colspan="1">S11 = apprendimento in corso [0/1]</td></tr>
@@ -669,8 +491,8 @@ Risposta:
 <table><tr><th colspan="1"><b>SEQ. BYTE</b></th><th colspan="1"><b>CONTENUTO</b></th><th colspan="1"><b>LUNGHEZZA</b></th><th colspan="1"><b>NOTE</b></th></tr>
 <tr><td colspan="1">0</td><td colspan="1"><b>1</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>011</b></td><td colspan="1">3 bytes</td></tr>
-<tr><td colspan="1">4</td><td colspan="1">S1</td><td colspan="1">1 byte</td><td colspan="1">S1 = scontrino fi scale in corso [0/1]</td></tr>
-<tr><td colspan="1">5</td><td colspan="1">S2</td><td colspan="1">1 byte</td><td colspan="1">S2 = scontrino non fi scale in corso [0/1]</td></tr>
+<tr><td colspan="1">4</td><td colspan="1">S1</td><td colspan="1">1 byte</td><td colspan="1">S1 = scontrino fiscale in corso [0/1]</td></tr>
+<tr><td colspan="1">5</td><td colspan="1">S2</td><td colspan="1">1 byte</td><td colspan="1">S2 = scontrino non fiscale in corso [0/1]</td></tr>
 </table>
 
 **1012 Step scontrino fiscale![](cef2e6c5-b46b-44be-b392-3359776d8743.025.png)**
@@ -687,7 +509,7 @@ Risposta:
 <table><tr><th colspan="1"><b>SEQ. BYTE</b></th><th colspan="1"><b>CONTENUTO</b></th><th colspan="1"><b>LUNGHEZZA</b></th><th colspan="1"><b>NOTE</b></th></tr>
 <tr><td colspan="1">0</td><td colspan="1"><b>1</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>012</b></td><td colspan="1">3 bytes</td></tr>
-<tr><td colspan="1">4</td><td colspan="1">STEP</td><td colspan="1">1 byte</td><td colspan="1"><p>STEP = step scontrino fi scale [0÷7] dove: 0  Scontrino off</p><p>1  Corpo scontrino (transazioni)</p><p>2  Pagamenti in corso</p><p>3  Stampa resto</p><p>4  Stampa righe fi sse (opzionali)</p><p>5  Chiusura eseguita</p><p>6  Stampa messaggi cortesia (opzionali) 7  Espulsione eseguita</p></td></tr>
+<tr><td colspan="1">4</td><td colspan="1">STEP</td><td colspan="1">1 byte</td><td colspan="1"><p>STEP = step scontrino fiscale [0÷7] dove: 0  Scontrino off</p><p>1  Corpo scontrino (transazioni)</p><p>2  Pagamenti in corso</p><p>3  Stampa resto</p><p>4  Stampa righe fi sse (opzionali)</p><p>5  Chiusura eseguita</p><p>6  Stampa messaggi cortesia (opzionali) 7  Espulsione eseguita</p></td></tr>
 </table>
 
 **1013 Modello e release stampante![ref10]**
@@ -744,7 +566,7 @@ Risposta:
 <table><tr><th colspan="1"><b>SEQ. BYTE</b></th><th colspan="1"><b>CONTENUTO</b></th><th colspan="1"><b>LUNGHEZZA</b></th><th colspan="1"><b>NOTE</b></th></tr>
 <tr><td colspan="1">0</td><td colspan="1"><b>1</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>104</b></td><td colspan="1">3 bytes</td></tr>
-<tr><td colspan="1">4-7</td><td colspan="1">N. CHIUS.</td><td colspan="1">4 byte</td><td colspan="1">N. CHIUS. = Numero di chiusura fi scale corrente</td></tr>
+<tr><td colspan="1">4-7</td><td colspan="1">N. CHIUS.</td><td colspan="1">4 byte</td><td colspan="1">N. CHIUS. = Numero di chiusura fiscale corrente</td></tr>
 <tr><td colspan="1">8-11</td><td colspan="1">N. DGFE</td><td colspan="1">4 byte</td><td colspan="1">N. DGFE = Numero di DGFE corrente</td></tr>
 </table>
 
@@ -853,7 +675,7 @@ messaggio d’errore in seguito al quale il master potrà chiedere lo stato per 
 
 ***Nota2:*** Le sequenze di bytes da 4 a 22 sono opzionali.
 
-- Se viene inserito il byte 4 verrà stampato in coda alla chiusura fi scale il numero rimanente di righe di DGFE (stampato con pitch 1)
+- Se viene inserito il byte 4 verrà stampato in coda alla chiusura fiscale il numero rimanente di righe di DGFE (stampato con pitch 1)
 - Se vengono inseriti i bytes 5-28 verrà stampato in coda alla chiusura la descrizione inserita. Tale campo può essere utilizzato, ad esempio, per inserire il numero di cassa. I comandi descritti in nota due sono disponibili dalla Rel. 146 della Kube-F
 
 **2003 Esecuzione lettura giornaliera![](cef2e6c5-b46b-44be-b392-3359776d8743.030.png)**
@@ -905,7 +727,7 @@ Risposta:
 </table>
 ***Nota:***  A seguito di questo comando, vengono avviate automaticamente delle verifi che per testare tutte le
 
-funzionalità operative come ad es. della memoria fi scale, della memory card (giornale elettronico). Al termine di queste verifi che viene stampato uno scontrino come riportato di seguito:
+funzionalità operative come ad es. della memoria fiscale, della memory card (giornale elettronico). Al termine di queste verifi che viene stampato uno scontrino come riportato di seguito:
 
 **NON FISCALE![](cef2e6c5-b46b-44be-b392-3359776d8743.031.png)**
 
@@ -955,7 +777,7 @@ Comando inviato:
 | - | - | - | - |
 |0|**2**|1 byte|HEADER1: indica il gruppo di comandi|
 |1-3|**201**|3 bytes|HEADER2: indica la funzione|
-|4-12|Val. Doc2|9 bytes|Val. Doc2 = valore con decimale implicito della fattura stampata tramite scontrino “non fi scale”|
+|4-12|Val. Doc2|9 bytes|Val. Doc2 = valore con decimale implicito della fattura stampata tramite scontrino “non fiscale”|
 
 Risposta:
 
@@ -973,7 +795,7 @@ Comando inviato:
 | - | - | - | - |
 |0|**3**|1 byte|HEADER1: indica il gruppo di comandi|
 |1-3|**001**|3 bytes|HEADER2: indica la funzione|
-|4|TIPO|1 byte|<p>TIPO = tipo [1÷9, A] dove:</p><p>1  Vendita</p><p>2  Maggiorazioni</p><p>3  Sconti</p><p>4  Void</p><p>5  Annullo ultima operazione fi scale 8  All void</p><p>9  Resi</p><p>A  Cauzione</p>|
+|4|TIPO|1 byte|<p>TIPO = tipo [1÷9, A] dove:</p><p>1  Vendita</p><p>2  Maggiorazioni</p><p>3  Sconti</p><p>4  Void</p><p>5  Annullo ultima operazione fiscale 8  All void</p><p>9  Resi</p><p>A  Cauzione</p>|
 |5-6|LUN|2 bytes|LUN = lunghezza (num. bytes) del campo che segue|
 |7-28|DESCR|0-22 bytes|DESCR = Descrizione dell’operazione [alfanumerico]|
 |29-37|IMP|9 bytes|IMP = Importo [numerico]|
@@ -992,7 +814,7 @@ Nel caso di tipo = 4 (void), il campo importo (IMP) deve essere uguale all’imp
 
 Dalla Rel.1.48 della Kube-F  è possibile inviare i comandi di tipo = 8 (all void)  e di tipo = 4 (void) anche a pagamento iniziato (dai comandi 3004, 3005, 3006) con lo stesso comportamento che si ottiene in fase di vendita. Per cui ora, anche a pagamento iniziato, è possibile eseguire l’annullo totale dello scontrino e l’annullo e dell’ultimo pagamento. Nello specifi co il comando di tipo = 4 (void) quando lo si vuole eseguire per annullare un pagamento richiede in input (campo IMP) il valore del pagamento da annullare: se questo è uguale viene annullato e restituito l’echo, mentre se questo è diverso viene restituito ERR05.
 
-Dalla release 1.54 della Kube-F stato aggiunto un nuovo pitch = 5 che permette di annullare l’ultima operazione di vendita, sconto, maggiorazione, reso o annullo, con il corretto ripristino dei contatori relativi a tali operazioni. Tale comando non permette di annullare ne una descrizione di vendita (3002), ne l’operazione di subtotale (3003) o di annullo totale transazione (3001-8): in tal caso viene restitu- ito errore 05 di sequenza errata. Quando viene annullata un’operazione con questo comando , sullo scontrino fi scale viene scritta la dicitura “ANNULLO OPERAZ. PREC.”, seguita da un importo pari a quello annullato  ma con segno contrario, inoltre tale comando non può annullare sé stesso, una volta eseguito è quindi irreversibile
+Dalla release 1.54 della Kube-F stato aggiunto un nuovo pitch = 5 che permette di annullare l’ultima operazione di vendita, sconto, maggiorazione, reso o annullo, con il corretto ripristino dei contatori relativi a tali operazioni. Tale comando non permette di annullare ne una descrizione di vendita (3002), ne l’operazione di subtotale (3003) o di annullo totale transazione (3001-8): in tal caso viene restitu- ito errore 05 di sequenza errata. Quando viene annullata un’operazione con questo comando , sullo scontrino fiscale viene scritta la dicitura “ANNULLO OPERAZ. PREC.”, seguita da un importo pari a quello annullato  ma con segno contrario, inoltre tale comando non può annullare sé stesso, una volta eseguito è quindi irreversibile
 
 Risposta:
 
@@ -1003,8 +825,8 @@ Risposta:
 ***Nota:***  Alla ricezione della stringa, prima di eseguire la stampa, vengono verifi cate le seguenti condizioni:
 
 - All’interno della descrizione non si trovi la scritta “TOTALE”;
-- Non sia in corso nessun’operazione o sia in corso uno scontrino fi scale;
-- L’importo non mandi in overfl ow o in underfl ow i totali dello scontrino, i totali giornalieri ed il totale fi scale progressivo.
+- Non sia in corso nessun’operazione o sia in corso uno scontrino fiscale;
+- L’importo non mandi in overfl ow o in underfl ow i totali dello scontrino, i totali giornalieri ed il totale fiscale progressivo.
 
 Se tutte queste condizioni sono verificate, verrà stampata l’operazione, in caso contrario verrà segnalato il tipo d’errore.
 
@@ -1018,7 +840,7 @@ Comando inviato:
 |1-3|**002**|3 bytes|HEADER2: indica la funzione|
 |4|PITCH|1 byte|<p>PITCH [1÷9] =  1 (normale)</p><p>2 (grassetto)</p><p>3 (42 caratteri)</p><p>4 (doppia altezza)</p><p>5 (doppia larghezza)</p><p>6 (corsivo)</p><p>7 (normale/doppia altezza/42 caratteri) 8 (grassetto/42 caratteri)</p><p>9 (grassetto/doppia altezza/42 caratteri)</p>|
 |5-6|LUN|2 bytes|LUN = lunghezza (num. bytes) del campo che segue|
-|7-38|RIG|0-32 bytes|RIG = testo della riga di descrizione aggiuntiva di un’ope- razione all’interno di un documento fi scale [alfanumerico]|
+|7-38|RIG|0-32 bytes|RIG = testo della riga di descrizione aggiuntiva di un’ope- razione all’interno di un documento fiscale [alfanumerico]|
 
 Risposta:
 
@@ -1026,15 +848,15 @@ Risposta:
 <tr><td colspan="1">0</td><td colspan="1"><b>3</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>002</b></td><td colspan="1">3 bytes</td></tr>
 </table>
-***Nota:***  Si può usare il comando, quando è consentita un’operazione fi scale.
+***Nota:***  Si può usare il comando, quando è consentita un’operazione fiscale.
 
 Se RIG contiene operatori e/o simboli speciali non viene eseguito nessun calcolo, viene solamente gestita e stampata come testo.
 
-***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fi scali di 1° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fiscali di 1° generazione (dalle
 
-release fi rmware 1.34 e successive) e nei prodotti fi scali di 2° generazione (tutte le release).
+release fi rmware 1.34 e successive) e nei prodotti fiscali di 2° generazione (tutte le release).
 
-***Nota:***  I valori di PITCH corrispondenti a 7, 8, 9 sono presenti solo nei prodotti fi scali di 2° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 7, 8, 9 sono presenti solo nei prodotti fiscali di 2° generazione (dalle
 
 release fi rmware 1.14 e successive).
 
@@ -1150,7 +972,7 @@ Se RIG contiene operatori e/o simboli speciali non viene eseguito nessun calcolo
 
 Se si lavora in stampa bufferizzata, questa riga non viene stampata subito ma quando si esegue l’ope- razione successiva (pagamento o rimanenza o chiusura).
 
-***Nota:***  I valori di PITCH corrispondenti a 7, 8, 9 sono presenti solo nei prodotti fi scali di 2° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 7, 8, 9 sono presenti solo nei prodotti fiscali di 2° generazione (dalle
 
 release fi rmware 1.14 e successive).
 
@@ -1189,11 +1011,11 @@ Risposta:
 
 come n° confezioni, numero/nome operatore, etc. Le righefi sse possono occupare l’intera larghezza dello scontrino.
 
-***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fi scali di 1° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fiscali di 1° generazione (dalle
 
-release fi rmware 1.34 e successive) e nei prodotti fi scali di 2° generazione (tutte le release).
+release fi rmware 1.34 e successive) e nei prodotti fiscali di 2° generazione (tutte le release).
 
-***Nota:***  I valori di PITCH corrispondenti a 7, 8, 9 sono presenti solo nei prodotti fi scali di 2° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 7, 8, 9 sono presenti solo nei prodotti fiscali di 2° generazione (dalle
 
 release fi rmware 1.14 e successive).
 
@@ -1214,7 +1036,7 @@ Risposta:
 </table>
 ***Nota:***  Con questo comando vengono stampate due righe fi sse: la prima riporta la data, l’ora ed il n° di scontrini
 
-fi scali emessi; la seconda il logotipo fi scale ed il n° matricola. Lo scontrino non viene espulso automati- camente.
+fiscali emessi; la seconda il logotipo fiscale ed il n° matricola. Lo scontrino non viene espulso automati- camente.
 
 ***Note operative sulla chiusura:***
 
@@ -1247,11 +1069,11 @@ Risposta:
 
 Le righe di cortesia possono occupare l’intera larghezza dello scontrino; tra la riga di logotipo e la prima riga di cortesia sono inserite 2 righe bianche
 
-***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fi scali di 1° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fiscali di 1° generazione (dalle
 
-release fi rmware 1.34 e successive) e nei prodotti fi scali di 2° generazione (tutte le release).
+release fi rmware 1.34 e successive) e nei prodotti fiscali di 2° generazione (tutte le release).
 
-***Nota:***  I valori di PITCH corrispondenti a 7, 8, 9 sono presenti solo nei prodotti fi scali di 2° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 7, 8, 9 sono presenti solo nei prodotti fiscali di 2° generazione (dalle
 
 release fi rmware 1.14 e successive).
 
@@ -1356,9 +1178,9 @@ Risposta:
 
 da ottimizzare l’emissione di documenti molto lunghi.
 
-***Nota:***  Questo comando è presente nei prodotti fi scali di 1° generazione (dalle release fi rmware 1.46 e suc-
+***Nota:***  Questo comando è presente nei prodotti fiscali di 1° generazione (dalle release fi rmware 1.46 e suc-
 
-cessive) e nei prodotti fi scali di 2° generazione (tutte le release).
+cessive) e nei prodotti fiscali di 2° generazione (tutte le release).
 
 Risposta:
 
@@ -1366,7 +1188,7 @@ Risposta:
 <tr><td colspan="1">0</td><td colspan="1"><b>3</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>020</b></td><td colspan="1">3 bytes</td></tr>
 </table>
-***Nota:***  Sui prodotti fi scali di 2° generazione questo comando viene accettato con echo corretto, ma non esegue
+***Nota:***  Sui prodotti fiscali di 2° generazione questo comando viene accettato con echo corretto, ma non esegue
 
 l’operazione.
 
@@ -1405,9 +1227,9 @@ Comando inviato:
 
 dello spazio di memoria  disponibile per l’acquisizione dei dati. La personalizzazione del buffer viene salvata in EEPROM, quindi rimane settata anche a fronte di un HW-Init o di un upgrade.
 
-***Nota:***  Questo comando è presente nei prodotti fi scali di 1° generazione (dalle release fi rmware 1.46 e suc-
+***Nota:***  Questo comando è presente nei prodotti fiscali di 1° generazione (dalle release fi rmware 1.46 e suc-
 
-cessive). Sui prodotti fi scali di 2° generazione questo comando viene accettato con echo corretto, ma non esegue l’operazione.
+cessive). Sui prodotti fiscali di 2° generazione questo comando viene accettato con echo corretto, ma non esegue l’operazione.
 
 Risposta:
 
@@ -1452,8 +1274,8 @@ Risposta:
 Alla ricezione della stringa, prima di eseguirne la stampa, si deve controllare che:
 
 - All’interno della descrizione non si trovi la scritta “TOTALE”
-- Non sia in corso nessuna operazione o sia in corso uno scontrino fi scale
-- L’importo non mandi in overfl ow o in underfl ow i totali dello scontrino, i totali giornalieri ed il totale fi scale progressivo
+- Non sia in corso nessuna operazione o sia in corso uno scontrino fiscale
+- L’importo non mandi in overfl ow o in underfl ow i totali dello scontrino, i totali giornalieri ed il totale fiscale progressivo
 
 Se tutte queste condizioni sono verificate, verrà stampata l’operazione, in caso contrario verrà segnalato il tipo di errore. Inoltre, dopo un “all void”, lo scontrino viene automaticamente terminato ed espulso.
 
@@ -1470,9 +1292,9 @@ Comando inviato:
 
 ***Nota:***  Tale comando è presente dalla release fi rmware 1.46 e successive, della stampante KUBE-F.
 
-***Nota:***  Questo comando è presente nei prodotti fi scali di 1° generazione (dalle release fi rmware 1.46 e suc-
+***Nota:***  Questo comando è presente nei prodotti fiscali di 1° generazione (dalle release fi rmware 1.46 e suc-
 
-cessive) e nei prodotti fi scali di 2° generazione (tutte le release).
+cessive) e nei prodotti fiscali di 2° generazione (tutte le release).
 
 Questo comando permette di far emettere alla stampante una segnalazione acustica per attirare l’at- tenzione dell’operatore, a seconda delle necessità operative.
 
@@ -1529,9 +1351,9 @@ Comando inviato:
 |5-6|LUN|2 bytes|LUN = lunghezza (num. bytes) del campo che segue|
 |7-48|RIGA|0-42 bytes|RIG = testo della riga [alfanumerico]|
 
-***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fi scali di 1° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fiscali di 1° generazione (dalle
 
-release fi rmware 1.34 e successive) e nei prodotti fi scali di 2° generazione (tutte le release).
+release fi rmware 1.34 e successive) e nei prodotti fiscali di 2° generazione (tutte le release).
 
 Risposta:
 
@@ -1556,7 +1378,7 @@ Risposta:
 </table>
 **Nota:**  Con questo comando vengono stampate le due righe di chiusura:
 
-1° riga = data/ora e n° scontrini non fi scali.
+1° riga = data/ora e n° scontrini non fiscali.
 
 2° riga = scritta “NON FISCALE”
 
@@ -1577,7 +1399,7 @@ Risposta:
 <tr><td colspan="1">0</td><td colspan="1"><b>4</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>005</b></td><td colspan="1">3 bytes</td></tr>
 </table>
-***Nota:*** Viene stampato uno scontrino non fi scale riportante le righe di intestazione programmate.
+***Nota:*** Viene stampato uno scontrino non fiscale riportante le righe di intestazione programmate.
 
 **5 STAMPA DEL CONTENUTO DELLA MEMORIA FISCALE**
 
@@ -1598,11 +1420,11 @@ Risposta:
 <tr><td colspan="1">0</td><td colspan="1"><b>5</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>001</b></td><td colspan="1">3 bytes</td></tr>
 </table>
-***Nota:***  Se i numeri d’ordine sono congruenti, viene stampato uno scontrino fi scale contenente i dati identifi -
+***Nota:***  Se i numeri d’ordine sono congruenti, viene stampato uno scontrino fiscale contenente i dati identifi -
 
-cativi dell’utente, i numeri d’ordine iniziale e fi nali impostati, la data e l’importo di ciascun corrispettivo giornaliero, il n° dei corrispettivi stampati e la somma degli stessi, il numero progressivo scontrini fiscali, la data e l’ora di emissione ed il logotipo fi scale.
+cativi dell’utente, i numeri d’ordine iniziale e fi nali impostati, la data e l’importo di ciascun corrispettivo giornaliero, il n° dei corrispettivi stampati e la somma degli stessi, il numero progressivo scontrini fiscali, la data e l’ora di emissione ed il logotipo fiscale.
 
-La stampa termina con il numero d’ordine fi nale, oppure con la stampa dell’ultimo totale effettivamente contenuto nella memoria fi scale.
+La stampa termina con il numero d’ordine fi nale, oppure con la stampa dell’ultimo totale effettivamente contenuto nella memoria fiscale.
 
 La sequenza della stampa dei totali può essere interrotta con il comando “INTERRUZIONE STAMPA”.
 
@@ -1628,9 +1450,9 @@ Risposta:
 </table>
 **Nota:**  Se le date sono congruenti, viene stampato uno scontrino fiscale contenente i dati identificativi dell’utente,
 
-le date iniziale e fi nale impostate, il n° d’ordine, la data e l’importo di ciascun corrispettivo giornaliero, il n° dei corrispettivi stampati e la somma degli stessi, il numero progressivo scontrini fi scali, la data e l’ora d’emissione ed il logotipo fi scale.
+le date iniziale e fi nale impostate, il n° d’ordine, la data e l’importo di ciascun corrispettivo giornaliero, il n° dei corrispettivi stampati e la somma degli stessi, il numero progressivo scontrini fiscali, la data e l’ora d’emissione ed il logotipo fiscale.
 
-La stampa termina al raggiungimento (o superamento) della data fi nale, oppure all’ultimo totale effet- tivamente contenuto nella memoria fi scale.
+La stampa termina al raggiungimento (o superamento) della data fi nale, oppure all’ultimo totale effet- tivamente contenuto nella memoria fiscale.
 
 La sequenza della stampa dei totali può essere interrotta con il comando “INTERRUZIONE STAMPA”.
 
@@ -1654,9 +1476,9 @@ Risposta:
 </table>
 ***Nota:***  Se le date sono congruenti, viene stampato uno scontrino fiscale contenente i dati identificativi dell’uten-
 
-te, le date iniziale e fi nale impostate, il n° dei corrispettivi compresi fra le due date e la somma degli stessi, il numero progressivo scontrini fi scali, la data e l’ora di emissione ed il logotipo fi scale.
+te, le date iniziale e fi nale impostate, il n° dei corrispettivi compresi fra le due date e la somma degli stessi, il numero progressivo scontrini fiscali, la data e l’ora di emissione ed il logotipo fiscale.
 
-La stampa termina al raggiungimento della data finale, oppure all’ultimo totale effettivamente contenuto nella memoria fi scale.
+La stampa termina al raggiungimento della data finale, oppure all’ultimo totale effettivamente contenuto nella memoria fiscale.
 
 La sequenza della stampa dei totali non può essere interrotta.
 
@@ -1675,9 +1497,9 @@ Risposta:
 <tr><td colspan="1">0</td><td colspan="1"><b>5</b></td><td colspan="1">1 byte</td><td colspan="1" rowspan="2">Nei primi 4 bytes, viene ripetuto il comando inviato</td></tr>
 <tr><td colspan="1">1-3</td><td colspan="1"><b>004</b></td><td colspan="1">3 bytes</td></tr>
 </table>
-***Nota:***  Viene stampato uno scontrino fi scale riportante il contenuto integrale della memoria fi scale (dati iden-
+***Nota:***  Viene stampato uno scontrino fiscale riportante il contenuto integrale della memoria fiscale (dati iden-
 
-tifi cativi dell’utente, ripristini effettuati, totali giornalieri), il numero progressivo scontrini fi scali, la data e l’ora di emissione ed il logotipo fi scale.
+tifi cativi dell’utente, ripristini effettuati, totali giornalieri), il numero progressivo scontrini fiscali, la data e l’ora di emissione ed il logotipo fiscale.
 
 La sequenza della stampa dei totali può essere interrotta con il comando “INTERRUZIONE STAMPA”.
 
@@ -1733,9 +1555,9 @@ Comando inviato:
 |6-7|LUN|2 bytes|LUN = lunghezza (num. bytes) del campo che segue|
 |8-39|RIGA|0-32 bytes|RIGA = testo della riga [alfanumerico]|
 
-***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fi scali di 1° generazione (dalle
+***Nota:***  I valori di PITCH corrispondenti a 4, 5 e 6 sono presenti nei prodotti fiscali di 1° generazione (dalle
 
-release fi rmware 1.34 e successive) e nei prodotti fi scali di 2° generazione (tutte le release). Il valore di PITCH corrispondente a 3 è presente solo nei prodotti fi scali di 2° generazione
+release fi rmware 1.34 e successive) e nei prodotti fiscali di 2° generazione (tutte le release). Il valore di PITCH corrispondente a 3 è presente solo nei prodotti fiscali di 2° generazione
 
 Risposta:
 
@@ -1946,7 +1768,7 @@ Risposta:
 | - | - | - | - |
 |0|**8**|1 byte|HEADER1: indica il gruppo di comandi|
 |1-3|**006**|3 bytes|HEADER2: indica la funzione|
-|4-7|XXXX|4 bytes|XXXX  = numero chiusura fi scale [0÷9999] dove (0000= corrente)|
+|4-7|XXXX|4 bytes|XXXX  = numero chiusura fiscale [0÷9999] dove (0000= corrente)|
 |8-11|YYYY|4 bytes|YYYY = numero scontrino iniziale [0÷9999] dove (0000 = primo)|
 |12-15|ZZZZ|4 bytes|ZZZZ = numero scontrino fi nale [0÷9999] dove (0000 = ultimo)|
 
@@ -1978,7 +1800,7 @@ Risposta:
 </table>
 ***Nota:***  A seguito di questo comando, le istruzioni per il cambio di DGFE sono fornite attraverso stampe non.
 
-fi scali di aiuto, con questa sequenza:
+fiscali di aiuto, con questa sequenza:
 
 ESTRARRE CARD ESAURITA![](cef2e6c5-b46b-44be-b392-3359776d8743.050.png)
 
@@ -2081,9 +1903,9 @@ PROTOCOLLO XON/XOFF![ref4]
 
 **1 SCOPO ED APPLICABILITÀ**
 
-Scopo del presente documento è quello di illustrare le specifi che relative al protocollo di comunicazione tra stampanti fiscali e HOST generico denominato “XON/XOFF”. Quanto definito nel presente documento si applica a tutti i dispositivi fi scali Custom (dove previsto).
+Scopo del presente documento è quello di illustrare le specifi che relative al protocollo di comunicazione tra stampanti fiscali e HOST generico denominato “XON/XOFF”. Quanto definito nel presente documento si applica a tutti i dispositivi fiscali Custom (dove previsto).
 
-Questo protocollo permette di creare a priori tutti i dati relativi ad operazioni di vendita su un HOST e di trasferirli in blocco al dispositivo fi scale per l’effettiva stampa del documento e per tutti i relativi aggiornamenti fi scali e gestionali.
+Questo protocollo permette di creare a priori tutti i dati relativi ad operazioni di vendita su un HOST e di trasferirli in blocco al dispositivo fiscale per l’effettiva stampa del documento e per tutti i relativi aggiornamenti fiscali e gestionali.
 
 Il protocollo “XON/XOFF” risulta essere più adatto in tutte quelle comunicazioni con HOST generici o terminali asserviti, governati da sistemi operativi, nei quali, i meccanismi di trasferimento dati via linea seriale, non sono normalmente accessibili in modo semplice, né ai programmatori né agli utenti.
 
@@ -2097,17 +1919,17 @@ Il protocollo XON/XOFF è un protocollo software utilizzato per regolare lo scam
 
 Il protocollo prevede la trasmissione da parte del dispositivo HOST di pacchetti di dati congruenti con quanto defi nito nel presente manuale sia a livello sintattico che semantico.
 
-Essendo una comunicazione unidirezionale, durante l’esecuzione dei comandi la stampante fi scale non ha la possibilità di segnalare al dispositivo trasmettitore (HOST) eventuali condizioni di errore generato da comandi o sequenze di comandi errati. In tali casi, le segnalazioni saranno visualizzate a display. Per i dettagli sui mes- saggi di errore consultare il manuale utente del dispositivo fi scale in uso.
+Essendo una comunicazione unidirezionale, durante l’esecuzione dei comandi la stampante fiscale non ha la possibilità di segnalare al dispositivo trasmettitore (HOST) eventuali condizioni di errore generato da comandi o sequenze di comandi errati. In tali casi, le segnalazioni saranno visualizzate a display. Per i dettagli sui mes- saggi di errore consultare il manuale utente del dispositivo fiscale in uso.
 
-La funzionalità di collegamento tramite protocollo XON/XOFF, deve essere esplicitamente programmata sulla stampante fi scale, in quanto la modalità standard di collegamento è impostata su protocollo CUSTOM.
+La funzionalità di collegamento tramite protocollo XON/XOFF, deve essere esplicitamente programmata sulla stampante fiscale, in quanto la modalità standard di collegamento è impostata su protocollo CUSTOM.
 
-Nello schema seguente è sinteticamente descritto il comportamento della stampante fi scale che è regolato da un fl ag o semaforo che in condizioni di riposo è verde (XON). Se la stampante riceve dal dispositivo HOST i dati da elaborare, ogni dato inviato dalla TASTIERA non può essere elaborato e viceversa. Quando la stampante fi scale è nuovamente in grado di accettare nuovi dati, invia al dispositivo HOST il segnale di semaforo verde (XON) e rimane in attesa di ricevere nuovi dati dalla TASTIERA o dal dispositivo HOST.
+Nello schema seguente è sinteticamente descritto il comportamento della stampante fiscale che è regolato da un fl ag o semaforo che in condizioni di riposo è verde (XON). Se la stampante riceve dal dispositivo HOST i dati da elaborare, ogni dato inviato dalla TASTIERA non può essere elaborato e viceversa. Quando la stampante fiscale è nuovamente in grado di accettare nuovi dati, invia al dispositivo HOST il segnale di semaforo verde (XON) e rimane in attesa di ricevere nuovi dati dalla TASTIERA o dal dispositivo HOST.
 
 SCHEMA:
 
 1. Stato di riposo. Semafori verdi. Entrambi i trasmettitori (HOST o TASTIERA) non stanno inviano dati.
 1. La TASTIERA trasmette i dati. Il semaforo del dispositivo HOST diventa rosso. Tutti i dati eventualmente trasmessi dal dispositivo HOST vengo accumulati nel BUFFER.
-1. La stampante fi scale ha elaborato i dati inviati dalla TASTIERA. Il semaforo della tastiera diventa rosso. Il semaforo del dispositivo HOST diventa verde e i comandi vengono trasferiti dal buffer alla stampante fiscale. Eventuali dati trasmessi dalla TASTIERA alla stampante fi scale vengono irrimediabilmente perduti.
+1. La stampante fiscale ha elaborato i dati inviati dalla TASTIERA. Il semaforo della tastiera diventa rosso. Il semaforo del dispositivo HOST diventa verde e i comandi vengono trasferiti dal buffer alla stampante fiscale. Eventuali dati trasmessi dalla TASTIERA alla stampante fiscale vengono irrimediabilmente perduti.
 
 59***![ref28]
 *PROTOCOLLO XON/XOFF*
@@ -2139,9 +1961,9 @@ BUFFER
 ![ref28]
 *PROTOCOLLO XON/XOFF*
 
-Nel corso della comunicazione tra dispositivo HOST e stampante fi scale, il buffer di quest’ultima si può fa- cilmente riempire e può verifi carsi la condizione di “buffer-overfl ow” in cui, parte dei dati trasmessi possono andare irrimediabilmente perduti.
+Nel corso della comunicazione tra dispositivo HOST e stampante fiscale, il buffer di quest’ultima si può fa- cilmente riempire e può verifi carsi la condizione di “buffer-overfl ow” in cui, parte dei dati trasmessi possono andare irrimediabilmente perduti.
 
-Per evitare ciò, viene stabilito un livello di riempimento del buffer (SOGLIA DI SICUREZZA). Quando la quantità di dati ricevuti supera questo livello la stampante fi scale invia al dispositivo HOST il segnale di semaforo rosso (XOFF). Il dispositivo HOST deve concludere la trasmissione del pacchetto di dati in corso e sospendere l’invio di ulteriori dati. Quando il livello dei dati contenuti nel buffer ha raggiunto un livello accettabile il trasferimento dal dispositivo HOST potrà ricomnciare.
+Per evitare ciò, viene stabilito un livello di riempimento del buffer (SOGLIA DI SICUREZZA). Quando la quantità di dati ricevuti supera questo livello la stampante fiscale invia al dispositivo HOST il segnale di semaforo rosso (XOFF). Il dispositivo HOST deve concludere la trasmissione del pacchetto di dati in corso e sospendere l’invio di ulteriori dati. Quando il livello dei dati contenuti nel buffer ha raggiunto un livello accettabile il trasferimento dal dispositivo HOST potrà ricomnciare.
 
 Dividendo i dati in pacchetti non superiori a 512 byte si evita la possibilità di perdere irrimediabilmente parte del pacchetto di dati (vedi esempio).
 
@@ -2281,7 +2103,7 @@ Nella seguente tabella sono elencati tutti i caratteri terminatori per la costru
 |**1%**|Visualizza la descrizione sulla prima riga del customer display|
 |**2%**|Visualizza la descrizione sulla seconda riga del customer display|
 |**a**|Apertura cassetto|
-|**1f**|Rendiconto report fi scale giornaliero senza azzeramento|
+|**1f**|Rendiconto report fiscale giornaliero senza azzeramento|
 |**2f**|Rendiconto report reparti senza azzeramento|
 |**3f**|Rendiconto report PLU senza azzeramento|
 |**4f**|Rendiconto report Operatori senza azzeramento|
@@ -2289,17 +2111,17 @@ Nella seguente tabella sono elencati tutti i caratteri terminatori per la costru
 |**6f**|Rendiconto report Clienti senza azzeramento|
 |**7f**|Rendiconto report Convenzioni senza azzeramento *(dove previsto)*|
 |**8f**|Rendiconto report fi nanziario|
-|**j**|Apertura scontrino non fi scale|
+|**j**|Apertura scontrino non fiscale|
 |**k**|Annullo scontrino|
-|**1w**|Dump memoria fi scale totale|
-|**2w**|Dump memoria fi scale per data|
-|**3w**|Dump memoria fi scale per numero|
+|**1w**|Dump memoria fiscale totale|
+|**2w**|Dump memoria fiscale per data|
+|**3w**|Dump memoria fiscale per numero|
 |**4w**|Dump giornale totale|
 |**5w**|Dump giornale per data|
 |**6w**|Dump giornale per numero|
 |**7w**|Termina dump|
 |**D**|Imposta data/ora|
-|**1F**|Azzeramento report fi scale giornaliero|
+|**1F**|Azzeramento report fiscale giornaliero|
 |**2F**|Azzeramento report reparti|
 |**3F**|Azzeramento report PLU|
 |**4F**|Azzeramento report Operatori|
@@ -2317,7 +2139,7 @@ Nella seguente tabella sono elencati tutti i caratteri terminatori per la costru
 |**8F**|Azzeramento report fi nanziario|
 |**39F**|Stampa Codice Fiscale / Partita IVA cliente|
 |**40F**|Stampa messaggio di cortesia a fi ne scontrino|
-|**J**|Chiusura scontrino non fi scale|
+|**J**|Chiusura scontrino non fiscale|
 |**K**|Clear|
 |**0M**|Modifi catore storno|
 |**1M**|Modifi catore sconto % su transazione articolo|
@@ -2421,11 +2243,11 @@ Invia al registratore di casa il segnale di apertura cassetto.
 
 **j  Apertura scontrino non fiscale![ref10]**
 
-Concordemente con la defi nizione di operazione di tipo “non fi scale” prevista dalla legge fi scale vigente in Italia, è possibile gestire da Host scontrini non fi scali contenenti stampe di messaggi di contenuto generico. La suddetta legge vieta la stampa della dicitura “TOTALE” in qualsiasi condizione essa venga richiesta all’interno di uno scontrino non fi scale: le stampanti fiscali Custom controllano tutto ciò annullando la stampa di messaggi contenenti la dicitura stessa. La sequenza di gestione prevede i seguenti comandi:
+Concordemente con la defi nizione di operazione di tipo “non fiscale” prevista dalla legge fiscale vigente in Italia, è possibile gestire da Host scontrini non fiscali contenenti stampe di messaggi di contenuto generico. La suddetta legge vieta la stampa della dicitura “TOTALE” in qualsiasi condizione essa venga richiesta all’interno di uno scontrino non fiscale: le stampanti fiscali Custom controllano tutto ciò annullando la stampa di messaggi contenenti la dicitura stessa. La sequenza di gestione prevede i seguenti comandi:
 
-1. Apertura scontrino non fi scale  [ j ]
+1. Apertura scontrino non fiscale  [ j ]
 1. Stampe di messaggi generici  [ @ ]
-1. Chiusura di scontrino non fi scale  [ J ] *Esempio di comando:*
+1. Chiusura di scontrino non fiscale  [ J ] *Esempio di comando:*
 
 |**“**|123456|**“**|**@**|
 | - | - | - | - |
@@ -2454,19 +2276,19 @@ Annulla le vendite inserite e stampa comunque lo scontrino con il totale a 0 e l
 
 **TOTALE EURO 0,00**
 
-***Note:***  quando sulla stampante fi scale è impostata la *STAMPA BUFFERIZZATA* e l’opzione “*STAMPA SCON-*
+***Note:***  quando sulla stampante fiscale è impostata la *STAMPA BUFFERIZZATA* e l’opzione “*STAMPA SCON-*
 
 *TRINO FISCALE ANNULLATO*” è abilitata, il terminatore [ k ] non produce lo scontrino annullato.
 
 **1w  Dump memoria fiscale totale![ref12]**
 
-Stampa l’intero contenuto della memoria fi scale. *Esempio di comando:*
+Stampa l’intero contenuto della memoria fiscale. *Esempio di comando:*
 
 **1w![ref30]**
 
 **2w  Dump memoria fiscale per data![ref20]**
 
-Stampa il contenuto della memoria fi scale compreso tra due date. La sequenza del comando prevede l’inseri- mento della data di inizio e la data di fi ne nel formato DDMMYY tra i separatori “ “ seguito dal terminatore.
+Stampa il contenuto della memoria fiscale compreso tra due date. La sequenza del comando prevede l’inseri- mento della data di inizio e la data di fi ne nel formato DDMMYY tra i separatori “ “ seguito dal terminatore.
 
 *Esempio di stampa dal 1 gennaio 2008 al 2 gennaio 2008:*
 
@@ -2475,7 +2297,7 @@ Stampa il contenuto della memoria fi scale compreso tra due date. La sequenza de
 
 **3w  Dump memoria fiscale per numero![ref31]**
 
-Stampa il contenuto della memoria fi scale compreso tra due numeri di scontrino. La sequenza del comando prevede l’inserimento del numero di scontrino di inizio e quello di fi ne nel formato nnnnNNNN tra i separatori “ “ seguito dal terminatore.
+Stampa il contenuto della memoria fiscale compreso tra due numeri di scontrino. La sequenza del comando prevede l’inserimento del numero di scontrino di inizio e quello di fi ne nel formato nnnnNNNN tra i separatori “ “ seguito dal terminatore.
 
 *Esempio di stampa dallo scontrino numero 0001 allo scontrino numero 0002:*
 
@@ -2808,7 +2630,7 @@ Esegue la sottrazione di una vendita effettuata in precedenza scontrino corrente
 
 **12M  Chiusura a credito![ref23]**
 
-Esegue la chiusura dello scontrino fi scale mediante un pagamento con credito. Il pagamento con credito può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
+Esegue la chiusura dello scontrino fiscale mediante un pagamento con credito. Il pagamento con credito può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
 
 *Esempio di pagamento con credito senza calcolo del resto:*
 
@@ -2835,7 +2657,7 @@ Esegue la chiusura dello scontrino fi scale mediante un pagamento con credito. I
 
 **O  Selezione operatore![](cef2e6c5-b46b-44be-b392-3359776d8743.151.png)**
 
-Permette di selezionare l’operatore che effettuerà la vendita, stampando il numero operatore in testa allo scontrino fi scale.
+Permette di selezionare l’operatore che effettuerà la vendita, stampando il numero operatore in testa allo scontrino fiscale.
 
 *Esempio di comando:*
 
@@ -2967,7 +2789,7 @@ Esegue una vendita su REPARTO. La vendita su REPARTO può essere inserita utiliz
 
 **1T  Pagamento (tender) con contante![ref42]**
 
-Esegue la chiusura dello scontrino fi scale mediante un pagamento in contanti. Il pagamento in contanti può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
+Esegue la chiusura dello scontrino fiscale mediante un pagamento in contanti. Il pagamento in contanti può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
 
 *Esempio di pagamento con contanti senza calcolo del resto:*
 
@@ -2992,7 +2814,7 @@ Esegue la chiusura dello scontrino fi scale mediante un pagamento in contanti. I
 
 **2T  Pagamento (tender) con assegno![](cef2e6c5-b46b-44be-b392-3359776d8743.186.png)**
 
-Esegue la chiusura dello scontrino fi scale mediante un pagamento con assegno. Il pagamento con assegno può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
+Esegue la chiusura dello scontrino fiscale mediante un pagamento con assegno. Il pagamento con assegno può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
 
 *Esempio di pagamento con assegno senza calcolo del resto:*
 
@@ -3042,7 +2864,7 @@ Esegue la chiusura dello scontrino fiscale mediante un pagamento con carta elett
 
 **4T  Pagamento (tender) con credito![ref45]**
 
-Esegue la chiusura dello scontrino fi scale mediante un pagamento con credito. Il pagamento con credito può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
+Esegue la chiusura dello scontrino fiscale mediante un pagamento con credito. Il pagamento con credito può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
 
 *Esempio di pagamento con credito senza calcolo del resto:*
 
@@ -3069,7 +2891,7 @@ Esegue la chiusura dello scontrino fi scale mediante un pagamento con credito. I
 
 **5T  Pagamento (tender) con buono pasto![ref12]**
 
-Esegue la chiusura dello scontrino fi scale mediante il pagamento con buono pasto. Il pagamento con buono pasto può essere inserito utilizzando varie modalità illustrate negli esempi seguenti. Se il corrispettivo incas- sato non raggiunge il valore del buono pasto viene automaticamente aggiunta una voce VARIE con l’importo necessario al raggiungimento del valore del buono pasto.
+Esegue la chiusura dello scontrino fiscale mediante il pagamento con buono pasto. Il pagamento con buono pasto può essere inserito utilizzando varie modalità illustrate negli esempi seguenti. Se il corrispettivo incas- sato non raggiunge il valore del buono pasto viene automaticamente aggiunta una voce VARIE con l’importo necessario al raggiungimento del valore del buono pasto.
 
 *Esempio di pagamento con buono pasto da 13 euro con raggiungimento del valore:*
 
@@ -3102,7 +2924,7 @@ Vedi descrizione del terminatore [ 7T ].
 
 **7T  Pagamento (tender) con pagamento generico![ref22]**
 
-Esegue la chiusura dello scontrino fi scale mediante un pagamento generico. Il pagamento generico può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
+Esegue la chiusura dello scontrino fiscale mediante un pagamento generico. Il pagamento generico può essere inserito utilizzando varie modalità illustrate negli esempi seguenti.
 
 *Esempio di pagamento generico senza calcolo del resto:*
 
@@ -3276,13 +3098,13 @@ Stampa un BARCODE in formato CODE39 a fi ne scontrino. La stringa da convertire 
 
 **4 COME EFFETTUARE LE PRIME PROVE DI COLLEGAMENTO**
 
-In ambienti che utilizzano PC con sistemi operativi di tipo MS-DOS, per effettuare le prime prove di collegamento tra PC e stampante fi scale, dopo avere confi gurato la la stampante fi scale, si può agire come di seguito:
+In ambienti che utilizzano PC con sistemi operativi di tipo MS-DOS, per effettuare le prime prove di collegamento tra PC e stampante fiscale, dopo avere confi gurato la la stampante fiscale, si può agire come di seguito:
 
 - Creare con un normale editor di testo un fi le contenente ad esempio le sequenze di input come defi nite nel precedente capitolo (ad. es. prova.txt”)
 - Eseguire da prompt di MS-DOS il comando: MODE COM1:9600,N,8,1,R
 - Eseguire: TYPE PROVA.TXT > COM1
 
-In ambienti che utilizzano PC con sistema operativo WINDOWS, per effettuare le prime prove di collegamento tra PC e stampante fi scale, dopo avere confi gurato la stampante fi scale, si può agire come di seguito:
+In ambienti che utilizzano PC con sistema operativo WINDOWS, per effettuare le prime prove di collegamento tra PC e stampante fiscale, dopo avere confi gurato la stampante fiscale, si può agire come di seguito:
 
 - Creare con un normale editor di testo un fi le contenente ad esempio le sequenze di input come defi nite nel precedente capitolo (ad. es. prova.txt”)
 - Eseguire (a seconda del sistema operativo installato)
@@ -3297,7 +3119,7 @@ In ambienti che utilizzano PC con sistema operativo WINDOWS, per effettuare le p
 
 **4.1  Parametri di collegamento**
 
-I parametri di collegamento per i dispositivi fi scali di 1° generazione sono i seguenti:
+I parametri di collegamento per i dispositivi fiscali di 1° generazione sono i seguenti:
 
 |1° MODALITÀ [default]|2° MODALITÀ|
 | - | - |
@@ -3307,9 +3129,9 @@ I parametri di collegamento per i dispositivi fi scali di 1° generazione sono i
 |STOP BIT = 1|STOP BIT= 1|
 |FLOW CONTROL = Xon-Xoff|FLOW CONTROL = Xon-Xoff|
 
-I parametri di collegamento per i dispositivi fi scali di 2° generazione sono identici a quelli della 1° MODALITÀ (vedi tabella precedente) con la differenza che la velocità di BAUD RATE può essere impostata a 1200, 2400, 4800, 9600, 19200, 38400 o 57600.
+I parametri di collegamento per i dispositivi fiscali di 2° generazione sono identici a quelli della 1° MODALITÀ (vedi tabella precedente) con la differenza che la velocità di BAUD RATE può essere impostata a 1200, 2400, 4800, 9600, 19200, 38400 o 57600.
 
-**Nota:** Per le modifi che dei suddetti parametri fare riferimento ai manuali delle stampanti fi scali.
+**Nota:** Per le modifi che dei suddetti parametri fare riferimento ai manuali delle stampanti fiscali.
 
 95***![ref2]
 *PROTOCOLLO XON/XOFF*
@@ -3354,7 +3176,7 @@ Assistenza Tecnica Clienti
 
 **ELENCO SEGNALAZIONI E TABELLA COMPARATIVA PRODOTTI**
 
-In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul display la dicitura ERRORE seguita da un codice numerico e da un messaggio (1). Nella seguente tabella è riportato l’elenco delle segna- lazioni raggruppate in base al tipo di prodotto fi scale e l’eventuale soluzione:
+In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul display la dicitura ERRORE seguita da un codice numerico e da un messaggio (1). Nella seguente tabella è riportato l’elenco delle segna- lazioni raggruppate in base al tipo di prodotto fiscale e l’eventuale soluzione:
 
 **THEA KUBE KUBE MESSAGGIO DI SEGNALAZIONE**
 
@@ -3366,7 +3188,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 
 **“IN RICEZIONE DA MF”**
 
-- ● ● ● ● **2** *Vi è stato un errore nella lettura dei dati della memoria fi scale, si richiede l’intervento del tecnico.*
+- ● ● ● ● **2** *Vi è stato un errore nella lettura dei dati della memoria fiscale, si richiede l’intervento del tecnico.*
 - ● ● ● ● **3 “VALORE NON VALIDO”**
 
 *L’immissione fatta non è corretta, cancellare e ricominciare.* **“OPERAZIONE NON POSSIBILE”**
@@ -3374,7 +3196,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 - ● ● ● ● **5** *L’operazione fatta non è corretta, terminare eventuali documenti in corso e ripetere.*
 - ● ● ● ● **6 “IN PROG. MATR. MF”**
 
-*Impossibile scrivere il logotipo fi scale sulla memoria fi scale.*
+*Impossibile scrivere il logotipo fiscale sulla memoria fiscale.*
 
 - ● ● ● ● **7 IN SCRITTA TOTALE**
 
@@ -3391,7 +3213,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 
 **“DATA ANTECEDENTE A MF”**
 
-- ● ● ● ● **12** *E’ stata inserita una data antecedente a quella memorizzata nella memoria fi scale, correggere e reinserire.*
+- ● ● ● ● **12** *E’ stata inserita una data antecedente a quella memorizzata nella memoria fiscale, correggere e reinserire.*
 - ● ● ● ● **13 “DATA / ORA NON VALIDA”**
 
 *Si è inserito una data / ora non valida, correggere e reimpostare.*
@@ -3405,7 +3227,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 
 - ● ● ● ● **19 “CHIUSURA MF NON POSSIBILE”**
 
-*Non si è riusciti a scrivere la chiusura in memoria fi scale.*
+*Non si è riusciti a scrivere la chiusura in memoria fiscale.*
 
 **“DOCUMENTO IN CORSO”**
 
@@ -3434,19 +3256,19 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 | - | - | - | - | - | - | - |
 |●|●|●|●|●|**33**|**“DGFE NON PRESENTE”** *Manca il DGFE, inserirlo.*|
 |●|●|●|●|●|**34**|<p>**“DATI DGFE ERRATI”**</p><p>*Tentativo di scrittura su DGFE fallita.*</p>|
-|●|●|●|●|●|**35**|<p>**“MF È STATA DISCONN.”**</p><p>*La memoria fi scale è stata disconnessa. Contattare l’assistenza tecnica.*</p>|
+|●|●|●|●|●|**35**|<p>**“MF È STATA DISCONN.”**</p><p>*La memoria fiscale è stata disconnessa. Contattare l’assistenza tecnica.*</p>|
 |●|●|●|●|●|**36**|<p>**“NESSUN DATO TROVATO SU DGFE”**</p><p>*Mancano i dati del DGFE, sostituire e avvisare il servizio tecnico.*</p>|
 |●|●|●|●|●|**38**|<p>**“DGFE NON IDENTIFICATO”**</p><p>*DGFE non omologato. Contattare il rivenditore autorizzato.*</p>|
 |●|●|●|●|●|**40**|<p>**“DATO DGFE NON PRESENTE”**</p><p>*Il dato cercato sul DGFE non è stato trovato.*</p>|
-|●|●|●|●|●|**50**|<p>**“MF NON PRESENTE”**</p><p>*Riconosciuta la sconnessione della memoria fi scale, chiamare il servizio tecnico.*</p>|
-|●|●|●|●|●|**51**|<p>**“MF PIENA”**</p><p>*La memoria fi scale si è esaurita, chiamare il servizio tecnico.*</p>|
+|●|●|●|●|●|**50**|<p>**“MF NON PRESENTE”**</p><p>*Riconosciuta la sconnessione della memoria fiscale, chiamare il servizio tecnico.*</p>|
+|●|●|●|●|●|**51**|<p>**“MF PIENA”**</p><p>*La memoria fiscale si è esaurita, chiamare il servizio tecnico.*</p>|
 |●|●|●|●|●|**52**|<p>**“JUMPER HWINIT INSER”**</p><p>*E’ stato lasciato dal tecnico il jumper dell’Hardware Hinit, chiamare il ser- vizio tecnico.*</p>|
 |●|●|●|●|●|**53**|<p>**“DISPOS. GIÀ SERIALIZ.”**</p><p>*Si sta tentando di serializzare una MF già serializzata.*</p>|
-|●|●|●|●|●|**54**|<p>**“CHIUS FISC NECESS”**</p><p>*Si richiede la chiusura fi scale.*</p>|
+|●|●|●|●|●|**54**|<p>**“CHIUS FISC NECESS”**</p><p>*Si richiede la chiusura fiscale.*</p>|
 |●|●|●|●|●|**55**|**“MODO TRAINING ATTIVO”** *E’ attivo il modo apprendimento.*|
 |●|●|●|●|●|**56**|**“DISPLAY NON PRESENTE (È EMESSO UN BEEP OGNI 3 SECONDI)”** *Il visore cliente è scollegato*|
 |●|●|●|●|●|**57**|**“DATA/ ORA NON IMPOST.”** *Non è stata inserita la data e l’ora.*|
-|●|●|●|●|●|**59**|<p>**“DISPOS. N. FISCALIZ.”**</p><p>*Dispositivo non fi scalizzabile perchè già fi scalizzato o con problemi alla memoria fi scale.*** </p>|
+|●|●|●|●|●|**59**|<p>**“DISPOS. N. FISCALIZ.”**</p><p>*Dispositivo non fiscalizzabile perchè già fiscalizzato o con problemi alla memoria fiscale.*** </p>|
 |●|●|●|●|●|**60**|<p>**“DISPOS. N. SERIALIZ.”**</p><p>*Il dispositivo non è ancora stato serializzato. Contattare l’assistenza tec- nica.*</p>|
 |●|●|●|●|-|**62**|<p>**“RICEZ.DATI IN CORSO”**</p><p>*Ricezione dati da remoto a scontrino aperto; chiudere lo scontrino da tastie- ra. Lo scontrino in memoria verrà stampato alla chiusura della transazione corrente da tastiera.*</p>|
 |●|●|●|●|-|**63**|**“TRANSAZIONE FALLITA”** *Transazione fallita su EFT-POS*|
@@ -3517,7 +3339,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
   - - ● ● - **162** *Nessuna ricevuta è stata salvata per la fatturazione differita del cliente selezionato.*
   - - ● ● - **163 “SU STAMPANTE RF”**
 
-*La stampante RF (ricevute fi scali) non risponde ai comandi.*
+*La stampante RF (ricevute fiscali) non risponde ai comandi.*
 
 **“TAVOLO PIENO”**
 
@@ -3584,7 +3406,7 @@ Assistenza Tecnica Clienti
 
 **ELENCO SEGNALAZIONI E TABELLA COMPARATIVA PRODOTTI**
 
-In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul display la dicitura ERRORE seguita da un codice numerico e da un messaggio (1). Nella seguente tabella è riportato l’elenco delle segna- lazioni raggruppate in base al tipo di prodotto fi scale e l’eventuale soluzione:
+In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul display la dicitura ERRORE seguita da un codice numerico e da un messaggio (1). Nella seguente tabella è riportato l’elenco delle segna- lazioni raggruppate in base al tipo di prodotto fiscale e l’eventuale soluzione:
 
 *Guida segnalazioni di stato  3***![ref2]*
 
@@ -3622,7 +3444,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 
 **“IN RICEZIONE DA MF”**
 
-**2** *Vi è stato un errore nella lettura dei dati della memoria fi scale, si richiede l’intervento del tecnico.*
+**2** *Vi è stato un errore nella lettura dei dati della memoria fiscale, si richiede l’intervento del tecnico.*
 
 **“VALORE NON VALIDO”**
 
@@ -3642,7 +3464,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 
 **6**
 
-*Impossibile scrivere il logotipo fi scale sulla memoria fi scale* **“IN SCRITTA TOTALE”**
+*Impossibile scrivere il logotipo fiscale sulla memoria fiscale* **“IN SCRITTA TOTALE”**
 
 **7**
 
@@ -3658,7 +3480,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 
 **“DATA ANTECEDENTE A MF”**
 
-**12** *E’ stata inserita una data antecedente a quella memorizzata nella memoria fi scale, correggere e reinserire.*
+**12** *E’ stata inserita una data antecedente a quella memorizzata nella memoria fiscale, correggere e reinserire.*
 
 **“DATA / ORA NON VALIDA”**
 
@@ -3680,7 +3502,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 
 **19**
 
-*Non si è riusciti a scrivere la chiusura in memoria fi scale.*
+*Non si è riusciti a scrivere la chiusura in memoria fiscale.*
 
 **“DOCUMENTO IN CORSO”**
 
@@ -3723,20 +3545,20 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 |●|●|●|●|**32**|<p>**“INIZIALIZZAZIONE DGFE NON POSSIBILE”**</p><p>*Non è stato possibile inizializzare il nuovo DGFE, sostituire con altro e avvisare assistenza tecnica*</p>|
 |●|●|●|●|**33**|**“DGFE NON PRESENTE”** *Manca il DGFE, inserirlo*|
 |●|●|●|●|**34**|<p>**“DATI DGFE ERRATI”**</p><p>*Tentativo di scrittura su DGFE fallita.*</p>|
-|●|●|●|●|**35**|<p>**“MF È STATA DISCONN.”**</p><p>*La memoria fi scale è stata disconnessa. Contattare l’assistenza tecnica.*</p>|
+|●|●|●|●|**35**|<p>**“MF È STATA DISCONN.”**</p><p>*La memoria fiscale è stata disconnessa. Contattare l’assistenza tecnica.*</p>|
 |●|●|●|●|**36**|<p>**“NESSUN DATO TROVATO SU DGFE”**</p><p>*Mancano i dati del DGFE, sostituire e avvisare il servizio tecnico.*</p>|
 |●|●|●|●|**38**|<p>**“DGFE NON IDENTIFICATO”**</p><p>*DGFE non omologato. Contattare il rivenditore autorizzato.*</p>|
 |●|●|●|●|**39**|<p>**SD/MMC CON PASSWORD**</p><p>*La SD/MMC inserita non è utilizzabile in quanto protetta da password. Utilizzarne una non protetta.*</p>|
 |●|●|●|●|**40**|<p>**“DATO DGFE NON PRESENTE”**</p><p>*Il dato cercato sul DGFE non è stato trovato.*</p>|
-|●|●|●|●|**50**|<p>**“MF NON PRESENTE”**</p><p>*Riconosciuta la sconnessione della memoria fi scale, chiamare il servizio tecnico*</p>|
-|●|●|●|●|**51**|<p>**“MF PIENA”**</p><p>*La memoria fi scale si è esaurita, chiamare il servizio tecnico*</p>|
+|●|●|●|●|**50**|<p>**“MF NON PRESENTE”**</p><p>*Riconosciuta la sconnessione della memoria fiscale, chiamare il servizio tecnico*</p>|
+|●|●|●|●|**51**|<p>**“MF PIENA”**</p><p>*La memoria fiscale si è esaurita, chiamare il servizio tecnico*</p>|
 |●|●|●|●|**52**|<p>**“JUMPER HWINIT INSER”**</p><p>*E’ stato lasciato dal tecnico il jumper dell’Hardware Hinit, chiamare il servizio tecnico*</p>|
 |●|●|●|●|**53**|<p>**“DISPOS. GIÀ SERIALIZ.”**</p><p>*Si sta tentando di serializzare una MF già serializzata.*</p>|
-|●|●|●|●|**54**|<p>**“CHIUS FISC NECESS”**</p><p>*Si richiede la chiusura fi scale.*</p>|
+|●|●|●|●|**54**|<p>**“CHIUS FISC NECESS”**</p><p>*Si richiede la chiusura fiscale.*</p>|
 |●|●|●|●|**55**|**“MODO TRAINING ATTIVO”** *E’ attivo il modo apprendimento.*|
 |●|●|●|●|**56**|<p>**“DISPLAY NON PRESENTE (È EMESSO UN BEEP OGNI 3 SE- CONDI)”**</p><p>*Il visore cliente è scollegato.*</p>|
 |●|●|●|●|**57**|**“DATA/ ORA NON IMPOST.”** *Non è stata inserita la data e l’ora.*|
-|●|●|●|●|**59**|<p>**“DISPOS. N. FISCALIZ.”**</p><p>*Dispositivo non fi scalizzabile perchè già fi scalizzato o con problemi alla memoria fi scale.*</p>|
+|●|●|●|●|**59**|<p>**“DISPOS. N. FISCALIZ.”**</p><p>*Dispositivo non fiscalizzabile perchè già fiscalizzato o con problemi alla memoria fiscale.*</p>|
 |●|●|●|●|**60**|<p>**“DISPOS. N. SERIALIZ.”**</p><p>*Il dispositivo non è ancora stato serializzato. Contattare l’assistenza tecnica.*</p>|
 |●|●|●|●|**62**|<p>**“RICEZ.DATI IN CORSO”**</p><p>*Ricezione dati da remoto a scontrino aperto; chiudere lo scontrino da tastiera. Lo scontrino in memoria verrà stampato alla chiusura della transazione corrente da tastiera.*</p>|
 |●|●|●|●|**63**|**“TRANSAZIONE FALLITA”** *Transazione fallita su EFT-POS.*|
@@ -3810,7 +3632,7 @@ In caso di anomalie viene emesso un segnale acustico e viene visualizzato sul di
 
 |\*|\*|\*|\*|**162**|<p>**“TROVATE 0 SF / RIC.”**</p><p>*Nessuna ricevuta è stata salvata per la fatturazione differita del cliente selezionato.*</p>|
 | - | - | - | - | - | - |
-|\*|\*|\*|\*|**163**|<p>**“SU STAMPANTE RF”**</p><p>*La stampante RF (ricevute fi scali) non risponde ai comandi.*</p>|
+|\*|\*|\*|\*|**163**|<p>**“SU STAMPANTE RF”**</p><p>*La stampante RF (ricevute fiscali) non risponde ai comandi.*</p>|
 |\*|\*|\*|\*|**164**|<p>**“TAVOLO PIENO”**</p><p>*Il numero di battute immesse al tavolo è pari alla quantità massima di battute possibili in un documento. Occorre liberare il tavolo.*</p>|
 |\*|\*|\*|\*|**165**|<p>**“TAVOLO VUOTO”**</p><p>*Al tavolo richiesto non sono ancora state inserire battute.*</p>|
 |\*|\*|\*|\*|**166**|<p>**“CHIUDERE TAVOLO”**</p><p>*Prima di fare l’operazione richiesta è necessario chiudere il tavolo.*</p>|
