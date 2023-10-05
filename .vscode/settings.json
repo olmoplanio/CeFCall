@@ -1,3 +1,4 @@
 {
     "omnisharp.useModernNet": false,
+    "dotnet.defaultSolution": "disable",
 }
