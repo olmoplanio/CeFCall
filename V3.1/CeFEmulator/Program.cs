@@ -16,7 +16,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                 Int32.TryParse(args[0], out serverPort);
             }
 
-            IServer server = new TcpServer(serverPort);
+            IServer server = new SfcServer(serverPort);
             server.Start();
 
             Console.WriteLine("Press any key to stop listening...");

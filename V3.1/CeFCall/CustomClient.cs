@@ -22,6 +22,7 @@ namespace com.github.olmoplanio.CeFCall
 
                 // Send the data to the server
                 stream.Write(dataToSend, 0, dataToSend.Length);
+                stream.Flush();
 
                 // Receive the response from the server
                 byte[] dataReceived = new byte[1024];

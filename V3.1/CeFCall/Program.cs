@@ -54,7 +54,7 @@ namespace com.github.olmoplanio.CeFCall
         {
             if (options.Contains('v'))
             {
-                return new string[] { "0", "V03.00" };
+                return new string[] { "0", "V03.01" };
             }
             bool isx = options.Contains('x');
             bool isc = options.Contains('c');
@@ -64,7 +64,7 @@ namespace com.github.olmoplanio.CeFCall
                 CheckLen(arguments, 2);
                 string ip = arguments[0];
                 int port = Int32.Parse(arguments[1]);
-                var commands = arguments.Skip(2);
+                string[] commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
                 string ret = caller.Exec(ip, port, String.Join(" ", commands.ToArray()));
 
 
