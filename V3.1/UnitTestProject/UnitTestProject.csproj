@@ -54,6 +54,7 @@
     <Compile Include="NoRegression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmokeTests.cs" />
+    <Compile Include="TestEnvironment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

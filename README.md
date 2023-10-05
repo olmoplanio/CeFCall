@@ -2,7 +2,9 @@
 
 Simple Custom, Custom Dll or XON/XOFF (Software Flow Control) Message Sender on ethernet.
 
-## Prerequisiters
+## Prerequisites
+
+### Custom Dlls
 
 To use Custom Dll, have the two Dlls (x64 version) in the same directory:
 
@@ -10,10 +12,13 @@ To use Custom Dll, have the two Dlls (x64 version) in the same directory:
 
 2. CeNComLayer.dll
 
-Still compatible on .Net Framework 3.5, downloadable from here:
-<https://www.microsoft.com/en-US/download/details.aspx?id=22>
-Soon migrating to .NET framework 4.8, download from:
-<https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48>
+### Development environment
+
+Executables are based on .Net Framework 3.5, downloadable from here:
+<https://www.microsoft.com/en-US/download/details.aspx?id=22> .
+
+Unit Tests based on .NET framework 4.8, download from:
+<https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48> .
 
 ## Usage
 
