@@ -46,7 +46,7 @@ namespace com.github.olmoplanio.CeFCall
             }
             if (options.Contains('t'))
             {
-                Console.In.ReadLine();
+                System.Threading.Thread.Sleep(5000);
             }
 
         }
@@ -99,6 +99,29 @@ namespace com.github.olmoplanio.CeFCall
                         case "ping":
                             CheckLen(arguments, 0);
                             return new string[] { "0", "pong" };
+                        default:
+                            Console.Out.WriteLine("Unknown command '{0}'", command);
+                            return GetHelp();
+                    }
+                case 'x':
+
+                    var caller2 = new SfcCaller();
+
+                    switch (command)
+                    {
+                        case "getversion":
+                            return new string[] { "0", caller2.GetVersion() };
+                        case "send":
+                        case "exec":
+                            CheckLen(arguments, 2);
+                            ip = arguments[0];
+                            port = Int32.Parse(arguments[1]);
+                            var commands2 = arguments.Skip(2);
+                            caller2.Send(ip, port, commands2);
+                            return new string[] { "0", "" };
+                        case "ping":
+                            CheckLen(arguments, 0);
+                            return new string[] { "0", "" + caller2.Ping(arguments[0]) };
                         default:
                             Console.Out.WriteLine("Unknown command '{0}'", command);
                             return GetHelp();

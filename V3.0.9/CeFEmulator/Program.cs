@@ -24,8 +24,12 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             IServer server;
             switch(mode)
             {
-                case 'x':
+                case 'c':
                     Console.WriteLine("Custom server starting...");
+                    server = new SfcServer();
+                    break;
+                case 'x':
+                    Console.WriteLine("SFC server starting...");
                     server = new CustomServer();
                     break;
                 default:
@@ -33,6 +37,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                     server = new BaseServer();
                     break;
             }
+            new SfcServer(serverPort);
             server.Start();
 
             Console.WriteLine("Press any key to stop listening...");

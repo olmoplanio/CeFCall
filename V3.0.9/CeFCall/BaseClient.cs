@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Net.Sockets;
 using System.Text;
 
 namespace com.github.olmoplanio.CeFCall
 {
-    public class CustomClient
+    public class BaseClient
     {
         public string Exec(string serverIpAddress, int serverPort, string messageToSend)
         {
@@ -17,11 +16,9 @@ namespace com.github.olmoplanio.CeFCall
 
                 // Get the network stream for sending and receiving data
                 NetworkStream stream = client.GetStream();
-                int cnt = 0;
-                string cmd = $"\u0002{cnt:00}0";
-                string commandToSend = "\u0002000" + messageToSend + CheckSum("000" + messageToSend) + "\u0003";
+
                 // Convert the string to bytes
-                byte[] dataToSend = Encoding.ASCII.GetBytes(commandToSend);
+                byte[] dataToSend = Encoding.ASCII.GetBytes(messageToSend);
 
                 // Send the data to the server
                 stream.Write(dataToSend, 0, dataToSend.Length);
@@ -31,20 +28,10 @@ namespace com.github.olmoplanio.CeFCall
                 byte[] dataReceived = new byte[1024];
                 int bytesRead = stream.Read(dataReceived, 0, dataReceived.Length);
 
-                if (bytesRead == 1)
-                {
-                    if (dataReceived[0] == 21)
-                    {
-                        return "NACK";
-                    }
-                }
                 // Convert the received data to a string
-                serverResponse = Encoding.ASCII.GetString(dataReceived, 9, bytesRead - 12);
+                serverResponse = Encoding.ASCII.GetString(dataReceived, 0, bytesRead);
 
                 Console.WriteLine("Received from server: " + serverResponse);
-
-                stream.WriteByte(6);
-                stream.Flush();
 
                 // Close the client socket
                 client.Close();
@@ -55,18 +42,6 @@ namespace com.github.olmoplanio.CeFCall
                 Console.WriteLine("Error: " + ex.Message);
             }
             return serverResponse;
-        }
-
-
-
-        private static string CheckSum(string s)
-        {
-            int cs = 0;
-            foreach (var c in s)
-            {
-                cs = (cs + c) % 100;
-            }
-            return cs.ToString("D2");
         }
     }
 }
