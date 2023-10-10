@@ -39,6 +39,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClient.cs" />
     <Compile Include="CustomClient.cs" />
     <Compile Include="Gateway.cs" />
     <Compile Include="ICaller.cs" />

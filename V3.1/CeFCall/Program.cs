@@ -56,84 +56,126 @@ namespace com.github.olmoplanio.CeFCall
             {
                 return new string[] { "0", "V03.01" };
             }
-            bool isx = options.Contains('x');
-            bool isc = options.Contains('c');
-            if (isc)
+            char mode = 'd';
+
+            if (options.Contains('x'))
             {
-                var caller = new CustomClient();
-                CheckLen(arguments, 2);
-                string ip = arguments[0];
-                int port = Int32.Parse(arguments[1]);
-                string[] commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
-                string ret = caller.Exec(ip, port, String.Join(" ", commands.ToArray()));
-
-
-                switch (command)
-                {
-                    case "call":
-                        return new string[] { ret };
-                    case "exec":
-                        return new string[] { "0", ret };
-                    case "ping":
-                        CheckLen(arguments, 0);
-                        return new string[] { "0", "pong" };
-                    default:
-                        Console.Out.WriteLine("Unknown command '{0}'", command);
-                        return GetHelp();
-                }
+                mode = 'x';
             }
-            else if (isx)
+            else if (options.Contains('c'))
             {
-                ICaller caller = new SfcCaller();
-
-                switch (command)
-                {
-                    case "getversion":
-                        return new string[] { "0", caller.GetVersion() };
-                    case "send":
-                    case "exec":
-                        CheckLen(arguments, 2);
-                        string ip = arguments[0];
-                        int port = Int32.Parse(arguments[1]);
-                        var commands = arguments.Skip(2);
-                        caller.Send(ip, port, commands);
-                        return new string[] { "0", "" };
-                    case "ping":
-                        CheckLen(arguments, 0);
-                        return new string[] { "0", "" + caller.Ping(arguments[0]) };
-                    default:
-                        Console.Out.WriteLine("Unknown command '{0}'", command);
-                        return GetHelp();
-                }
+                mode = 'c';
             }
-            else
+            else if (options.Contains('d'))
             {
-                var gw = new Gateway();
-                switch (command)
-                {
-                    case "getversion":
-                        return gw.GetVersion();
-                    case "sendcommand":
-                        CheckLen(arguments, 0);
-                        return gw.Send(arguments[0]);
-                    case "read":
-                        return gw.Read();
-                    case "exec":
-                        CheckLen(arguments, 2);
-                        string[] commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
-                        return gw.Exec(arguments[0], Int32.Parse(arguments[1]), commands);
-                    case "openeth":
-                        CheckLen(arguments, 1);
-                        return gw.OpenEth(arguments[0], Int32.Parse(arguments[1]));
-                    case "close":
-                        return gw.Close();
-                    case "ping":
-                        CheckLen(arguments, 0);
-                        return gw.Ping(arguments[0]);
-                    default:
-                        Console.Out.WriteLine("Unknown command '{0}'", command);
-                        return GetHelp();
-                }
+                mode = 'd';
+            }
+            else if (options.Contains('b'))
+            {
+                mode = 'b';
+            }
+
+
+            string ip;
+            int port;
+
+            switch (mode)
+            {
+                case 'c':
+                    var caller = new CustomClient();
+                    CheckLen(arguments, 2);
+                    ip = arguments[0];
+                    port = Int32.Parse(arguments[1]);
+                    string[] commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
+                    string ret1 = caller.Exec(ip, port, String.Join(" ", commands.ToArray()));
+
+
+                    switch (command)
+                    {
+                        case "call":
+                            return new string[] { ret1 };
+                        case "exec":
+                            return new string[] { "0", ret1 };
+                        case "ping":
+                            CheckLen(arguments, 0);
+                            return new string[] { "0", "pong" };
+                        default:
+                            Console.Out.WriteLine("Unknown command '{0}'", command);
+                            return GetHelp();
+                    }
+                case 'x':
+
+                    var caller2 = new SfcCaller();
+
+                    switch (command)
+                    {
+                        case "getversion":
+                            return new string[] { "0", caller2.GetVersion() };
+                        case "send":
+                        case "exec":
+                            CheckLen(arguments, 2);
+                            ip = arguments[0];
+                            port = Int32.Parse(arguments[1]);
+                            var commands2 = arguments.Skip(2);
+                            caller2.Send(ip, port, commands2);
+                            return new string[] { "0", "" };
+                        case "ping":
+                            CheckLen(arguments, 0);
+                            return new string[] { "0", "" + caller2.Ping(arguments[0]) };
+                        default:
+                            Console.Out.WriteLine("Unknown command '{0}'", command);
+                            return GetHelp();
+                    }
+                case 'd':
+                    var gw = new Gateway();
+                    switch (command)
+                    {
+                        case "getversion":
+                            return gw.GetVersion();
+                        case "sendcommand":
+                            CheckLen(arguments, 0);
+                            return gw.Send(arguments[0]);
+                        case "read":
+                            return gw.Read();
+                        case "exec":
+                            CheckLen(arguments, 2);
+                            string[] commands0 = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
+                            return gw.Exec(arguments[0], Int32.Parse(arguments[1]), commands0);
+                        case "openeth":
+                            CheckLen(arguments, 1);
+                            return gw.OpenEth(arguments[0], Int32.Parse(arguments[1]));
+                        case "close":
+                            return gw.Close();
+                        case "ping":
+                            CheckLen(arguments, 0);
+                            return gw.Ping(arguments[0]);
+                        default:
+                            Console.Out.WriteLine("Unknown command '{0}'", command);
+                            return GetHelp();
+                    }
+                default:
+                    var caller3 = new BaseClient();
+                    CheckLen(arguments, 2);
+                    ip = arguments[0];
+                    port = Int32.Parse(arguments[1]);
+                    string[] commands3 = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
+                    string ret3 = caller3.Exec(ip, port, String.Join(" ", commands3.ToArray()));
+
+
+                    switch (command)
+                    {
+                        case "call":
+                            return new string[] { ret3 };
+                        case "exec":
+                            return new string[] { "0", ret3 };
+                        case "ping":
+                            CheckLen(arguments, 0);
+                            return new string[] { "0", "pong" };
+                        default:
+                            Console.Out.WriteLine("Unknown command '{0}'", command);
+                            return GetHelp();
+                    }
+
             }
         }
 

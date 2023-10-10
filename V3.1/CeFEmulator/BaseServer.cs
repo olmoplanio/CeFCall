@@ -8,11 +8,9 @@ using System.Threading;
 
 namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
-    public class SfcServer : IServer
+    public class BaseServer : IServer
     {
         private const byte EOT = 4; // ASCII control code for EOT
-        private const byte XON = 17; // ASCII control code for XON
-        private const byte XOFF = 19; // ASCII control code for XOFF
         private readonly int port;
         private readonly TcpListener listener;
         private readonly StringBuilder history;
@@ -25,7 +23,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        public SfcServer(int port = 9100)
+        public BaseServer(int port = 9100)
         {
             this.port = port;
             history = new StringBuilder();
@@ -58,7 +56,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         public void Listen()
         {
             listener.Start();
-            Console.Out.WriteLine($"Listening TCP for incoming SFC connections on port {port}...");
+            Console.Out.WriteLine($"Listening TCP for incoming connections on port {port}...");
 
             cancel = false;
             while (!cancel)
@@ -86,15 +84,13 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                                 else
                                 {
                                     string receivedData = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                                    Ethernet_DataReceived(receivedData);
+                                    Ethernet_DataReceived(receivedData, stream);
                                 }
 
                                 // Clear the buffer for the next iteration
                                 Array.Clear(buffer, 0, buffer.Length);
 
-                                Reply(stream, XOFF);
                                 Thread.Sleep(1000);
-                                Reply(stream, XON);
                             }
                             stream.Close();
                         }
@@ -126,11 +122,15 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        private static void Reply(NetworkStream stream, byte response)
+        private static void Reply(NetworkStream stream, string response)
         {
             try
             {
-                stream.WriteByte(response);
+                // Convert the string to bytes
+                byte[] dataToSend = Encoding.ASCII.GetBytes(response);
+
+                // Send the data to the server
+                stream.Write(dataToSend, 0, dataToSend.Length);
                 stream.Flush();
             }
             catch (System.IO.IOException)
@@ -142,10 +142,13 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        protected void Ethernet_DataReceived(string receivedMessage)
+        protected void Ethernet_DataReceived(string receivedMessage, NetworkStream stream)
         {
             Console.Out.WriteLine($"Received data: {receivedMessage}");
             history.Append(receivedMessage);
+            string resp = (receivedMessage + "0000").Substring(0, 4);
+            Reply(stream, resp);
+            Console.Out.WriteLine($"Sent data: {resp}");
 
         }
     }

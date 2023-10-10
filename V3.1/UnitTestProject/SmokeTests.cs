@@ -13,6 +13,31 @@ namespace UnitTests
         private const byte EOT = 4;
 
         [TestMethod]
+        public void BaseHelloWorld()
+        {
+            IServer server = new BaseServer(9102);
+            server.Start();
+            Thread.Sleep(192); // Wait for server
+
+            var client = new BaseClient();
+            var r1 = client.Exec("127.0.0.1", 9102, "Hi");
+
+            Assert.AreEqual("Hi00", r1);
+            Thread.Sleep(194);
+
+            var r2 = client.Exec("127.0.0.1", 9102, "Hello");
+            Assert.AreEqual("Hell", r2);
+            Thread.Sleep(194);
+
+            Thread.Sleep(1000);
+
+            Assert.AreEqual("HiHello", server.History);
+
+            client.Exec("127.0.0.1", 9102, Char.ToString((char)EOT));
+        }
+
+
+        [TestMethod]
         public void CustomHelloWorld()
         {
             IServer server = new CustomServer(9101);

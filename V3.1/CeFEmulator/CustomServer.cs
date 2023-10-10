@@ -56,7 +56,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         public void Listen()
         {
             listener.Start();
-            Console.Out.WriteLine($"Listening TCP for incoming connections on port {port}...");
+            Console.Out.WriteLine($"Listening TCP for incoming Custom connections on port {port}...");
 
             cancel = false;
             while (!cancel)
