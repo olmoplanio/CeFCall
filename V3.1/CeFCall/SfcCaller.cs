@@ -87,10 +87,7 @@ namespace com.github.olmoplanio.CeFCall
 
         private static void WriteLog(string message, bool asError = false)
         {
-            var saveColor = Console.ForegroundColor;
-            Console.ForegroundColor = asError ? ConsoleColor.Yellow : ConsoleColor.Cyan;
-            Console.Error.WriteLine(message);
-            Console.ForegroundColor = saveColor;
+            Console.Out.WriteLine(message);
         }
 
         public string GetVersion()

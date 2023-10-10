@@ -10,7 +10,13 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
     public class CustomServer : IServer
     {
+        private const byte STX = 2; // ASCII control code for STX
+        private const byte ETX = 3; // ASCII control code for ETX
         private const byte EOT = 4; // ASCII control code for EOT
+
+
+        private const string ACK = "\u0006"; 
+        private const string NACK = "\u0021";
         private readonly int port;
         private readonly TcpListener listener;
         private readonly StringBuilder history;
@@ -43,7 +49,10 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
             catch (Exception ex)
             {
-                Console.Out.WriteLine($"Error while stopping listener: {ex.Message}");
+                if (ex != null)
+                {
+                    Console.Out.WriteLine($"Error while stopping listener: {ex.Message}");
+                }
             }
         }
 
@@ -110,7 +119,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                 }
                 catch (SocketException tax)
                 {
-                    if (tax.Message.GetHashCode() != -2120842407)
+                    if (tax.Message.GetHashCode() != -2120842407 && tax.Message.GetHashCode() != 173107983)
                     {
                         Console.Out.WriteLine($"Socket Error: {tax.Message.GetHashCode()}: {tax.Message}");
                     }
@@ -144,12 +153,78 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
 
         protected void Ethernet_DataReceived(string receivedMessage, NetworkStream stream)
         {
+            string message = CustomParse(receivedMessage);
+            if (message == null)
+            {
+                Reply(stream, NACK);
+            }
+            Custom_DataReceived(message, stream);
+        }
+
+        string CustomParse(string receivedMessage)
+        {
+            try
+            {
+                if (receivedMessage[0] != STX || receivedMessage[receivedMessage.Length - 1] != ETX)
+                {
+                    Console.Out.WriteLine($"Incorrect STX or ETX");
+                    return null;
+                }
+                //string cnt = receivedMessage.Substring(1, 2);
+                //char ident = receivedMessage[3];
+                if (receivedMessage[3] != '0')
+                {
+                    Console.Out.WriteLine($"Incorrect IDENT");
+                    return null;
+                }
+                string message = receivedMessage.Substring(4, receivedMessage.Length - 7);
+                string chk = receivedMessage.Substring(receivedMessage.Length - 3, 2);
+                string cntIdentMsg = receivedMessage.Substring(1, receivedMessage.Length - 4);
+                string checksum = CheckSum(cntIdentMsg);
+                if (chk != checksum)
+                {
+                    Console.Out.WriteLine($"Incorrect CHK");
+                    return null;
+                }
+                return message;
+            }
+            catch(Exception ex)
+            {
+                Console.Out.WriteLine(ex);
+                return null;
+            }
+        }
+
+        private static string CheckSum(string s)
+        {
+            int cs = 0;
+            foreach (var c in s)
+            {
+                cs = (cs + c) % 100;
+            }
+            return cs.ToString("D2");
+        }
+
+        protected void Custom_DataReceived(string receivedMessage, NetworkStream stream)
+        {
+            string repl = NACK;
             Console.Out.WriteLine($"Received data: {receivedMessage}");
             history.Append(receivedMessage);
-            string resp = (receivedMessage + "0000").Substring(0, 4);
-            Reply(stream, resp);
-            Console.Out.WriteLine($"Sent data: {resp}");
+            if (receivedMessage == "1109")
+            {
+                repl = ACK + "110900000";
+            }
+            else if (receivedMessage == "1001")
+            {
+                repl = ACK + "10011010231900"; ;
+            }
+            else if (receivedMessage == "70081")
+            {
+                repl = ACK + "7008"; ;
+            }
 
+            Reply(stream, repl);
+            Console.Out.WriteLine($"Sent data: {repl}");
         }
     }
 }

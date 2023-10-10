@@ -7,9 +7,14 @@ namespace UnitTests
     public class TestEnvironment
     {
         [TestMethod]
-        public void CheckAssert()
+        public void CheckAssertTrue()
         {
             Assert.IsTrue(true);
+        }
+        [TestMethod]
+        public void CheckAssertFalse()
+        {
+            Assert.IsTrue(false);
         }
     }
 }

@@ -36,29 +36,86 @@ namespace UnitTests
             client.Exec("127.0.0.1", 9102, Char.ToString((char)EOT));
         }
 
+        [TestMethod]
+        public void CustomDllHelloWorld()
+        {
+            IServer server = new CustomServer(9104);
+            try
+            {
+                server.Start();
+                Thread.Sleep(253); // Wait for server
+
+                var client = new Gateway();
+                var r1 = client.Exec("127.0.0.1", 9104, new string[] { "70081" }); //apricassetto
+                //var r1 = client.Exec("127.0.0.1", 9104, new string[] { "1001" }); //chiedi data
+                var err = int.Parse(r1[0]);
+                var data = r1[1];
+                Assert.AreEqual(0, err);
+                Thread.Sleep(281);
+
+                //Assert.AreEqual("1001", server.History);
+
+            }
+            finally
+            {
+                Thread.Sleep(500);
+                server.Close();
+            }
+        }
 
         [TestMethod]
         public void CustomHelloWorld()
         {
             IServer server = new CustomServer(9101);
-            server.Start();
-            Thread.Sleep(203); // Wait for server
+            try
+            {
+                server.Start();
+                Thread.Sleep(203); // Wait for server
 
-            var client = new CustomClient();
-            var r1 = client.Exec("127.0.0.1", 9101, "Hi");
+                var client = new CustomClient();
+                var r1 = client.Exec("127.0.0.1", 9101, "1001");  // Data e ora
+                
+                Assert.AreEqual("\u00061001", r1.Substring(0,5));
+                
+                Thread.Sleep(2000);
 
-            Assert.AreEqual("Hi00", r1);
-            Thread.Sleep(211);
+                Assert.AreEqual("1001", server.History);
+                client.Exec("127.0.0.1", 9101, Char.ToString((char)EOT));
 
-            var r2 = client.Exec("127.0.0.1", 9101, "Hello");
-            Assert.AreEqual("Hell", r2);
-            Thread.Sleep(211);
+            }
+            finally
+            {
+                Thread.Sleep(500);
+                server.Close();
+            }
+        }
 
-            Thread.Sleep(2000);
 
-            Assert.AreEqual("HiHello", server.History);
+        [TestMethod]
+        public void CustomOpenEth()
+        {
+            IServer server = new CustomServer(9110);
+            try
+            {
+                server.Start();
+                Thread.Sleep(203); // Wait for server
 
-            client.Exec("127.0.0.1", 9101, Char.ToString((char)EOT));
+                var client = new CustomClient();
+                var r1 = client.Exec("127.0.0.1", 9110, "1109");  //Printerstatus
+
+                Assert.AreEqual("\u0006110900000", r1);
+
+                Thread.Sleep(2000);
+
+                Assert.AreEqual("1109", server.History);
+                client.Exec("127.0.0.1", 9110, Char.ToString((char)EOT));
+
+            }
+            finally
+            {
+                Thread.Sleep(500);
+                server.Close();
+            }
         }
 
 
@@ -81,22 +138,7 @@ namespace UnitTests
 
             client.Send("127.0.0.1", 9100, Char.ToString((char)EOT));
         }
-
-        // [TestMethod]
-        public void SfcChallengeXonXoff()
-        {
-            IServer server = new SfcServer(9100);
-            server.Start();
-
-            string message = GenerateString();
-            var client = new SfcCaller();
-            client.Send("127.0.0.1", 9100, message);
-            Thread.Sleep(2000);
-
-            Assert.AreEqual(message, server.History);
-            client.Send("127.0.0.1", 9100, Char.ToString((char)EOT));
-        }
-
+        
         private static string GenerateString()
         {
             Random random = new Random();

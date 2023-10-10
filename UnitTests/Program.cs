@@ -7,7 +7,8 @@ namespace UnitTests
     {
         static void Main(string[] args)
         {
-            Runner.Main(typeof(Program).Assembly);
+            string testName = args.Length > 0 ? args[0] : null;
+            Runner.Main(typeof(Program).Assembly, testName);
             Console.Out.WriteLine("Press any key.");
             Console.In.Read();
         }

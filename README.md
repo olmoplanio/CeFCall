@@ -26,7 +26,7 @@ Unit Tests based on .NET framework 4.8, download from:
 
 ``CeFCall /c _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_``
 
-Sends a message to the given server using XON/XOFF.
+Sends a message to the given server using Custom Protocol.
 
 Examples:
 
@@ -36,6 +36,10 @@ CeFCall.exe /c exec 192.168.1.199 9100 70081
 
 ```bash
 CeFCall.exe /c exec 192.168.1.199 9100 80010101230201230
+```
+
+```bash
+CeFCall.exe /c exec 192.168.1.199 9100 1001
 ```
 
 #### Commands

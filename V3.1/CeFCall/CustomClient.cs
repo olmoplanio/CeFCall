@@ -17,8 +17,9 @@ namespace com.github.olmoplanio.CeFCall
                 // Get the network stream for sending and receiving data
                 NetworkStream stream = client.GetStream();
 
+                string commandToSend = "\u0002000" + messageToSend + CheckSum("000" + messageToSend) + "\u0003";
                 // Convert the string to bytes
-                byte[] dataToSend = Encoding.ASCII.GetBytes(messageToSend);
+                byte[] dataToSend = Encoding.ASCII.GetBytes(commandToSend);
 
                 // Send the data to the server
                 stream.Write(dataToSend, 0, dataToSend.Length);
@@ -42,6 +43,18 @@ namespace com.github.olmoplanio.CeFCall
                 Console.WriteLine("Error: " + ex.Message);
             }
             return serverResponse;
+        }
+
+
+
+        private static string CheckSum(string s)
+        {
+            int cs = 0;
+            foreach (var c in s)
+            {
+                cs = (cs + c) % 100;
+            }
+            return cs.ToString("D2");
         }
     }
 }
