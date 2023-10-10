@@ -12,9 +12,9 @@ namespace UnitTests
             Assert.IsTrue(true);
         }
         [TestMethod]
-        public void CheckAssertFalse()
+        public void CheckAssertNotEqual()
         {
-            Assert.IsTrue(false);
+            Assert.AreEqual(1, 0);
         }
     }
 }
