@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace UnitTests
+namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
     internal class TestClassAttribute : Attribute
     {

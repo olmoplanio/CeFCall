@@ -54,7 +54,7 @@ namespace com.github.olmoplanio.CeFCall
         {
             if (options.Contains('v'))
             {
-                return new string[] { "0", "V03.01" };
+                return new string[] { "0", "V03.02" };
             }
             char mode = 'd';
 
@@ -84,18 +84,18 @@ namespace com.github.olmoplanio.CeFCall
                             ip = arguments[0];
                             port = Int32.Parse(arguments[1]);
                             var cmds = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
-                            return new string[] { caller.Exec(ip, port, cmds)[1] };
+                            return new string[] { caller.Exec(ip, port, cmds).Message };
                         case "exec":
                             CheckLen(arguments, 2);
                             ip = arguments[0];
                             port = Int32.Parse(arguments[1]);
                             var commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
-                            return caller.Exec(ip, port, commands);
+                            return caller.Exec(ip, port, commands).ToArray();
                         case "ping":
                             CheckLen(arguments, 1);
                             ip = arguments[0];
                             port = Int32.Parse(arguments[1]);
-                            return caller.Exec(ip, port, "1009");
+                            return caller.Exec(ip, port, "1009").ToArray();
                         default:
                             Console.Out.WriteLine("Unknown command '{0}'", command);
                             return GetHelp();
@@ -105,7 +105,7 @@ namespace com.github.olmoplanio.CeFCall
                     switch (command)
                     {
                         case "getversion":
-                            return gw.GetVersion();
+                            return new string[] { gw.GetVersion() };
                         case "sendcommand":
                             CheckLen(arguments, 0);
                             return gw.Send(arguments[0]);
@@ -121,8 +121,8 @@ namespace com.github.olmoplanio.CeFCall
                         case "close":
                             return gw.Close();
                         case "ping":
-                            CheckLen(arguments, 0);
-                            return gw.Ping(arguments[0]);
+                            CheckLen(arguments, 2);
+                            return gw.OpenEth(arguments[0], Int32.Parse(arguments[1]));
                         default:
                             Console.Out.WriteLine("Unknown command '{0}'", command);
                             return GetHelp();

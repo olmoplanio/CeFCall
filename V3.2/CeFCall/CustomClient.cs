@@ -7,7 +7,9 @@ namespace com.github.olmoplanio.CeFCall
 {
     public class CustomClient
     {
-        public string[] Exec(string serverIpAddress, int serverPort, params string[] messagesToSend)
+        public readonly string Version = "V3.2";
+
+        public CallResult Exec(string serverIpAddress, int serverPort, params string[] messagesToSend)
         {
             int errorCode = 0;
             string serverResponse = null;
@@ -80,9 +82,9 @@ namespace com.github.olmoplanio.CeFCall
             }
             catch (Exception ex)
             {
-                return new string[] { (ex.Message.GetHashCode()).ToString(), ex.Message };
+                return new CallResult(ex.Message.GetHashCode(), ex.Message);
             }
-            return new string[] { errorCode.ToString(), serverResponse };
+            return new CallResult(errorCode, serverResponse);
         }
 
 

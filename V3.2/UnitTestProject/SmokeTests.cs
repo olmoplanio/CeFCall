@@ -57,10 +57,8 @@ namespace UnitTests
                 var client = new CustomClient();
                 var r2 = client.Exec("127.0.0.1", 9101, "1109", "1001");  // Data e ora
 
-                var err2 = int.Parse(r2[0]);
-                var data2 = r2[1];
-                Assert.AreEqual(0, err2);
-                Assert.AreEqual($"1001{DateTime.Now:ddMMyy}", data2);
+                Assert.AreEqual("0", r2[0]);
+                Assert.AreEqual($"1001{DateTime.Now:ddMMyy}", r2[1]);
 
                 Thread.Sleep(2000);
 

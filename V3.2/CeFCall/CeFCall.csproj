@@ -39,8 +39,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallResult.cs" />
     <Compile Include="CustomClient.cs" />
+    <Compile Include="CustomDllClient.cs" />
+    <Compile Include="CustomMode.cs" />
     <Compile Include="Gateway.cs" />
+    <Compile Include="ICommandMode.cs" />
     <Compile Include="IntercomModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,11 +5,6 @@ namespace com.github.olmoplanio.CeFCall
     public class Gateway
     {
         
-        public string[] Ping(string ins)
-        {
-            return new string[] {"0", ins };
-        }
-
         public string[] OpenEth(string ip, int port)
         {
             int vRetErr = int.MinValue;
@@ -55,12 +50,12 @@ namespace com.github.olmoplanio.CeFCall
             return new string[] { vRet.ToString(), strOut.ToString() };
         }
 
-        public string[] GetVersion()
+        public string GetVersion()
         {
             int vRetErr = int.MinValue;
             StringBuilder strOut = new StringBuilder(256);
             int vRet = IntercomModule.CEFGetVersion(strOut, ref vRetErr);
-            return new string[] { vRet.ToString(), strOut.ToString() };
+            return strOut.ToString();
         }
 
         public string[] Close()

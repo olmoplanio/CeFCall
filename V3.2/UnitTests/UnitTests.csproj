@@ -62,11 +62,11 @@
     <Compile Include="TestPlatform\TestMethodAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CeFCall\CeFCall.csproj">
+    <ProjectReference Include="..\..\V3.1\CeFCall\CeFCall.csproj">
       <Project>{446eea27-29c9-4234-b5c6-a4a6dc25bc2c}</Project>
       <Name>CeFCall</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CeFEmulator\CeFEmulator.csproj">
+    <ProjectReference Include="..\..\V3.1\CeFEmulator\CeFEmulator.csproj">
       <Project>{fc3c5461-e448-43ca-9748-811f12a8c561}</Project>
       <Name>CeFEmulator</Name>
     </ProjectReference>

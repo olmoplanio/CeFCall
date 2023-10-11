@@ -41,13 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assert.cs" />
-    <Compile Include="NoRegression.cs" />
+    <Compile Include="..\UnitTestProject\NoRegression.cs">
+      <Link>NoRegression.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTestProject\SmokeTests.cs">
+      <Link>SmokeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTestProject\TestEnvironment.cs">
+      <Link>TestEnvironment.cs</Link>
+    </Compile>
+    <Compile Include="TestPlatform\Assert.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SmokeTests.cs" />
-    <Compile Include="TestClassAttribute.cs" />
-    <Compile Include="TestMethodAttribute.cs" />
+    <Compile Include="TestPlatform\UnitTestException.cs" />
+    <Compile Include="TestPlatform\AssertFailedException.cs" />
+    <Compile Include="TestPlatform\AssertInconclusiveException.cs" />
+    <Compile Include="TestPlatform\FrameworkMessages.cs" />
+    <Compile Include="TestPlatform\Runner.cs" />
+    <Compile Include="TestPlatform\TestClassAttribute.cs" />
+    <Compile Include="TestPlatform\TestMethodAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CeFCall\CeFCall.csproj">
