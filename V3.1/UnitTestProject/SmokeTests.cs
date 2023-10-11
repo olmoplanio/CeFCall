@@ -39,7 +39,7 @@ namespace UnitTests
         [TestMethod]
         public void CustomDllHelloWorld()
         {
-            IServer server = new CustomServer(9104);
+            IServer server = new CustomDllServer(9104);
             try
             {
                 server.Start();
@@ -47,7 +47,6 @@ namespace UnitTests
 
                 var client = new Gateway();
                 var r1 = client.Exec("127.0.0.1", 9104, new string[] { "70081" }); //apricassetto
-                //var r1 = client.Exec("127.0.0.1", 9104, new string[] { "1001" }); //chiedi data
                 var err = int.Parse(r1[0]);
                 var data = r1[1];
                 Assert.AreEqual(0, err);

@@ -10,17 +10,28 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
     public class CustomServer : IServer
     {
-        private const byte STX = 2; // ASCII control code for STX
-        private const byte ETX = 3; // ASCII control code for ETX
-        private const byte EOT = 4; // ASCII control code for EOT
+        public const byte EOT = 4; // ASCII control code for EOT
 
+        private class CustomMessage
+        {
+            public byte Counter { get; private set; }
+            public string InnerMessage { get; private set; }
 
-        private const string ACK = "\u0006"; 
-        private const string NACK = "\u0021";
-        private readonly int port;
+            public CustomMessage(byte counter, string innerMessage)
+            {
+                Counter = counter;
+                InnerMessage = innerMessage;
+            }
+        }
+
+        private const string STX = "\u0002";
+        private const string ETX = "\u0003";
+        protected const string ACK = "\u0006";
+        protected const string NACK = "\u0021";
+        protected readonly int port;
+        protected readonly StringBuilder history;
         private readonly TcpListener listener;
-        private readonly StringBuilder history;
-        bool cancel;
+        private bool cancel;
         public string History
         {
             get
@@ -47,12 +58,8 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                     Console.Out.WriteLine("Listener stopped.");
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                if (ex != null)
-                {
-                    Console.Out.WriteLine($"Error while stopping listener: {ex.Message}");
-                }
             }
         }
 
@@ -131,7 +138,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        private static void Reply(NetworkStream stream, string response)
+        protected static void Reply(NetworkStream stream, string response)
         {
             try
             {
@@ -151,27 +158,38 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        protected void Ethernet_DataReceived(string receivedMessage, NetworkStream stream)
+        protected virtual void Ethernet_DataReceived(string msg, NetworkStream stream)
         {
-            string message = CustomParse(receivedMessage);
-            if (message == null)
+            if (msg == null)
             {
                 Reply(stream, NACK);
             }
-            Custom_DataReceived(message, stream);
+            short start = 0;
+            while(start < msg.Length && msg[start] == 6)
+            {
+                start++;
+            }
+            var receivedMessage = msg.Substring(start);
+
+            var countedMessage = CustomParse(receivedMessage);
+            if (countedMessage == null)
+            {
+                Reply(stream, NACK);
+            }
+            Custom_DataReceived(countedMessage.InnerMessage, countedMessage.Counter, stream);
         }
 
-        string CustomParse(string receivedMessage)
+        private CustomMessage CustomParse(string receivedMessage)
         {
             try
             {
-                if (receivedMessage[0] != STX || receivedMessage[receivedMessage.Length - 1] != ETX)
+                if (!receivedMessage.StartsWith(STX) || !receivedMessage.EndsWith(ETX))
                 {
                     Console.Out.WriteLine($"Incorrect STX or ETX");
                     return null;
                 }
-                //string cnt = receivedMessage.Substring(1, 2);
-                //char ident = receivedMessage[3];
+                byte cnt = Byte.Parse(receivedMessage.Substring(1, 2));
+                char ident = receivedMessage[3];
                 if (receivedMessage[3] != '0')
                 {
                     Console.Out.WriteLine($"Incorrect IDENT");
@@ -186,7 +204,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                     Console.Out.WriteLine($"Incorrect CHK");
                     return null;
                 }
-                return message;
+                return new CustomMessage(cnt, message);
             }
             catch(Exception ex)
             {
@@ -195,7 +213,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        private static string CheckSum(string s)
+        protected static string CheckSum(string s)
         {
             int cs = 0;
             foreach (var c in s)
@@ -205,26 +223,37 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             return cs.ToString("D2");
         }
 
-        protected void Custom_DataReceived(string receivedMessage, NetworkStream stream)
+        protected virtual void Custom_DataReceived(string receivedMessage, byte nonce, NetworkStream stream)
         {
-            string repl = NACK;
             Console.Out.WriteLine($"Received data: {receivedMessage}");
             history.Append(receivedMessage);
-            if (receivedMessage == "1109")
-            {
-                repl = ACK + "110900000";
-            }
-            else if (receivedMessage == "1001")
-            {
-                repl = ACK + "10011010231900"; ;
-            }
-            else if (receivedMessage == "70081")
-            {
-                repl = ACK + "7008"; ;
-            }
+
+            string response = Emulate(receivedMessage);
+            string innerMessage = $"{nonce:D2}0{response}";
+            string chk = CheckSum(innerMessage);
+
+            string repl = $"{ACK}{STX}{innerMessage}{chk}{ETX}";
 
             Reply(stream, repl);
             Console.Out.WriteLine($"Sent data: {repl}");
+        }
+
+        protected static string Emulate(string receivedMessage)
+        {
+            if (receivedMessage == "1109")
+            {
+                return "110900000";
+            }
+            else if (receivedMessage == "1001")
+            {
+                var now = DateTime.Now;
+                return $"10011{now:ddMMYY}";
+            }
+            else if (receivedMessage == "70081")
+            {
+                return "7008";
+            }
+            return receivedMessage.Substring(0, 4);
         }
     }
 }
