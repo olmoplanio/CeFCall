@@ -14,7 +14,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         protected override void Custom_DataReceived(string receivedMessage, byte nonce, NetworkStream stream)
         {
             Console.Out.WriteLine($"Received data: {receivedMessage}");
-            history.Append(receivedMessage);
+            history.Add(receivedMessage);
 
             string repl = ACK + Emulate(receivedMessage);
 

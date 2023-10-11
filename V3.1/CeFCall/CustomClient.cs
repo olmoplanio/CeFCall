@@ -7,8 +7,9 @@ namespace com.github.olmoplanio.CeFCall
 {
     public class CustomClient
     {
-        public string Exec(string serverIpAddress, int serverPort, string messageToSend)
+        public string[] Exec(string serverIpAddress, int serverPort, params string[] messagesToSend)
         {
+            int errorCode = 0;
             string serverResponse = null;
             try
             {
@@ -18,33 +19,60 @@ namespace com.github.olmoplanio.CeFCall
                 // Get the network stream for sending and receiving data
                 NetworkStream stream = client.GetStream();
                 int cnt = 0;
-                string cmd = $"\u0002{cnt:00}0";
-                string commandToSend = "\u0002000" + messageToSend + CheckSum("000" + messageToSend) + "\u0003";
-                // Convert the string to bytes
-                byte[] dataToSend = Encoding.ASCII.GetBytes(commandToSend);
-
-                // Send the data to the server
-                stream.Write(dataToSend, 0, dataToSend.Length);
-                stream.Flush();
-
-                // Receive the response from the server
-                byte[] dataReceived = new byte[1024];
-                int bytesRead = stream.Read(dataReceived, 0, dataReceived.Length);
-
-                if (bytesRead == 1)
+                foreach (var messageToSend in messagesToSend)
                 {
+                    string innerMessage = $"{cnt:D2}0{messageToSend}";
+                    string commandToSend = "\u0002" + innerMessage + CheckSum(innerMessage) + "\u0003";
+                    // Convert the string to bytes
+                    byte[] dataToSend = Encoding.ASCII.GetBytes(commandToSend);
+                    // Send the data to the server
+                    stream.Write(dataToSend, 0, dataToSend.Length);
+                    stream.Flush();
+
+
+                    // Receive the response from the server
+                    byte[] dataReceived = new byte[1024];
+                    int bytesRead = stream.Read(dataReceived, 0, dataReceived.Length);
+
+
                     if (dataReceived[0] == 21)
                     {
-                        return "NACK";
+                        errorCode = 21;
+                        serverResponse = "NACK";
+                        Console.Out.WriteLine("Received from server: " + serverResponse);
+
+                        stream.WriteByte(6);
+                        stream.Flush();
                     }
+                    else
+                    {
+                        int skip = 0;
+                        while (bytesRead > 0 && (dataReceived[skip] == 6))
+                        {
+                            skip++;
+                            bytesRead--;
+                        }
+                        if (bytesRead >= 7)
+                        {
+                            // Convert the received data to a string
+                            serverResponse = Encoding.ASCII.GetString(dataReceived, skip + 4, bytesRead - 7);
+                            if (serverResponse.Substring(4, 3) == "ERR")
+                            {
+                                errorCode = int.Parse(serverResponse.Substring(6, 2));
+                            }
+                            else
+                            {
+                                errorCode = 0;
+                            }
+                            Console.Out.WriteLine("Received from server: " + serverResponse);
+
+                            stream.WriteByte(6);
+                            stream.Flush();
+                        }
+                    }
+
+                    cnt++;
                 }
-                // Convert the received data to a string
-                serverResponse = Encoding.ASCII.GetString(dataReceived, 9, bytesRead - 12);
-
-                Console.WriteLine("Received from server: " + serverResponse);
-
-                stream.WriteByte(6);
-                stream.Flush();
 
                 // Close the client socket
                 client.Close();
@@ -52,9 +80,9 @@ namespace com.github.olmoplanio.CeFCall
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                return new string[] { (ex.Message.GetHashCode()).ToString(), ex.Message };
             }
-            return serverResponse;
+            return new string[] { errorCode.ToString(), serverResponse };
         }
 
 

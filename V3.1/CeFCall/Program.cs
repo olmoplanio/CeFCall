@@ -50,7 +50,7 @@ namespace com.github.olmoplanio.CeFCall
             }
 
         }
-        public IEnumerable<string> Run(string command, string[] arguments, char[] options)
+        public string[] Run(string command, string[] arguments, char[] options)
         {
             if (options.Contains('v'))
             {
@@ -58,21 +58,13 @@ namespace com.github.olmoplanio.CeFCall
             }
             char mode = 'd';
 
-            if (options.Contains('x'))
-            {
-                mode = 'x';
-            }
-            else if (options.Contains('c'))
+            if (options.Contains('c'))
             {
                 mode = 'c';
             }
             else if (options.Contains('d'))
             {
                 mode = 'd';
-            }
-            else if (options.Contains('b'))
-            {
-                mode = 'b';
             }
 
 
@@ -83,22 +75,27 @@ namespace com.github.olmoplanio.CeFCall
             {
                 case 'c':
                     var caller = new CustomClient();
-                    CheckLen(arguments, 2);
-                    ip = arguments[0];
-                    port = Int32.Parse(arguments[1]);
-                    string[] commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
-                    string ret1 = caller.Exec(ip, port, String.Join(" ", commands.ToArray()));
 
 
                     switch (command)
                     {
                         case "call":
-                            return new string[] { ret1 };
+                            CheckLen(arguments, 2);
+                            ip = arguments[0];
+                            port = Int32.Parse(arguments[1]);
+                            var cmds = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
+                            return new string[] { caller.Exec(ip, port, cmds)[1] };
                         case "exec":
-                            return new string[] { "0", ret1 };
+                            CheckLen(arguments, 2);
+                            ip = arguments[0];
+                            port = Int32.Parse(arguments[1]);
+                            var commands = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
+                            return caller.Exec(ip, port, commands);
                         case "ping":
-                            CheckLen(arguments, 0);
-                            return new string[] { "0", "pong" };
+                            CheckLen(arguments, 1);
+                            ip = arguments[0];
+                            port = Int32.Parse(arguments[1]);
+                            return caller.Exec(ip, port, "1009");
                         default:
                             Console.Out.WriteLine("Unknown command '{0}'", command);
                             return GetHelp();
@@ -131,28 +128,8 @@ namespace com.github.olmoplanio.CeFCall
                             return GetHelp();
                     }
                 default:
-                    var caller3 = new BaseClient();
-                    CheckLen(arguments, 2);
-                    ip = arguments[0];
-                    port = Int32.Parse(arguments[1]);
-                    string[] commands3 = arguments.Skip(2).Select(x => x.Replace('^', '"')).ToArray();
-                    string ret3 = caller3.Exec(ip, port, String.Join(" ", commands3.ToArray()));
-
-
-                    switch (command)
-                    {
-                        case "call":
-                            return new string[] { ret3 };
-                        case "exec":
-                            return new string[] { "0", ret3 };
-                        case "ping":
-                            CheckLen(arguments, 0);
-                            return new string[] { "0", "pong" };
-                        default:
-                            Console.Out.WriteLine("Unknown command '{0}'", command);
-                            return GetHelp();
-                    }
-
+                    Console.Out.WriteLine("Undefined client '{0}'", mode);
+                    return GetHelp();
             }
         }
 

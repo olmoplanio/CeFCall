@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -29,21 +30,21 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         protected const string ACK = "\u0006";
         protected const string NACK = "\u0021";
         protected readonly int port;
-        protected readonly StringBuilder history;
+        protected readonly List<string> history;
         private readonly TcpListener listener;
         private bool cancel;
         public string History
         {
             get
             {
-                return history.ToString();
+                return String.Join(",", history.ToArray());
             }
         }
 
         public CustomServer(int port = 9100)
         {
             this.port = port;
-            history = new StringBuilder();
+            history = new List<string>(5);
             listener = new TcpListener(IPAddress.Any, port);
         }
 
@@ -115,7 +116,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                 }
                 catch(IOException iox)
                 {
-                    if (iox.Message.GetHashCode() == -960292345 || iox.Message.GetHashCode() == -948353057)
+                    if (iox.Message.GetHashCode() == -960292345 || iox.Message.GetHashCode() == -948353057 || iox.Message.GetHashCode() == -1207492938)
                     {
                         Console.Out.WriteLine("Client forcibly disconnected.");
                     }
@@ -170,13 +171,19 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                 start++;
             }
             var receivedMessage = msg.Substring(start);
-
+            if (string.IsNullOrEmpty(receivedMessage))
+            {
+                return;
+            }
             var countedMessage = CustomParse(receivedMessage);
             if (countedMessage == null)
             {
                 Reply(stream, NACK);
             }
-            Custom_DataReceived(countedMessage.InnerMessage, countedMessage.Counter, stream);
+            else
+            {
+                Custom_DataReceived(countedMessage.InnerMessage, countedMessage.Counter, stream);
+            }
         }
 
         private CustomMessage CustomParse(string receivedMessage)
@@ -226,7 +233,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         protected virtual void Custom_DataReceived(string receivedMessage, byte nonce, NetworkStream stream)
         {
             Console.Out.WriteLine($"Received data: {receivedMessage}");
-            history.Append(receivedMessage);
+            history.Add(receivedMessage);
 
             string response = Emulate(receivedMessage);
             string innerMessage = $"{nonce:D2}0{response}";
@@ -247,7 +254,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             else if (receivedMessage == "1001")
             {
                 var now = DateTime.Now;
-                return $"10011{now:ddMMYY}";
+                return $"1001{now:ddMMyy}";
             }
             else if (receivedMessage == "70081")
             {
