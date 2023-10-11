@@ -1,4 +1,4 @@
-# CeFCall (v3.1)
+# CeFCall (v3.2)
 
 Simple Custom, Custom Dll or XON/XOFF (Software Flow Control) Message Sender on ethernet.
 
@@ -26,7 +26,7 @@ Unit Tests based on .NET framework 4.8, download from:
 
 ``CeFCall /c _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_``
 
-Sends a message to the given server using XON/XOFF.
+Sends a message to the given server using Custom protocol.
 
 Examples:
 
@@ -45,39 +45,6 @@ CeFCall.exe /c exec 192.168.1.199 9100 80010101230201230
  Use '^' as an alias for double quotes.
 
 * _exec_
- Sends a list of commands, returns "0" plus the return code.
+ Sends a list of commands, returns error code and _inner_ return code.
+ For example, querying the printer status with `1109`, on a priner without anomalies you will get `['0', '110900000']`: an echo of the command followed by the anomaly flags that characterized the response of this command.
  Use '^' as an alias for double quotes.
-
-### XOFF/XON Connection
-
-``CeFCall /x _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_``
-
-Sends a message to the given server using XON/XOFF.
-
-Examples:
-
-```bash
-CeFCall.exe /x send 192.168.1.199 9100 a
-```
-
-```bash
-CeFCall.exe /x send 192.168.1.199 9100 ^ITEM1^2.5*R1
-```
-
-#### XOFF/ON Commands
-
-* _send_ / _exec_
- Sends a list of commands, pausing whenever an XOFF is received until an XON resumes.
- Use '^' as an alias for double quotes.
-
-### Custom Dll connection
-
-``CeFCall _COMMAND_ _SERVER_ _PORT_ _MESSAGES[...]_``
-
-Sends a message to the given server using Custom (TM) protocol.
-
-Examples:
-
-```bash
-CeFCall.exe exec 192.168.1.199 9100 70081
-```

@@ -1,4 +1,4 @@
-# CeFCall (v3.1)
+# CeFCall (v3.2)
 
 Simple Custom, Custom Dll or XON/XOFF (Software Flow Control) Message Sender on ethernet.
 
