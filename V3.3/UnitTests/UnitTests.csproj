@@ -53,6 +53,7 @@
     <Compile Include="TestPlatform\Assert.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestPlatform\Runner.TestItem.cs" />
     <Compile Include="TestPlatform\UnitTestException.cs" />
     <Compile Include="TestPlatform\AssertFailedException.cs" />
     <Compile Include="TestPlatform\AssertInconclusiveException.cs" />

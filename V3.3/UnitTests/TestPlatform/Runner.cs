@@ -1,11 +1,36 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
 
 namespace com.github.olmoplanio.UnitTesting
 {
-    public static class Runner
+    public partial class Runner
     {
+
+        readonly Assembly assembly;
+        readonly string testName;
+
+        readonly static private List<string> results = new List<string> ();
+
+        public Runner(Assembly assembly, string testName)
+        {
+            this.assembly = assembly;
+            this.testName = testName;
+        }
+        public Runner(Assembly assembly)
+        {
+            this.assembly = assembly;
+            this.testName = null;
+        }
+
+        private static void AddResult(string result)
+        {
+            results.Add(result);
+        }
+
         private static void WriteLog()
         {
             Console.Out.WriteLine();
@@ -25,7 +50,7 @@ namespace com.github.olmoplanio.UnitTesting
             Console.ForegroundColor = saveColor;
         }
 
-        public static void Main(System.Reflection.Assembly assembly, string testName = null)
+        public static void Main(Assembly assembly, string testName)
         {
             if (string.IsNullOrEmpty(testName))
             {
@@ -35,47 +60,57 @@ namespace com.github.olmoplanio.UnitTesting
             {
                 WriteLog("Running test '{0}'...", testName);
             }
+
+            var runner = new Runner(assembly, testName);
+            runner.Start();
+            WriteLog("Done.", testName);
+        }
+
+        public void Run()
+        {
+            foreach (var mi in TestItems())
+            {
+                mi.Run();
+            }
+        }
+        
+        public void Start()
+        {
+            var tz = new List<Thread>();
+            foreach (var mi in TestItems())
+            {
+                var t = new Thread(mi.Run);
+                t.Start();
+                tz.Add(t);
+            }
+            foreach (var t in tz)
+            {
+                t.Join();
+            }
+            foreach(var r in results)
+            {
+                WriteLog(r);
+            }
+        }
+
+        public IEnumerable<TestItem> TestItems()
+        {
             foreach(var c in TestClassAttribute.GetTestClasses(assembly))
             {
                 if (string.IsNullOrEmpty(testName) || testName.Equals(c.Name) || testName.StartsWith(c.Name + "."))
                 {
-                    WriteLog("# {0}", c.Name);
-                    WriteLog();
                     object instance = Activator.CreateInstance(c);
                     foreach (var m in TestMethodAttribute.GetTestMethods(c))
                     {
                         if (string.IsNullOrEmpty(testName) || testName.Equals(c.Name) || testName.Equals(c.Name + "." + m.Name))
                         {
-                            WriteLog("## Test Method {0}.{1}", c.Name, m.Name);
-                            WriteLog();
-                            WriteLog("Starting Method {0}.{1}", c.Name, m.Name);
-                            try
-                            {
-                                var ret = m.Invoke(instance, new object[0]);
-                                WriteLog("Done {0}.{1}: {2}", c.Name, m.Name, ret ?? (object)"OK");
-                            }
-                            catch(System.Reflection.TargetInvocationException tix)
-                            {
-                                var x = tix.InnerException;
-
-                                if (x is UnitTestAssertException)
-                                {
-                                    WriteErr("Failed {0}.{1}: {2}", c.Name, m.Name, x.Message);
-                                }
-                                else
-                                {
-                                    WriteErr("Failed {0}.{1}: {2}", c.Name, m.Name, x);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                WriteErr("Failed {0}.{1}: {2}", c.Name, m.Name, ex);
-                            }
-                            WriteLog();
+                            yield return new TestItem(m, instance);
                         }
                     }
                 }
             }
         }
+
+        
     }
 }
