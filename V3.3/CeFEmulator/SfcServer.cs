@@ -8,9 +8,11 @@ using System.Threading;
 
 namespace com.github.olmoplanio.CeFCall.CeFEmulator
 {
-    public class BaseServer : IServer
+    public class SfcServer : IServer
     {
         private const byte EOT = 4; // ASCII control code for EOT
+        private const byte XON = 17; // ASCII control code for XON
+        private const byte XOFF = 19; // ASCII control code for XOFF
         private readonly int port;
         private readonly TcpListener listener;
         private readonly StringBuilder history;
@@ -23,7 +25,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        public BaseServer(int port = 9100)
+        public SfcServer(int port = 9100)
         {
             this.port = port;
             history = new StringBuilder();
@@ -56,7 +58,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         public void Listen()
         {
             listener.Start();
-            WriteLog($"Listening TCP for incoming connections on port {port}...");
+            WriteLog($"Listening TCP for incoming SFC connections on port {port}...");
 
             cancel = false;
             while (!cancel)
@@ -84,13 +86,15 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
                                 else
                                 {
                                     string receivedData = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                                    Ethernet_DataReceived(receivedData, stream);
+                                    Ethernet_DataReceived(receivedData);
                                 }
 
                                 // Clear the buffer for the next iteration
                                 Array.Clear(buffer, 0, buffer.Length);
 
+                                Reply(stream, XOFF);
                                 Thread.Sleep(1000);
+                                Reply(stream, XON);
                             }
                             stream.Close();
                         }
@@ -122,15 +126,11 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        private static void Reply(NetworkStream stream, string response)
+        private static void Reply(NetworkStream stream, byte response)
         {
             try
             {
-                // Convert the string to bytes
-                byte[] dataToSend = Encoding.ASCII.GetBytes(response);
-
-                // Send the data to the server
-                stream.Write(dataToSend, 0, dataToSend.Length);
+                stream.WriteByte(response);
                 stream.Flush();
             }
             catch (System.IO.IOException)
@@ -142,14 +142,10 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
         }
 
-        protected void Ethernet_DataReceived(string receivedMessage, NetworkStream stream)
+        protected void Ethernet_DataReceived(string receivedMessage)
         {
             WriteLog($"Received data: {receivedMessage}");
             history.Append(receivedMessage);
-            string resp = (receivedMessage + "0000").Substring(0, 4);
-            Reply(stream, resp);
-            WriteLog($"Sent data: {resp}");
-
         }
 
 
@@ -157,7 +153,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
         {
             var saveColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            WriteLog(message, args);
+            Console.Out.WriteLine(message, args);
             Console.ForegroundColor = saveColor;
         }
     }

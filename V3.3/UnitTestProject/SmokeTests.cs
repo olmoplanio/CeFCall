@@ -31,7 +31,7 @@ namespace UnitTests
                 Assert.AreEqual($"1001{DateTime.Now:ddMMyy}", r2.Message);
                 Thread.Sleep(281);
 
-                //Assert.AreEqual("1001", server.History);
+                Assert.AreEqual("1109,70081,1109,1001", server.History);
 
             }
             finally
@@ -69,6 +69,31 @@ namespace UnitTests
             }
         }
 
+
+        [TestMethod]
+        public void SfcHelloWorld()
+        {
+            IServer server = new SfcServer(7100);
+            try
+            {
+                server.Start();
+                Thread.Sleep(203); // Wait for server
+
+                var client = new SfcCaller();
+                client.Send("127.0.0.1", 7100, "a");
+
+                Thread.Sleep(2743);
+
+                client.Send("127.0.0.1", 7100, Char.ToString((char)EOT));
+                Assert.AreEqual("a", server.History);
+
+            }
+            finally
+            {
+                Thread.Sleep(500);
+                server.Close();
+            }
+        }
 
         [TestMethod]
         public void CustomOpenEth()

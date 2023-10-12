@@ -2,7 +2,7 @@
 
 namespace com.github.olmoplanio.CeFCall
 {
-    class CustomMode : ICommandMode
+    internal class CustomMode : ICommandMode
     {
         private readonly CustomClient client = new CustomClient();
         public CallResult Execute(string serverAddress, int serverPort, params string[] messages)

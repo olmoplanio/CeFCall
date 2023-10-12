@@ -5,14 +5,15 @@ using System.Text;
 
 namespace com.github.olmoplanio.CeFCall
 {
-    internal class CustomDllMode : ICommandMode
+    internal class SfcMode : ICommandMode
     {
-        private readonly Gateway gateway = new Gateway();
+        private readonly SfcCaller client = new SfcCaller();
         public CallResult Execute(string serverAddress, int serverPort, params string[] messages)
         {
             try
             {
-                return gateway.Exec(serverAddress, serverPort, messages);
+                client.Send(serverAddress, serverPort, messages);
+                return new CallResult(0, "OK");
             }
             catch(Exception ex)
             {
@@ -24,9 +25,8 @@ namespace com.github.olmoplanio.CeFCall
         {
             try
             {
-                var response = gateway.OpenEth(serverAddress, serverPort);
-                gateway.Close();
-                return response.Message;
+                client.Send(serverAddress, serverPort, "K");
+                return "OK";
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace com.github.olmoplanio.CeFCall
             {
                 try
                 {
-                    return gateway.GetVersion();
+                    return client.GetVersion();
                 }
                 catch (Exception ex)
                 {

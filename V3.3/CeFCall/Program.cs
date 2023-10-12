@@ -54,7 +54,7 @@ namespace com.github.olmoplanio.CeFCall
         {
             if (options.Contains('v'))
             {
-                return new string[] { "0", "V03.02" };
+                return new string[] { "0", "V03.03" };
             }
 
             ICommandMode commandMode;
@@ -66,6 +66,10 @@ namespace com.github.olmoplanio.CeFCall
             else if (options.Contains('d'))
             {
                 commandMode = new CustomDllMode();
+            }
+            else if (options.Contains('x'))
+            {
+                commandMode = new SfcMode();
             }
             else
             {

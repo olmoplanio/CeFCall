@@ -5,7 +5,7 @@ using System.Text;
 
 namespace com.github.olmoplanio.CeFCall
 {
-    interface ICommandMode
+    internal interface ICommandMode
     {
         CallResult Execute(string serverAddress, int serverPort, params string[] messages);
 

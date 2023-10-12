@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CallResult.cs" />
     <Compile Include="CustomClient.cs" />
+    <Compile Include="SfcMode.cs" />
     <Compile Include="CustomDllMode.cs" />
     <Compile Include="CustomMode.cs" />
     <Compile Include="Gateway.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="IntercomModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SfcCaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\README.md">

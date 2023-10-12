@@ -48,7 +48,7 @@ namespace com.github.olmoplanio.UnitTesting
                         {
                             WriteLog("## Test Method {0}.{1}", c.Name, m.Name);
                             WriteLog();
-                            WriteLog("Started Method {0}.{1}", c.Name, m.Name);
+                            WriteLog("Starting Method {0}.{1}", c.Name, m.Name);
                             try
                             {
                                 var ret = m.Invoke(instance, new object[0]);

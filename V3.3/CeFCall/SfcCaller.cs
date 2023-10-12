@@ -11,7 +11,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace com.github.olmoplanio.CeFCall
 {
-    public class TcpCaller
+    public class SfcCaller
     {
         private const byte XON = 17; // ASCII control code for XON
         private const byte XOFF = 19; // ASCII control code for XOFF
@@ -27,7 +27,6 @@ namespace com.github.olmoplanio.CeFCall
             try
             {
                 client.Connect(IPAddress.Parse(hostIp), port);
-                WriteLog("Connected to the server.");
 
                 NetworkStream stream = client.GetStream();
                 bool pauseTransmission = false;
@@ -56,21 +55,15 @@ namespace com.github.olmoplanio.CeFCall
                         if (incomingSignal[0] == XOFF)
                         {
                             pauseTransmission = true;
-                            WriteLog("Received XOFF, data transmission paused.");
                         }
                         else if (incomingSignal[0] == XON)
                         {
                             pauseTransmission = false;
-                            WriteLog("Received XON, data transmission resumed.");
                         }
                     }
                 } //wend
                 stream.Close();
             } 
-            catch (Exception ex)
-            {
-                WriteLog("An error occurred: " + ex.Message, true);
-            }
             finally
             {
                 client.Close();
@@ -82,25 +75,11 @@ namespace com.github.olmoplanio.CeFCall
             byte[] buffer = Encoding.ASCII.GetBytes(message);
             stream.Write(buffer, 0, buffer.Length);
             stream.Flush();
-            WriteLog(String.Format("Sent '{0}' to endpoint", message));
         }
-
-        private static void WriteLog(string message, bool asError = false)
-        {
-            var saveColor = Console.ForegroundColor;
-            Console.ForegroundColor = asError ? ConsoleColor.Yellow : ConsoleColor.Cyan;
-            Console.Error.WriteLine(message);
-            Console.ForegroundColor = saveColor;
-        }
-
+        
         public string GetVersion()
         {
             return "V3.0.3";
-        }
-
-        public int Ping(string v)
-        {
-            return 0;
         }
     }
 }
