@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace com.github.olmoplanio.CeFCall
 {
-    class CustomMode : ICommandMode
+    class CustomDllMode : ICommandMode
     {
-        private readonly CustomClient client = new CustomClient();
+        private Gateway gateway = new Gateway();
         public CallResult Execute(string serverAddress, int serverPort, params string[] messages)
         {
             try
             {
-                return client.Exec(serverAddress, serverPort, messages);
+                return gateway.Exec(serverAddress, serverPort, messages);
             }
             catch(Exception ex)
             {
@@ -21,14 +24,15 @@ namespace com.github.olmoplanio.CeFCall
         {
             try
             {
-                var response = client.Exec(serverAddress, serverPort, "1109");
+                var response = gateway.OpenEth(serverAddress, serverPort);
+                gateway.Close();
                 return response.Message;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.Message;
             }
-        }
+    }
 
         public string Version
         {
@@ -36,9 +40,9 @@ namespace com.github.olmoplanio.CeFCall
             {
                 try
                 {
-                    return client.Version;
+                    return gateway.GetVersion();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return ex.Message;
                 }

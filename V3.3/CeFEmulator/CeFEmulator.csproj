@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BBC7003E-01C5-4424-B136-0B33527D200A}</ProjectGuid>
+    <ProjectGuid>{FC3C5461-E448-43CA-9748-811F12A8C561}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>UnitTests</RootNamespace>
-    <AssemblyName>UnitTests</AssemblyName>
+    <RootNamespace>com.github.olmoplanio.CeFCall.CeFEmulator</RootNamespace>
+    <AssemblyName>CeFEmulator</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -32,44 +32,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>UnitTests.Program</StartupObject>
+    <ApplicationIcon>cash-register.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>com.github.olmoplanio.CeFCall.CeFEmulator.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\UnitTestProject\NoRegression.cs">
-      <Link>NoRegression.cs</Link>
-    </Compile>
-    <Compile Include="..\UnitTestProject\SmokeTests.cs">
-      <Link>SmokeTests.cs</Link>
-    </Compile>
-    <Compile Include="..\UnitTestProject\TestEnvironment.cs">
-      <Link>TestEnvironment.cs</Link>
-    </Compile>
-    <Compile Include="TestPlatform\Assert.cs" />
+    <Compile Include="BaseServer.cs" />
+    <Compile Include="CustomDllServer.cs" />
+    <Compile Include="IServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestPlatform\UnitTestException.cs" />
-    <Compile Include="TestPlatform\AssertFailedException.cs" />
-    <Compile Include="TestPlatform\AssertInconclusiveException.cs" />
-    <Compile Include="TestPlatform\FrameworkMessages.cs" />
-    <Compile Include="TestPlatform\Runner.cs" />
-    <Compile Include="TestPlatform\TestClassAttribute.cs" />
-    <Compile Include="TestPlatform\TestMethodAttribute.cs" />
+    <Compile Include="CustomServer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CeFCall\CeFCall.csproj">
-      <Project>{446eea27-29c9-4234-b5c6-a4a6dc25bc2c}</Project>
-      <Name>CeFCall</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CeFEmulator\CeFEmulator.csproj">
-      <Project>{fc3c5461-e448-43ca-9748-811f12a8c561}</Project>
-      <Name>CeFEmulator</Name>
-    </ProjectReference>
+    <Content Include="cash-register.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 using com.github.olmoplanio.CeFCall;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using com.github.olmoplanio.CeFCall.CeFEmulator;
+using System.Threading;
 
 namespace UnitTests
 {
@@ -11,8 +12,8 @@ namespace UnitTests
         [TestMethod]
         public void CheckVersion()
         {
-            string version = client.GetVersion();
-            Assert.AreEqual("1, 4, 0, 0", version);
+            string[] version = client.GetVersion();
+            Assert.AreEqual("1, 4, 0, 0", version[1]);
         }
     }
 }
