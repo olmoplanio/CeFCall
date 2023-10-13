@@ -62,7 +62,7 @@ namespace com.github.olmoplanio.UnitTesting
             }
 
             var runner = new Runner(assembly, testName);
-            runner.Start();
+            runner.Run();
             WriteLog("Done.", testName);
         }
 
@@ -89,7 +89,7 @@ namespace com.github.olmoplanio.UnitTesting
             }
             foreach(var r in results)
             {
-                WriteLog(r);
+                Console.Out.WriteLine(r);
             }
         }
 
