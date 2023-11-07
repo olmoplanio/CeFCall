@@ -44,12 +44,8 @@ CeFCall.exe /c exec 192.168.1.199 9100 1001
 
 #### Commands
 
-* _call_
- Sends a list of commands, forwarding the return value.
- Use '^' as an alias for double quotes.
-
 * _exec_
- Sends a list of commands, returns "0" plus the return code.
+ Sends a list of commands, returns error code plus return code.
  Use '^' as an alias for double quotes.
 
 ### XOFF/XON Connection
@@ -70,7 +66,7 @@ CeFCall.exe /x send 192.168.1.199 9100 ^ITEM1^2.5*R1
 
 #### Commands
 
-* _send_ / _exec_
+* _exec_
  Sends a list of commands, pausing whenever an XOFF is received until an XON resumes.
  Use '^' as an alias for double quotes.
 

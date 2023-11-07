@@ -18,7 +18,7 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             }
             if (args.Length > 1)
             {
-                mode = args[1][1];
+                mode = args[1][0];
             }
 
             IServer server;
@@ -26,11 +26,11 @@ namespace com.github.olmoplanio.CeFCall.CeFEmulator
             {
                 case 'x':
                     Console.WriteLine("Custom server starting...");
-                    server = new CustomServer();
+                    server = new CustomServer(serverPort);
                     break;
                 default:
                     Console.WriteLine("Server starting...");
-                    server = new BaseServer();
+                    server = new BaseServer(serverPort);
                     break;
             }
             server.Start();
